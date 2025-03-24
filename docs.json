@@ -16,7 +16,6 @@
           {
             "group": "Get Started",
             "pages": [
-              "blocks/openwebsites",
               "introduction",
               "quickstart",
               "development"

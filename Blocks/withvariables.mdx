@@ -1,28 +1,50 @@
 ---
-title: 'With variables (Apply input variables)'
-description: 'Description of your new file.'
+title: "With variables (Apply input variables)"
+description: "Description of your new file."
 ---
+
+![2 1 Pn](/Blocks/imgs/2-1.png)
 
 This block adds variables to the workflow, which can be used in other blocks throughout the workflow. The column name is the variable name, and each row below contains a variable value that will be substituted into all supported blocks where the variable name is specified. An unlimited number of rows can be added to this block.
 
-Examples of using variables in blocks
+## Examples of using variables in blocks
 
 1. Search on Google block
 
-In this case, the variable {{company_name}} will be replaced with 'Jsonify' in the Google search query: Jsonify CEO.
+![2 2 Pn](/Blocks/imgs/2-2.png)
 
-2. AI instructions in any of the blocks
+![2 3 Pn](/Blocks/imgs/2-3.png)
+
+In this case, the variable {company_name} will be replaced with 'Jsonify' in the Google search query: Jsonify CEO.
+
+1. AI instructions in any of the blocks
+
+![2 4 Pn](/Blocks/imgs/2-4.png)
 
 A variable can be referenced in any AI instruction. In this case, the variable is specified in the Explore Content block. According to this instruction, the agent will search for pages containing information about the CEO of the company Jsonify.
 
+![2 5 Pn](/Blocks/imgs/2-5.png)
+
 Here, the variable is specified both in the JSON schema that the agent must fill with the found information on the target page and in the general instructions for the AI agent on filling this JSON.
 
-3. Open Websites block
+1. Open Websites block
 
-In this case, the variable {{website}} will be replaced with its value 'jsonify.com' when the workflow runs, and the agent will open the website https://jsonify.com.
+![2 6 Pn](/Blocks/imgs/2-6.png)
+
+![2 7 Pn](/Blocks/imgs/2-7.png)
+
+In this case, the variable {website} will be replaced with its value 'jsonify.com' when the workflow runs, and the agent will open the website https://jsonify.com.
 
 Additionally, in this block, it is possible not only to substitute the entire link but also to replace part(s) of it.
+
+![2 8 Pn](/Blocks/imgs/2-8.png)
+
+![2 9 Pn](/Blocks/imgs/2-9.png)
 
 In this case, the agent will open three pages, corresponding to each row in the With variables block.
 
 If multiple Extract data blocks are used sequentially in the workflow, the field names from previous blocks can be used as new variables in blocks placed afterward.
+
+![2 10 Pn](/Blocks/imgs/2-10.png)
+
+![2 11 Pn](/Blocks/imgs/2-11.png)

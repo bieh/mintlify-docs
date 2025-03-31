@@ -2,3 +2,76 @@
 title: "Movies Rating Extractor "
 description: "Description of your new file."
 ---
+Let's create a step-by-step workflow that will collect a list of movies currently playing in theaters from the rottentomatoes.com website. 
+
+ 
+
+Create an empty extraction workflow via the Dashboard. 
+
+ 
+
+ 
+
+Add a link to the service to the first block. 
+
+ 
+
+ 
+
+As a starting point, the page with the general list of movies has been added, but to extract detailed information about each of them, you need to open their individual pages. 
+
+ 
+
+ 
+
+For the agent to open the page of each movie, it needs a link. This link can be found on the starting page. Add a new block to the workflow for finding links. To do this, you need to press the plus sign at the bottom of the first block. 
+
+ 
+
+ 
+
+Select Find Links and describe to the agent which links it needs to find on the page. 
+
+ 
+
+ 
+
+Simply finding links on a page is not enough. For the agent to open the found links, you need to add the "Follow links" block below and select "Follow each link" in it. 
+
+ 
+
+ 
+
+Now we move on to writing the schema that our AI-agent will fill in, extracting information about films. 
+
+ 
+
+ 
+
+Switch to advanced editing mode in the "Extract Data" block for maximum fine-tuning of the schema. 
+
+ 
+
+ 
+
+Click 'click to set' to open the editor and write the schema in JSON format, where specify the names of the objects to be extracted and a detailed description for each object. 
+
+The more detailed the description, the more accurate the extracted data will be. There are two visible critic reviews on the page, so we will add a list designation [ ] for them. 
+
+ 
+
+ 
+
+Don't forget to save the changes. Now let's add general instructions for the agent. 
+
+ 
+
+ 
+
+Here you can specify the context that can help the agent extract data from the page more accurately, as well as general requirements that the agent must follow when filling out the schema. 
+
+ 
+
+ 
+
+After running, you will be able to easily save a list of films and their ratings to your computer and use them for personal purposes later. 

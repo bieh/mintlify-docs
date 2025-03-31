@@ -1,0 +1,52 @@
+---
+title: "Trustpilot Reviews Extractor "
+description: "Description of your new file."
+---
+
+Let's create a step-by-step workflow that will gather user reviews on a company/service from the Trustpilot resource. For example, let's take Apple Music, Spotify, and Netflix. 
+
+Create an empty extraction workflow via the Dashboard 
+
+![1 1 Pn](/Guides/imgs/1-1.png)
+
+Add links to the services of interest in the first block. 
+
+![1 2 Pn](/Guides/imgs/1-2.png)
+
+Then add a new block to the workflow. To do this, you need to click the plus sign at the bottom of the first block. 
+
+![1 3 Pn](/Guides/imgs/1-3.png)
+
+Select Paginate and specify the required number of pages that the agent will visit on each link added in the first block.
+
+![1 4 Pn](/Guides/imgs/1-4.png)
+
+![1 5 Pn](/Guides/imgs/1-5.png)
+
+Now let's move on to writing the schema that our AI agent will fill in by extracting reviews from the pages.
+
+![1 6 Pn](/Guides/imgs/1-6.png)
+
+Switch to advanced editing mode in the Extract Data block for maximum fine-tuning of the schema. 
+
+![1 7 Pn](/Guides/imgs/1-7.png)
+
+Click 'click to set' to open the editor and write the schema in JSON format, where specify the names of the objects to be extracted and a detailed description for each object. 
+
+You can also specify objects here that are not explicitly present on the page, but the agent can create data for them based on the information obtained. For example, let's ask it to determine the tone of the review, and also ask it to separately extract the pros and cons of the product that the author mentions in their review. 
+
+![1 8 Pn](/Guides/imgs/1-8.png)
+
+ 
+
+Don't forget to save the changes. Now let's add general instructions for the agent. 
+
+![1 9 Pn](/Guides/imgs/1-9.png)
+
+Here you can specify context that may help the agent extract data from the page more accurately, as well as general requirements that the agent must follow when filling out the schema. 
+
+![1 10 Pn](/Guides/imgs/1-10.png)
+
+After running, you will be able to easily save a list of reviews for each service to your computer and use them for personal purposes later. 
+
+![1 11 Pn](/Guides/imgs/1-11.png)

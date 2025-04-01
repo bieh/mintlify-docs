@@ -1,0 +1,55 @@
+---
+title: "Turn Website to FAQ "
+description: "Description of your new file."
+---
+
+Jsonify not only allows you to extract raw data from web pages, but also to create new textual data based on it. Let's build a step-by-step workflow that will analyze a website and write an FAQ for it.
+
+Create an empty extraction workflow via Dashboard
+
+![3 1 Pn](/Guides/imgs/3-1.png)
+
+Add links to the pages for which the FAQ will be created in the first block.
+
+![3 2 Pn](/Guides/imgs/3-2.png)
+
+In order for the agent to create an FAQ for the site, let's send it to explore not only the main page, but also other sections of the site. Add a new "Explore content" block after the first block.
+To do this, you need to click the plus sign at the bottom of the first block.
+
+![3 3 Pn](/Guides/imgs/3-3.png)
+
+The necessary block is located in the Advanced section.
+
+![3 4 Pn](/Guides/imgs/3-4.png)
+
+Select 'Find information inside the current site' and write the research goal for the AI agent.
+
+![3 5 Pn](/Guides/imgs/3-5.png)
+
+![3 6 Pn](/Guides/imgs/3-6.png)
+
+Now let's move on to writing the schema that our AI agent will fill in, extracting information from company websites. Click on the "Extract Data" block to edit it.
+
+![3 7 Pn](/Guides/imgs/3-7.png)
+
+Switch to advanced editing mode for maximum fine-tuning of the schema.
+
+![3 8 Pn](/Guides/imgs/3-8.png)
+
+Click 'click to set' to open the editor and write the schema in JSON format. Specify the names of the objects for extraction and text creation, as well as the most detailed description for each object. The more detailed the description, the more accurate the extracted data will be.
+
+To create an FAQ, the AI needs information based on which questions and answers will be generated. To do this, ask to extract text from the pages opened by the agent (which it visited while researching the site). Since it is assumed that there will be several questions for the FAQ, we will add a list designation [ ].
+
+![3 9 Pn](/Guides/imgs/3-9.png)
+
+Don't forget to save the changes. Now let's add general instructions for the agent.
+
+![3 10 Pn](/Guides/imgs/3-10.png)
+
+Here you can specify the context that can help the agent extract data from the page more accurately, as well as general requirements that the agent must follow when filling out the schema.
+
+![3 11 Pn](/Guides/imgs/3-11.png)
+
+Workflow creation is complete. After running, you'll get a list of possible frequently asked questions and answers for them.
+
+![3 12 Pn](/Guides/imgs/3-12.png)

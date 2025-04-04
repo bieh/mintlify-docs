@@ -1,0 +1,84 @@
+---
+title: "Landing Page Analyzer "
+description: "Description of your new file."
+---
+
+With Jsonify, you can not only extract information from a page, but also analyze its content, such as the content of competitors' landing pages from a SEO perspective. Let's build a step-by-step workflow that will do all this dirty work. 
+
+Create an empty extraction workflow via Dashboard 
+
+![5 1 Pn](/Guides/imgs/5-1.png)
+
+As a starting point, you can add a ready-made list of sites for analysis to the first block. 
+
+To make the workflow a little more useful, let's analyze Google search results for a query, for example, once a month. Add a timer by clicking the plus sign to the right of the empty block. 
+
+![5 2 Pn](/Guides/imgs/5-2.png)
+
+![5 3 Pn](/Guides/imgs/5-3.png)
+
+Set the frequency and start time of the workflow. 
+
+![5 4 Pn](/Guides/imgs/5-4.png)
+
+Since it was decided to search for landing pages via Google search, the "Open Websites" block is not needed for this. Delete it by clicking on the three vertical dots in the upper right corner of this block and select "Delete". 
+
+![5 5 Pn](/Guides/imgs/5-5.png)
+
+Instead of the previous starting point, add a new block by clicking the plus sign to the right of the empty block. 
+
+![5 6 Pn](/Guides/imgs/5-6.png)
+
+Select "Search on Google" and write your query. 
+
+![5 7 Pn](/Guides/imgs/5-7.png)
+
+![5 8 Pn](/Guides/imgs/5-8.png)
+
+![5 9 Pn](/Guides/imgs/5-9.png)
+
+Next, add a step in which the AI agent will search for suitable links in the search results. To do this, click the plus sign at the bottom of the block. 
+
+![5 10 Pn](/Guides/imgs/5-10.png)
+
+Select "Find links on each page" and describe which links the agent needs to find. 
+
+![5 11 Pn](/Guides/imgs/5-11.png)
+
+![5 12 Pn](/Guides/imgs/5-12.png)
+
+Simply finding the links is not enough for the AI agent to follow them. The next step is to add "Follow links". 
+
+![5 13 Pn](/Guides/imgs/5-13.png)
+
+![5 14 Pn](/Guides/imgs/5-14.png)
+
+Now let's move on to writing the schema that our AI agent will fill in, extracting information from pages. Click on the "Extract data" block and switch to advanced editing mode for maximum fine-tuning of the schema. 
+
+![5 15 Pn](/Guides/imgs/5-15.png)
+
+Click "click to set" to open the editor and write the schema in JSON format. Specify the names of the objects for extraction and a maximally detailed description for each object. The more detailed the description, the more accurate the extracted data will be. 
+
+![5 16 Pn](/Guides/imgs/5-16.png)
+
+![5 17 Pn](/Guides/imgs/5-17.png)
+
+ 
+
+The names of objects for extraction can be arbitrary, and not even related to the subject of extraction, provided that the explanations are comprehensive for understanding what you want to see in the final result of the agent's work. 
+
+Sometimes it's not necessary to fill in explanations if the object name is simple and the data that needs to be entered is obvious. 
+
+The more detailed the explanation is, plus the more examples are added, the more accurate the data extracted by the agent will be. Don't forget to save the changes. 
+
+Now let's add general instructions for the agent. 
+
+![5 18 Pn](/Guides/imgs/5-18.png)
+
+Here you can specify the context that can help the agent extract data from the page more accurately, as well as general requirements that the agent must follow when filling out the schema. 
+
+![5 19 Pn](/Guides/imgs/5-19.png)
+
+Workflow creation is complete. After running, you will get a SEO analysis of 5 landing pages from organizations in the current Google search results. Since a timer was added at the beginning, this workflow will automatically run once a week and process the first 5 search results. 
+
+![5 20 Pn](/Guides/imgs/5-20.png)

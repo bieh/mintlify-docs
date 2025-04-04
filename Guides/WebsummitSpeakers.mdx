@@ -13,8 +13,90 @@ In the first block, click the "\+ Add" button on the right to select a URL addit
 
 ![4 2 Pn](/Guides/imgs/4-2.png)
 
-Add a link to the page. Inside the link, replace the page number with the variable {{page}} (you can copy it by clicking on it at the top) and specify the page range for generating links. 
+Add a link to the page. Inside the link, replace the page number with the variable {page} (you can copy it by clicking on it at the top) and specify the page range for generating links. 
 
 ![4 3 Pn](/Guides/imgs/4-3.png)
 
 The result will be a list of links to each page with the corresponding number. 
+
+![4 4 Pn](/Guides/imgs/4-4.png)
+
+Now fill in the "Extract Data" block so that the agent extracts the names of the speakers from each page. Click on the block to start editing it. 
+
+![4 5 Pn](/Guides/imgs/4-5.png)
+
+Switch to advanced editing mode for maximum fine-tuning of the schema. 
+
+![4 6 Pn](/Guides/imgs/4-6.png)
+
+Click 'click to set' to open the editor and write the schema in JSON format. Specify the names of the objects for extraction, as well as the most detailed description for each object. The more detailed the description, the more accurate the extracted data will be. 
+
+Since there are multiple speakers on each page, add a list designation [ ] to the schema. 
+
+![4 7 Pn](/Guides/imgs/4-7.png)
+
+Don't forget to save the changes. Now let's add general instructions for the agent. 
+
+![4 8 Pn](/Guides/imgs/4-8.png)
+
+Here you can specify the context that can help the agent extract data from the page more accurately, as well as general requirements that the agent must follow when filling out the schema. 
+
+![4 9 Pn](/Guides/imgs/4-9.png)
+
+Now it is possible to use the "name" object as a variable {{name}} in the following blocks of the current workflow. Add a search for the LinkedIn profile in Google as the next step, using this variable. 
+
+To do this, click the plus sign at the bottom of the "Extract Data" block to add a new block as the next step. 
+
+![4 10 Pn](/Guides/imgs/4-10.png)
+
+Select "Search on Google" and write the query that will be used for the search. 
+
+![4 11 Pn](/Guides/imgs/4-11.png)
+
+![4 12 Pn](/Guides/imgs/4-12.png)
+
+At this step, the AI agent will perform a Google search using each person's name it extracted from the Websummit speaker list page, along with the Google search operator "site:linkedin.com/in" to make Google provide a link to the desired person's page. 
+
+The next step is to add a search for the person's page link so that the agent opens the correct one from the top 10 results. 
+
+![4 13 Pn](/Guides/imgs/4-13.png)
+
+![4 14 Pn](/Guides/imgs/4-14.png)
+
+Finding the correct link is not enough for the agent to follow it. The next step is to add the "Follow links" block and select the "Follow the first link" parameter in it. 
+
+![4 15 Pn](/Guides/imgs/4-15.png)
+
+![4 16 Pn](/Guides/imgs/4-16.png)
+
+As the final step, add an "Extract Data" block. In it, you need to write a schema according to which the AI agent will extract data from the user's LinkedIn page. 
+
+![4 17 Pn](/Guides/imgs/4-17.png)
+
+Switch to advanced editing mode for maximum fine-tuning of the schema. 
+
+![4 18 Pn](/Guides/imgs/4-18.png)
+
+Click 'click to set' to open the editor and write the schema in JSON format. Specify the names of the objects for extraction, as well as the most detailed description for each object. The more detailed the description, the more accurate the extracted data will be. 
+
+![4 19 Pn](/Guides/imgs/4-19.png)
+
+In the example, we added the object "profile_exists": "\<whether you've managed to open this page and see data (boolean)\>", because a person's LinkedIn profile can be private and inaccessible to unregistered site guests. This object is needed so that such profiles are also present in the final results and are not lost, since no other information will be extracted from them. 
+
+![4 20 Pn](/Guides/imgs/4-20.png)
+
+The names of objects for extraction can be arbitrary, and not even related to the subject of extraction, provided that the explanations are comprehensive for understanding what you want to see in the final result of the agent's work. 
+
+Sometimes it's not necessary to fill in explanations if the object name is simple and the data that needs to be entered is obvious. 
+
+The more detailed the explanation is, plus the more examples are added, the more accurate the data extracted by the agent will be. Don't forget to save the changes. 
+
+Now let's add general instructions for the agent. 
+
+![4 21 Pn](/Guides/imgs/4-21.png)
+
+Here you can specify the context that can help the agent extract data from the page more accurately, as well as general requirements that the agent must follow when filling out the schema. 
+
+![4 22 Pn](/Guides/imgs/4-22.png)
+
+Workflow creation is complete. After running, you'll get a list of LinkedIn profiles for all Websummit speakers. 

@@ -15,11 +15,9 @@
         "groups": [
           {
             "group": "Get Started",
-            "pages": [
-              "introduction",
-              "quickstart",
-              "development",
-              "part1/wellcome"
+            "pages": [              
+              "part1/wellcome",
+              "part1/basics"
               
             ]
           },

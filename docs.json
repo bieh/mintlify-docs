@@ -16,7 +16,7 @@
           {
             "group": "Get Started",
             "pages": [              
-              "part1/wellcome",
+              "part1/welcome",
               "part1/basics"
               
             ]

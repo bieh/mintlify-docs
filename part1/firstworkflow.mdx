@@ -10,44 +10,56 @@ Let's jump right in and build your first automation with Jsonify! This simple wo
 ### 1. Create a New Workflow
 
 * Navigate to your Jsonify **Dashboard**.
-* Click the button to create a New workflow: **Create an empty workflow ➙ Extract**.
-* The created workflow already has the necessary blocks for our first workflow.
+* Click the button sequence to create a new workflow: **Create an empty workflow ➙ Extract**.
+* Notice that the created workflow already contains the necessary blocks (`Open Websites` and `Extract Data`) for this first example.
 
 *[Optional: Insert a screenshot of creating a new workflow]*
-[Screenshot: Creating a new workflow]
-### 2. Сonfigure the `Open Websites` Block
 
-* Every workflow needs a starting point. Here it is  **`Open Websites`**.
+[Screenshot: Creating a new workflow from the Extract template]
+
+
+### 2. Configure the `Open Websites` Block
+
+* The starting point for this workflow is the **`Open Websites`** block, which is already on the canvas.
 * Select the `Open Websites` block to configure it.
 * In the URL input field, enter the website you want the AI Agent to visit. Let's use a simple, stable example: `https://example.com`
-* Ensure the toggle next to the URL is **ON**.
+* Ensure the toggle switch next to the URL is **ON**.
 
 *[Optional: Insert a screenshot of configuring the Open Websites block]*
-[Screenshot: Configuring the Open Websites block with example.com]
-### 3. Сonfigure the `Extract Data` Block
 
-* Now, tell the agent what to do after opening the page. The **`Extract Data`** block is already on the dashboard canvas *after* the `Open Websites` block.
+[Screenshot: Configuring the Open Websites block with example.com]
+
+
+### 3. Configure the `Extract Data` Block
+
+* Next, we need to tell the agent what to extract. The **`Extract Data`** block is already placed after the `Open Websites` block on the canvas.
 * Select the `Extract Data` block to configure it.
-* We want a single piece of data (the title), so ensure **"A single item"** (or similar) is selected.
+* We want a single piece of data (the title) for this example, so ensure **"A single item"** is selected.
 * Define the data point you want:
-    * In the first column "NAME", type `page_title`.
-    * In the second column "Example value or a longer description", describe what the AI should extract: `Extract the main title of the webpage`.
-* (Optional) Add additional instructions if needed, like: `Extract only the text content of the main page title.`
+    * In the first column, labeled **NAME**, type `page_title`.
+    * In the second column, labeled **EXAMPLE VALUE OR A LONGER DESCRIPTION**, describe what the AI should extract: `Extract the main title of the webpage`.
+* *(Optional)* You could add further clarification in the "Add additional instructions" field below, like: `Extract only the text content of the main page title.`
 
 *[Optional: Insert a screenshot of configuring the Extract Data block for the title]*
+
 [Screenshot: Configuring the Extract Data block for page_title]
+
+
 ### 4. Run Your Workflow!
 
-* That's it! Your simple workflow is ready.
-* Find and click the **"Run"** button for your workflow.
+* That's it! Your simple workflow is configured and ready to run.
+* Find and click the **Run** button (often located at the top right or bottom of the editor).
 * Jsonify will assign an AI Agent to open `example.com` and extract its title based on your instructions.
 
 ### 5. Check the Results
 
-* Once the workflow finishes (it should be very quick for this example), navigate to your  Results area.
-* To do this, click "Running" if the workflow is currently running, or "Results". if the workflow has already completed its work.
-* You should see the extracted data, with a column named `page_title` containing the text "Example Domain".
+* Once the workflow finishes (it should be very quick for this example), you can view the results.
+* Navigate to the results area. You might click on the **Running** status indicator if the workflow is still active, or the **Results** tab/section if it has completed.
+* You should see the extracted data, likely presented in a table, with a column named `page_title` containing the text "Example Domain".
 
 *[Optional: Insert a screenshot of the results showing the extracted title]*
-[Screenshot: Results showing extracted page_title 'Example Domain']
-**Congratulations!** You've successfully built and run your first Jsonify workflow, demonstrating the basic process of navigating to a page and extracting specific information. You can now build upon this foundation to tackle more complex tasks.
+
+[Screenshot: Results table showing extracted page_title 'Example Domain']
+
+
+**Congratulations!** You've successfully configured and run your first Jsonify workflow using a template. This demonstrates the basic process of navigating to a page and extracting specific information. You can now build upon this foundation to tackle more complex tasks.

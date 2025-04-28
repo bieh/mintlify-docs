@@ -1,50 +1,58 @@
 ---
-title: "With variables (Apply input variables)"
-description: "Description of your new file."
+title: 'Block: Apply Variables'
+description: 'Run your workflow with different inputs using variables.'
+icon: 'table-columns' # Example icon, replace with actual if available
 ---
 
-![2 1 Pn](/Blocks/imgs/2-1.png)
+The `Apply Variables` block is a powerful tool for running the same workflow logic across different sets of input data. Instead of creating separate workflows for each input, you define variables once, and the workflow runs automatically for each set.
 
-This block adds variables to the workflow, which can be used in other blocks throughout the workflow. The column name is the variable name, and each row below contains a variable value that will be substituted into all supported blocks where the variable name is specified. An unlimited number of rows can be added to this block.
+## Purpose
 
-## Examples of using variables in blocks
+Use the `Apply Variables` block when you want to:
 
-1. Search on Google block
+* Process a list of items (e.g., search for multiple companies, open several user profiles).
+* Parameterize your workflow (e.g., use different search keywords, test various URLs).
+* Import data from external sources (like CSV) to drive your workflow runs.
 
-![2 2 Pn](/Blocks/imgs/2-2.png)
+This block typically sits at the **beginning** of a workflow or section where dynamic input is needed.
 
-![2 3 Pn](/Blocks/imgs/2-3.png)
+## Configuration
 
-In this case, the variable {company_name} will be replaced with 'Jsonify' in the Google search query: Jsonify CEO.
+Configuring this block involves setting up a table where columns represent variable names and rows represent the different sets of values for those variables.
 
-2. AI instructions in any of the blocks
+1.  **Add Columns:** Click to add a new column. The column header becomes your **variable name** (e.g., `company_name`, `search_term`, `website_url`). Variable names should be descriptive and usually contain only letters, numbers, and underscores.
+2.  **Rows:** Each row represents one run of the subsequent workflow steps. Fill in the cells for each row with the specific **values** for your variables for that run.
+3.  **Variable Syntax:** In subsequent blocks (like `Open Websites`, `Extract Data` instructions, `Search on Google`, etc.), you refer to these variables using double curly braces: `{{variable_name}}`. For example, if you have a column named `company_name`, you would use `{{company_name}}` in another block to insert the value from the current row.
+4.  **Import (Optional):** You can import data directly into this table from a CSV file, which is useful for large datasets. Look for an "Import" button.
 
-![2 4 Pn](/Blocks/imgs/2-4.png)
+*[Optional: Insert a screenshot of the Apply Variables block configuration table]*
+[Screenshot: Apply Variables block configuration table with example columns/rows]
+## Examples
 
-A variable can be referenced in any AI instruction. In this case, the variable is specified in the Explore Content block. According to this instruction, the agent will search for pages containing information about the CEO of the company Jsonify.
+**Example 1: Searching for Multiple Companies**
 
-![2 5 Pn](/Blocks/imgs/2-5.png)
+* **`Apply Variables` Block:**
+    * Column: `company_name`
+    * Row 1: `Jsonify`
+    * Row 2: `Google`
+    * Row 3: `Microsoft`
+* **`Search on Google` Block (following Apply Variables):**
+    * Query: `{{company_name}} headquarters address`
+    * *Result:* The workflow will run three times, searching for the headquarters of Jsonify, Google, and Microsoft respectively.
 
-Here, the variable is specified both in the JSON schema that the agent must fill with the found information on the target page and in the general instructions for the AI agent on filling this JSON.
+**Example 2: Opening Different Product Pages**
 
-3. Open Websites block
+* **`Apply Variables` Block:**
+    * Column: `product_id`
+    * Row 1: `12345`
+    * Row 2: `67890`
+* **`Open Websites` Block (following Apply Variables):**
+    * URL: `https://yourstore.com/products/{{product_id}}`
+    * *Result:* The workflow runs twice, opening the pages for product ID 12345 and 67890.
 
-![2 6 Pn](/Blocks/imgs/2-6.png)
+## Key Considerations
 
-![2 7 Pn](/Blocks/imgs/2-7.png)
+* The workflow steps *after* the `Apply Variables` block will execute once for **each row** defined in the table.
+* Ensure your variable names in the table match exactly how you reference them (including case sensitivity) in other blocks using the `{{variable_name}}` syntax.
 
-In this case, the variable {website} will be replaced with its value 'jsonify.com' when the workflow runs, and the agent will open the website https://jsonify.com.
-
-Additionally, in this block, it is possible not only to substitute the entire link but also to replace part(s) of it.
-
-![2 8 Pn](/Blocks/imgs/2-8.png)
-
-![2 9 Pn](/Blocks/imgs/2-9.png)
-
-In this case, the agent will open three pages, corresponding to each row in the With variables block.
-
-If multiple Extract data blocks are used sequentially in the workflow, the field names from previous blocks can be used as new variables in blocks placed afterward.
-
-![2 10 Pn](/Blocks/imgs/2-10.png)
-
-![2 11 Pn](/Blocks/imgs/2-11.png)
+This block is fundamental for scaling your automations and making them reusable across different data inputs.

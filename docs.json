@@ -17,8 +17,7 @@
             "group": "Get Started with Jsonify",
             "pages": [              
               "part1/welcome",
-              "part1/basics",
-              "part1/firstworkflow"
+              "part1/basics"
               
             ]
           },

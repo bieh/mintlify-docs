@@ -22,6 +22,12 @@
             ]
           },
           {
+            "group": "Blocks",
+            "pages": [
+              "blocks/with-variables"
+            ]
+          }
+          {
             "group": "Essentials",
             "pages": [
               "essentials/markdown",

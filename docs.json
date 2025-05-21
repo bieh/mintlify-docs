@@ -17,7 +17,8 @@
             "group": "Get Started with Jsonify",
             "pages": [              
               "part1/welcome",
-              "part1/basics"
+              "part1/basics",
+              "part1/first-workflow"
               
             ]
           },
@@ -26,7 +27,7 @@
             "pages": [
               "blocks/with-variables"
             ]
-          }
+          },
           {
             "group": "Essentials",
             "pages": [

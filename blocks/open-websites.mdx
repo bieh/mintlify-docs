@@ -1,0 +1,78 @@
+---
+title: 'Block: Open Websites'
+description: 'Define the starting URLs for your AI Agent to visit.'
+icon: 'globe-network' # Example icon, replace with actual if available
+---
+
+The `Open Websites` block is typically the first active step in many workflows. It tells your AI Agent which web pages to navigate to initially. The subsequent blocks in your workflow will then operate on these opened pages.
+
+## Purpose
+
+Use the `Open Websites` block to:
+
+* Specify one or more starting URLs for your automation.
+* Provide a list of websites to process sequentially or in parallel (depending on workflow design and agent availability).
+* Dynamically generate URLs using variables or patterns.
+
+## Configuration
+
+This block allows you to manage a list of URLs that the AI Agent will visit.
+
+1. **Adding URLs:**
+
+   * **Single URL:** Type or paste a single URL into the input field and click **+ Add** (or press Enter).
+   * **List of URLs:** You can often paste a list of URLs (e.g., copied from a spreadsheet, with each URL on a new line) directly into the input field. The system usually parses them into individual entries.
+   * **Import from CSV:** Look for an option to import URLs from a CSV file. This is useful for large lists. The CSV typically needs a column containing the URLs.
+   * **Add a numbered range of URLs:** This powerful feature allows you to generate a sequence of URLs based on a pattern.
+     * You provide a URL pattern with `{{page}}` as a placeholder for the page number (e.g., `https://example.com/news?page={{page}}`).
+     * You then specify the start and end numbers for the range (e.g., 1 to 10).
+     * Jsonify will generate all URLs in that sequence (e.g., `...page=1`, `...page=2`, ..., `...page=10`).
+
+2. **Managing URLs:**
+
+   * **Toggle ON/OFF:** Each URL in the list usually has a toggle switch. Only URLs that are **ON** will be visited by the agent. This allows you to temporarily disable certain URLs without deleting them.
+   * **Edit/Delete:** You can typically edit or delete individual URLs from the list.
+
+3. **Using Variables (from `Apply Variables` block):**
+
+   * If you have an `Apply Variables` block earlier in your workflow, you can use those variables to construct dynamic URLs.
+   * **Full URL Replacement:** If a variable `{{website_url}}` contains a full URL (e.g., `https://jsonify.com`), you can simply put `{{website_url}}` in the URL input field.
+   * **Partial URL Replacement:** You can use variables to substitute parts of a URL. For example, if you have variables `{{ticker}}` and `{{slug}}`, your URL might look like: `https://financialsite.com/stocks/{{ticker}}/{{slug}}/details`. The workflow will generate a URL for each row in your `Apply Variables` table.
+
+[Screenshot: Open Websites block configuration showing a list of URLs, some with variables and pagination]
+
+## Examples
+
+**Example 1: Opening a Single Website**
+
+* URL added: `https://jsonify.com`
+* *Result:* The agent will open the Jsonify homepage.
+
+**Example 2: Processing a List of Competitor Sites**
+
+* URLs added:
+  * `https://competitorA.com`
+  * `https://competitorB.com`
+  * `https://competitorC.com`
+* *Result:* The agent will visit each of these three sites.
+
+**Example 3: Scraping Paginated Search Results**
+
+* Using "Add a numbered range of URLs":
+  * Pattern: `https://searchengine.com/results?query=ai&page={{page}}`
+  * Range: 1 to 5
+* *Result:* The agent will open 5 pages of search results.
+
+**Example 4: Opening Company Pages Using Variables**
+
+* Assumes an `Apply Variables` block with a column `company_domain`.
+* `Open Websites` block URL: `https://{{company_domain}}`
+* *Result:* If `Apply Variables` has rows for `jsonify.com` and `google.com`, the agent will open these two sites.
+
+## Key Considerations
+
+* The AI Agent will visit each URL that is enabled in this block.
+* You do **not** need to add a `Follow Links` block immediately after `Open Websites` for these initial URLs; the agent inherently "follows" them by opening them.
+* This block is crucial for defining the scope of your automation when dealing with multiple pages or dynamic inputs.
+
+This block sets the stage for all subsequent actions your AI Agent will perform.

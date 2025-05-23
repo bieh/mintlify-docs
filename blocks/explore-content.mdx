@@ -21,8 +21,11 @@ This block is typically used **before** an `Extract Data` block if the aim is to
 
 1.  **Describe an action or set of actions below. Jsonify will follow the instructions to navigate the site:**
     * This is the primary input field where you define the **goal** for the AI Agent.
-   
-    * You can use variables from an `Apply Variables` block here (e.g., "Find pages about {{topic}}").
+    * Be clear and specific. For instance, you could instruct the agent:
+        * "Find the page which may contain the company's contact information."
+        * "Explore product detail pages for smartphones and summarize key features."
+        * "Open search results that seem most relevant to 'AI in healthcare' and provide a brief summary of each."
+    * You can use variables from an `Apply Variables` block here (e.g., "Find pages about `{{topic}}`").
 
 2.  **How many pages to open? (Maximum number of pages):**
     * This sets a **total limit** on the number of new pages the agent can open while executing this `Explore Content` block, regardless of the depth.

@@ -23,7 +23,8 @@
             ]
           },
           {
-            "group": "Blocks",
+            "dropdown": "Blocks",
+            "icon": "home",
             "pages": [
               "blocks/with-variables"
             ]

@@ -18,26 +18,23 @@ Use the `Open Websites` block to:
 
 This block allows you to manage a list of URLs that the AI Agent will visit.
 
-1. **Adding URLs:**
+1.  **Adding URLs:**
+    * **Single URL:** Type or paste a single URL into the main input field and click the **+ Add** button (or press Enter).
+    * **Advanced Add Options (Dropdown next to + Add button):**
+        * **Add a list of pages:** Select this option to paste a list of URLs (e.g., copied from a spreadsheet, with each URL on a new line). The system will parse them into individual entries.
+        * **Add a numbered range of URLs:** This powerful feature allows you to generate a sequence of URLs based on a pattern.
+            * You provide a URL pattern with `{{page}}` as a placeholder for the page number (e.g., `https://example.com/news?page={{page}}`).
+            * You then specify the start and end numbers for the range (e.g., 1 to 10).
+            * Jsonify will generate all URLs in that sequence (e.g., `...page=1`, `...page=2`, ..., `...page=10`).
+        * **Import from CSV:** Look for this option in the dropdown to import URLs from a CSV file. This is useful for large lists. The CSV needs a column containing the URLs.
 
-   * **Single URL:** Type or paste a single URL into the input field and click **+ Add** (or press Enter).
-   * **List of URLs:** You can often paste a list of URLs (e.g., copied from a spreadsheet, with each URL on a new line) directly into the input field. The system usually parses them into individual entries.
-   * **Import from CSV:** Look for an option to import URLs from a CSV file. This is useful for large lists. The CSV typically needs a column containing the URLs.
-   * **Add a numbered range of URLs:** This powerful feature allows you to generate a sequence of URLs based on a pattern.
-     * You provide a URL pattern with `{{page}}` as a placeholder for the page number (e.g., `https://example.com/news?page={{page}}`).
-     * You then specify the start and end numbers for the range (e.g., 1 to 10).
-     * Jsonify will generate all URLs in that sequence (e.g., `...page=1`, `...page=2`, ..., `...page=10`).
-
-2. **Managing URLs:**
-
-   * **Toggle ON/OFF:** Each URL in the list usually has a toggle switch. Only URLs that are **ON** will be visited by the agent. This allows you to temporarily disable certain URLs without deleting them.
-   * **Edit/Delete:** You can typically edit or delete individual URLs from the list.
-
-3. **Using Variables (from `Apply Variables` block):**
-
-   * If you have an `Apply Variables` block earlier in your workflow, you can use those variables to construct dynamic URLs.
-   * **Full URL Replacement:** If a variable `{{website_url}}` contains a full URL (e.g., `https://jsonify.com`), you can simply put `{{website_url}}` in the URL input field.
-   * **Partial URL Replacement:** You can use variables to substitute parts of a URL. For example, if you have variables `{{ticker}}` and `{{slug}}`, your URL might look like: `https://financialsite.com/stocks/{{ticker}}/{{slug}}/details`. The workflow will generate a URL for each row in your `Apply Variables` table.
+2.  **Managing URLs:**
+    * **Toggle ON/OFF:** Each URL in the list has a toggle switch. Only URLs that are **ON** will be visited by the agent. This allows you to temporarily disable certain URLs without deleting them.
+    * **Edit/Delete/open:** To the right of each URL in the list, you will find separate **Open** and **Delete** buttons to open or remove that specific entry. To edit the URL, click on it.
+3.  **Using Variables (from `Apply Variables` block):**
+    * If you have an `Apply Variables` block earlier in your workflow, you can use those variables to construct dynamic URLs.
+    * **Full URL Replacement:** If a variable `{{website_url}}` contains just the domain (e.g., `jsonify.com` or `jsonify.com/news`), you should structure the input in the URL field like this: `https://{{website_url}}`.
+    * **Partial URL Replacement:** You can use variables to substitute parts of a URL. For example, if you have variables `{{ticker}}` and `{{slug}}`, your URL might look like: `https://financialsite.com/stocks/{{ticker}}/{{slug}}/details`. The workflow will generate a URL for each row in your `Apply Variables` table.
 
 [Screenshot: Open Websites block configuration showing a list of URLs, some with variables and pagination]
 
@@ -45,29 +42,28 @@ This block allows you to manage a list of URLs that the AI Agent will visit.
 
 **Example 1: Opening a Single Website**
 
-* URL added: `https://jsonify.com`
+* URL added (via main input): `https://jsonify.com`
 * *Result:* The agent will open the Jsonify homepage.
 
-**Example 2: Processing a List of Competitor Sites**
+**Example 2: Processing a List of Competitor Sites (via "Add a list of pages")**
 
-* URLs added:
-  * `https://competitorA.com`
-  * `https://competitorB.com`
-  * `https://competitorC.com`
+* URLs pasted:
+    * `https://competitorA.com`
+    * `https://competitorB.com`
+    * `https://competitorC.com`
 * *Result:* The agent will visit each of these three sites.
 
-**Example 3: Scraping Paginated Search Results**
+**Example 3: Scraping Paginated Search Results (via "Add a numbered range of URLs")**
 
-* Using "Add a numbered range of URLs":
-  * Pattern: `https://searchengine.com/results?query=ai&page={{page}}`
-  * Range: 1 to 5
+* Pattern: `https://searchengine.com/results?query=ai&page={{page}}`
+* Range: 1 to 5
 * *Result:* The agent will open 5 pages of search results.
 
 **Example 4: Opening Company Pages Using Variables**
 
-* Assumes an `Apply Variables` block with a column `company_domain`.
+* Assumes an `Apply Variables` block with a column `company_domain` containing values like `jsonify.com` or `google.com`.
 * `Open Websites` block URL: `https://{{company_domain}}`
-* *Result:* If `Apply Variables` has rows for `jsonify.com` and `google.com`, the agent will open these two sites.
+* *Result:* If `Apply Variables` has rows for `jsonify.com` and `google.com`, the agent will open `https://jsonify.com` and `https://google.com`.
 
 ## Key Considerations
 

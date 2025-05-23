@@ -17,3 +17,28 @@ Use the `Explore Content` block when you want your AI Agent to:
 
 This block is typically used **before** an `Extract Data` block if the aim is to gather specific details from the pages found during exploration.
 
+## Configuration
+
+1.  **Describe an action or set of actions below. Jsonify will follow the instructions to navigate the site:**
+    * This is the primary input field where you define the **goal** for the AI Agent.
+    * Be clear and specific. For example:
+        * "Find the page which may contain the company's contact information."
+        * "Explore product detail pages for smartphones and summarize key features."
+        * "Open search results that seem most relevant to 'AI in healthcare' and provide a brief summary of each."
+    * You can use variables from an `Apply Variables` block here (e.g., "Find pages about {{topic}}").
+
+2.  **How many pages to open? (Maximum number of pages):**
+    * This sets a **total limit** on the number of new pages the agent can open while executing this `Explore Content` block, regardless of the depth.
+    * For instance, if set to 10, the agent will not open more than 10 pages in total, even if the depth setting might theoretically allow for more traversals.
+    * Default is often a reasonable number (e.g., 5 or 10), but adjust based on the complexity of the site and your goal.
+
+3.  **Depth to explore:**
+    * This controls how "deep" the agent can go by clicking links from one page to another. Each click to a new page counts towards the "Maximum number of pages" limit.
+    * A depth of 1 means it will only explore links found on the initial page(s) it started from.
+    * A depth of 2 means it can click links on the initial page, and then click links on *those* subsequent pages.
+    * To easily understand this parameter, recall the popular "Wikipedia rabbit hole" meme. A person goes to Wikipedia for something simple (e.g., "who invented the telephone"), but after a few clicks on hyperlinks, ends up in a completely unexpected article (say, about alpaca breeding in Peru). This setting limits how far down such rabbit holes the agent can travel, all while staying within the overall "Maximum number of pages" limit.
+
+[Screenshot: Explore Content block configuration with example goal and settings]
+
+
+

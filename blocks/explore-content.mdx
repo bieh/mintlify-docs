@@ -19,26 +19,36 @@ This block is typically used **before** an `Extract Data` block if the aim is to
 
 ## Configuration
 
-1.  **Describe an action or set of actions below. Jsonify will follow the instructions to navigate the site:**
-    * This is the primary input field where you define the **goal** for the AI Agent.
-    * Be clear and specific. For example:
-        * "Find the page which may contain the company's contact information."
-        * "Explore product detail pages for smartphones and summarize key features."
-        * "Open search results that seem most relevant to 'AI in healthcare' and provide a brief summary of each."
-    * You can use variables from an `Apply Variables` block here (e.g., "Find pages about {{topic}}").
+## Examples
 
-2.  **How many pages to open? (Maximum number of pages):**
-    * This sets a **total limit** on the number of new pages the agent can open while executing this `Explore Content` block, regardless of the depth.
-    * For instance, if set to 10, the agent will not open more than 10 pages in total, even if the depth setting might theoretically allow for more traversals.
-    * Default is often a reasonable number (e.g., 5 or 10), but adjust based on the complexity of the site and your goal.
+**Example 1: Finding a Company's "About Us" Page**
 
-3.  **Depth to explore:**
-    * This controls how "deep" the agent can go by clicking links from one page to another. Each click to a new page counts towards the "Maximum number of pages" limit.
-    * A depth of 1 means it will only explore links found on the initial page(s) it started from.
-    * A depth of 2 means it can click links on the initial page, and then click links on *those* subsequent pages.
-    * To easily understand this parameter, recall the popular "Wikipedia rabbit hole" meme. A person goes to Wikipedia for something simple (e.g., "who invented the telephone"), but after a few clicks on hyperlinks, ends up in a completely unexpected article (say, about alpaca breeding in Peru). This setting limits how far down such rabbit holes the agent can travel, all while staying within the overall "Maximum number of pages" limit.
+* **Goal:** "Find the page that describes the company's mission or history (About Us page)."
+* **Max Pages:** 5
+* **Depth:** 2
+* *Result:* The agent will navigate the current website, trying to identify and open the "About Us" page or similar, opening no more than 5 pages in total.
 
-[Screenshot: Explore Content block configuration with example goal and settings]
+**Example 2: Exploring Blog Posts on a Specific Topic**
 
+* Assumes the agent is on a blog's main page.
+* **Goal:** "Find and open blog articles related to 'artificial intelligence'."
+* **Max Pages:** 10
+* **Depth:** 3
+* *Result:* The agent will look for links to articles matching the topic and navigate to them, respecting the 10-page total limit.
 
+**Example 3: Processing and Summarizing Google Search Results**
 
+* Assumes the previous block was `Search on Google` for "best CRM software".
+* **Goal:** "From these search results, open the pages that are reviews or comparison articles for CRM software and provide a one-sentence summary for each."
+* **Max Pages:** 3 (to open and process the top few relevant results)
+* **Depth:** 1 (only open links directly from the search results page)
+* *Result:* The agent will analyze the search result links, open up to 3 promising ones, and attempt to summarize them.
+
+## Key Considerations
+
+* **Clarity of Goal:** The more specific and clear your goal description, the better the agent will perform.
+* **Website Structure:** Performance can vary depending on how well-structured and navigable the target website is.
+* **Limits are Important:** `Max Pages` and `Depth` work together to control the scope and prevent excessive navigation, saving time and resources. The `Max Pages` is the overarching constraint.
+* **Use in Sequence:** This block is often placed **before** an `Extract Data` block to get information from the pages the agent discovered or to process the generalized information gathered.
+
+The `Explore Content` block adds a layer of intelligence to your workflows, allowing for more flexible and adaptive web automation.

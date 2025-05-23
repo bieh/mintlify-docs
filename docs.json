@@ -26,7 +26,8 @@
             "group": "Blocks",
             "pages": [
               "blocks/with-variables",
-              "blocks/open-websites"
+              "blocks/open-websites",
+              "blocks/explore-content"
             ]
           },
           {

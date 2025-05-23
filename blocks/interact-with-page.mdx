@@ -15,7 +15,7 @@ Use the `Interact with Page` block when you need your AI Agent to:
 * Press keys like 'Enter' or key combinations.
 * Interact with elements to reveal more content (e.g., clicking 'Show all', 'Read more', spoilers).
 * Attempt more complex, multi-step goals on a single page, such as "initiate download of the file named `{{filename}}`" or "register on the website using `{{email}}` and `{{password}}`."
-* **File Handling Note:** When you instruct the agent to "download" a file (e.g., a PDF), it doesn't mean the file is downloaded directly to your computer. Instead, the agent will typically open the file content within its browser environment. This allows subsequent workflow steps to process this content, such as extracting data from the opened PDF.
+* **File Handling Note:** When you instruct the agent to "download" a file (e.g., a PDF), it doesn't mean the file is downloaded directly to your computer. Instead, the agent will open the file content within its browser environment. This allows subsequent workflow steps to process this content, such as extracting data from the opened PDF.
 
 This block can function as a direct, step-by-step instruction manual or a higher-level task definition for interacting with a single page.
 
@@ -61,8 +61,8 @@ This block can function as a direct, step-by-step instruction manual or a higher
 
 **Example 3: Submitting a Form with Variables (Step-by-step)**
 
-1.  `type `{{user_email}}` into 'Email field'`
-2.  `type `{{user_password}}` into 'Password field'`
+1.  `type {{user_email}} into 'Email field'`
+2.  `type {{user_password}} into 'Password field'`
 3.  `click on 'Login button'`
 
 ## Key Considerations

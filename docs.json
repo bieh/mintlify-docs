@@ -28,7 +28,8 @@
               "blocks/with-variables",
               "blocks/open-websites",
               "blocks/explore-content",
-              "blocks/interact-with-page"
+              "blocks/interact-with-page",
+              "blocks/find-links"
             ]
           },
           {

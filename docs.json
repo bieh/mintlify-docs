@@ -27,7 +27,8 @@
             "pages": [
               "blocks/with-variables",
               "blocks/open-websites",
-              "blocks/explore-content"
+              "blocks/explore-content",
+              "test"
             ]
           },
           {

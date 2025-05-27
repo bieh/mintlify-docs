@@ -29,9 +29,17 @@
               "part2/Common-Workflow-Patterns",
               "part2/Practical-Tutorials"
             ]
-          }
+          },
+          {
+        "dropdown": "Tutorials",
+        "icon": "code",
+        "pages": [
+          "guides/Extracting-Online-Reviews"
+        ]
+      }
         ]
       },
+      
       {
         "tab": "Mastering Workflow Blocks",
         "groups": [          

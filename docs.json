@@ -23,17 +23,6 @@
             ]
           },
           {
-            "group": "Mastering Workflow Blocks",
-            "pages": [
-              "blocks/with-variables",
-              "blocks/open-websites",
-              "blocks/explore-content",
-              "blocks/interact-with-page",
-              "blocks/find-links",
-              "blocks/extract-data"
-            ]
-          },
-          {
             "group": "Building Effectively - Strategies & Examples ",
             "pages": [
               "part2/Workflow-Design-Principles"
@@ -42,21 +31,17 @@
         ]
       },
       {
-        "tab": "API Reference",
-        "groups": [
+        "tab": "Mastering Workflow Blocks",
+        "groups": [          
           {
-            "group": "API Documentation",
+            "group": "Blocks",
             "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint Examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "blocks/with-variables",
+              "blocks/open-websites",
+              "blocks/explore-content",
+              "blocks/interact-with-page",
+              "blocks/find-links",
+              "blocks/extract-data"
             ]
           }
         ]

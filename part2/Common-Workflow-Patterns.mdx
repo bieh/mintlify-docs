@@ -1,0 +1,80 @@
+---
+title: 'Common Workflow Patterns'
+description: 'Discover common and effective ways to combine Jsonify blocks to solve various automation tasks.'
+icon: 'project-roadmap' # Example icon
+---
+
+Understanding individual blocks is important, but the real power of Jsonify comes from combining them into effective **workflow patterns**. This section highlights several common patterns you can adapt for your specific needs.
+
+## 1. List Processing (Batch URL Opening & Extraction)
+
+This is one of the most fundamental patterns for processing multiple similar pages when you have direct URLs.
+
+* **Blocks:**
+    1.  `Open Websites` (configured with a list of URLs, or a numbered range, or imported CSV)
+    2.  `Extract Data` (configured to extract desired information from each page)
+* **Use Case:** Extracting product details from a list of product URLs, scraping contact information from multiple company "About Us" pages.
+* **How it Works:** The `Open Websites` block feeds one URL at a time to the subsequent `Extract Data` block. The `Extract Data` block then processes that single page according to its schema. This repeats for every URL in the input list.
+* **Diagram:**
+    `[Open Websites (List of URLs)] ---&gt; [Extract Data]`
+
+## 2. Deep Dive Extraction (Navigate & Scrape)
+
+This pattern is used when you start on a general page and need to navigate to more specific sub-pages to find the data.
+
+* **Blocks:**
+    1.  `Open Websites` (opens an initial overview or listing page)
+    2.  `Find Links` (identifies links to detail pages, e.g., individual product links)
+    3.  `Follow Links` (navigates to each found link, typically using "Follow each link")
+    4.  `Extract Data` (extracts detailed information from each detail page)
+* **Use Case:** Scraping all movies and their details from a movie listing site; collecting information about all speakers from a conference attendees page.
+* **How it Works:** The agent opens the main page, finds all relevant detail links, then visits each detail page one by one to extract the required information.
+* **Diagram:**
+    `[Open Websites] ---&gt; [Find Links] ---&gt; [Follow Links] ---&gt; [Extract Data]`
+
+## 3. Paginated Data Handling (Iterating Through Pages/Content)
+
+This pattern addresses extracting data that spans multiple "pages." This can include traditional numbered pages, content loaded by "Next" or "Load More" buttons, or even dynamically loaded infinite scroll feeds.
+
+* **Blocks (Primary Method - Using Pagination Block):**
+    1.  `Open Websites` (opens the first page of the list/feed)
+    2.  `Paginate through Listings` (or a similar pagination block configured to handle "Next" buttons, numbered page buttons, or infinite scroll for a set number of iterations/pages. For infinite scroll, each scroll action that loads new content can be considered a "page" or viewport change.)
+    3.  `Extract Data` (extracts data from the content visible on each "page" or after each pagination action)
+* **Alternative (Direct URLs - if pagination structure is known):**
+    1.  `Open Websites` (configured with "Add a numbered range of URLs" to generate direct links for page 1, page 2, page 3, etc., if the URL structure supports this)
+    2.  `Extract Data` (extracts data from each numbered page)
+* **Use Case:** Collecting all search results for a query; scraping all products from a category that has multiple pages or uses infinite scroll; extracting all posts from a social media feed.
+* **Note on Pagination Block:** The pagination block intelligently interacts with "Next" buttons, numbered page links, or simulates scrolling for dynamically loading content. For infinite scroll, you define how many "scrolls" (viewports) it should process.
+* **Why Direct URLs (Alternative) Can Be Good:** As mentioned in "Workflow Design Principles," providing direct links for each page (if possible) can sometimes be more robust or less likely to trigger anti-bot measures, as each direct URL might initiate a new browser session, potentially with a unique IP address.
+* **Diagram (Primary):**
+    `[Open Websites (Initial Page)] ---&gt; [Paginate through Listings] ---&gt; [Extract Data (runs for each paginated segment)]`
+
+## 4. Dynamic Search & Extract
+
+This pattern is used when your starting point is a set of search terms or other variables, and you need to find and extract information related to each.
+
+* **Blocks:**
+    1.  `Apply Variables` (provides a list of search terms, company names, etc.)
+    2.  `Search on Google` (or other search block, using the variable in the query, e.g., `Search for "{{company_name}} official website"`)
+    3.  `Find Links` (identifies the most relevant link from the search results, e.g., `Find the official website link`)
+    4.  `Follow Links` (navigates to the found relevant link, typically "Follow the first link")
+    5.  `Extract Data` (extracts information from the target page)
+* **Use Case:** Finding official websites and contact emails for a list of companies; looking up product specifications for a list of product names.
+* **How it Works:** For each variable set, the agent performs a search, identifies the best link, navigates to it, and then extracts data.
+* **Diagram:**
+    `[Apply Variables] ---&gt; [Search on Google] ---&gt; [Find Links] ---&gt; [Follow Links] ---&gt; [Extract Data]`
+
+## 5. Site Exploration for Targeted Data Extraction or Summarization
+
+This pattern leverages the AI's ability to understand and navigate to find specific pages, after which data is extracted or summarized.
+
+* **Blocks:**
+    1.  `Open Websites` (opens a starting page or a list of pages)
+    2.  `Explore Content` (instructs the agent to find specific target pages, e.g., "Find all pages related to pricing policies" or "Locate the 'About Us' and 'Contact' pages")
+    3.  `Extract Data` (configured to extract specific information from the found pages, or to generate new content like a summary or FAQ based on the content of these targeted pages. The summarization/generation logic is defined within this `Extract Data` block's instructions.)
+* **Use Case:** Creating an FAQ by first finding the website's help/FAQ pages and then extracting Q&As; summarizing key information by first locating relevant blog posts or reports on a topic, then instructing the `Extract Data` block to summarize their content.
+* **How it Works:** The agent first explores the site based on your goal to find relevant pages. Once on a target page (or after collecting content from several target pages if `Explore Content` is set up to do so), the subsequent `Extract Data` block processes this information from the *now current* page(s), potentially using generative AI capabilities for summarization or Q&A generation.
+* **Diagram:**
+    `[Open Websites] ---&gt; [Explore Content (Finds Target Pages)] ---&gt; [Extract Data (Extracts/Summarizes from Found Pages)]`
+
+These patterns are starting points. Feel free to combine and adapt them to create sophisticated workflows tailored to your unique automation challenges!

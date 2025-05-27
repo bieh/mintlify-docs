@@ -25,7 +25,8 @@
           {
             "group": "Building Effectively - Strategies & Examples ",
             "pages": [
-              "part2/Workflow-Design-Principles"
+              "part2/Workflow-Design-Principles",
+              "part2/Common-Workflow-Patterns"
             ]
           }
         ]

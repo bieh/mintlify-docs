@@ -23,7 +23,7 @@
             ]
           },
           {
-            "group": "Blocks",
+            "group": "Mastering Workflow Blocks",
             "pages": [
               "blocks/with-variables",
               "blocks/open-websites",

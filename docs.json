@@ -31,8 +31,7 @@
             ]
           },
           {
-            "dropdown": "Tutorials",
-            "icon": "code",
+            "group": "Tutorials",
             "pages": [
               "guides/Extracting-Online-Reviews"
             ]

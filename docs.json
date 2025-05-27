@@ -34,14 +34,9 @@
             ]
           },
           {
-            "group": "Essentials",
+            "group": "Building Effectively - Strategies & Examples ",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "part2/Workflow-Design-Principles"
             ]
           }
         ]

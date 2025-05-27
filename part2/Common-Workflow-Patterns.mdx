@@ -38,7 +38,7 @@ This pattern addresses extracting data that spans multiple "pages." This can inc
 
 * **Blocks (Primary Method - Using Pagination Block):**
     1.  `Open Websites` (opens the first page of the list/feed)
-    2.  `Paginate through Listings` (or a similar pagination block configured to handle "Next" buttons, numbered page buttons, or infinite scroll for a set number of iterations/pages. For infinite scroll, each scroll action that loads new content can be considered a "page" or viewport change.)
+    2.  `Paginate a list` (is used to handle "Next" buttons, numbered page buttons, or infinite scroll for a set number of iterations/pages. For infinite scroll, each scroll action that loads new content can be considered a "page" or viewport change.)
     3.  `Extract Data` (extracts data from the content visible on each "page" or after each pagination action)
 * **Alternative (Direct URLs - if pagination structure is known):**
     1.  `Open Websites` (configured with "Add a numbered range of URLs" to generate direct links for page 1, page 2, page 3, etc., if the URL structure supports this)

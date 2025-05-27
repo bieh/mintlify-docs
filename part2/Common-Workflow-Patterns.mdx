@@ -16,7 +16,7 @@ This is one of the most fundamental patterns for processing multiple similar pag
 * **Use Case:** Extracting product details from a list of product URLs, scraping contact information from multiple company "About Us" pages.
 * **How it Works:** The `Open Websites` block feeds one URL at a time to the subsequent `Extract Data` block. The `Extract Data` block then processes that single page according to its schema. This repeats for every URL in the input list.
 * **Diagram:**
-    `[Open Websites (List of URLs)] ---&gt; [Extract Data]`
+    `[Open Websites (List of URLs)] ➙ [Extract Data]`
 
 ## 2. Deep Dive Extraction (Navigate & Scrape)
 
@@ -30,7 +30,7 @@ This pattern is used when you start on a general page and need to navigate to mo
 * **Use Case:** Scraping all movies and their details from a movie listing site; collecting information about all speakers from a conference attendees page.
 * **How it Works:** The agent opens the main page, finds all relevant detail links, then visits each detail page one by one to extract the required information.
 * **Diagram:**
-    `[Open Websites] ---&gt; [Find Links] ---&gt; [Follow Links] ---&gt; [Extract Data]`
+    `[Open Websites] ➙ [Find Links] ➙ [Follow Links] ➙ [Extract Data]`
 
 ## 3. Paginated Data Handling (Iterating Through Pages/Content)
 
@@ -47,7 +47,7 @@ This pattern addresses extracting data that spans multiple "pages." This can inc
 * **Note on Pagination Block:** The pagination block intelligently interacts with "Next" buttons, numbered page links, or simulates scrolling for dynamically loading content. For infinite scroll, you define how many "scrolls" (viewports) it should process.
 * **Why Direct URLs (Alternative) Can Be Good:** As mentioned in "Workflow Design Principles," providing direct links for each page (if possible) can sometimes be more robust or less likely to trigger anti-bot measures, as each direct URL might initiate a new browser session, potentially with a unique IP address.
 * **Diagram (Primary):**
-    `[Open Websites (Initial Page)] ---&gt; [Paginate through Listings] ---&gt; [Extract Data (runs for each paginated segment)]`
+    `[Open Websites (Initial Page)] ➙ [Paginate through Listings] ➙ [Extract Data (runs for each paginated segment)]`
 
 ## 4. Dynamic Search & Extract
 
@@ -62,7 +62,7 @@ This pattern is used when your starting point is a set of search terms or other 
 * **Use Case:** Finding official websites and contact emails for a list of companies; looking up product specifications for a list of product names.
 * **How it Works:** For each variable set, the agent performs a search, identifies the best link, navigates to it, and then extracts data.
 * **Diagram:**
-    `[Apply Variables] ---&gt; [Search on Google] ---&gt; [Find Links] ---&gt; [Follow Links] ---&gt; [Extract Data]`
+    `[Apply Variables] ➙ [Search on Google] ➙ [Find Links] ➙ [Follow Links] ➙ [Extract Data]`
 
 ## 5. Site Exploration for Targeted Data Extraction or Summarization
 
@@ -75,6 +75,6 @@ This pattern leverages the AI's ability to understand and navigate to find speci
 * **Use Case:** Creating an FAQ by first finding the website's help/FAQ pages and then extracting Q&As; summarizing key information by first locating relevant blog posts or reports on a topic, then instructing the `Extract Data` block to summarize their content.
 * **How it Works:** The agent first explores the site based on your goal to find relevant pages. Once on a target page (or after collecting content from several target pages if `Explore Content` is set up to do so), the subsequent `Extract Data` block processes this information from the *now current* page(s), potentially using generative AI capabilities for summarization or Q&A generation.
 * **Diagram:**
-    `[Open Websites] ---&gt; [Explore Content (Finds Target Pages)] ---&gt; [Extract Data (Extracts/Summarizes from Found Pages)]`
+    `[Open Websites] ➙ [Explore Content (Finds Target Pages)] ➙ [Extract Data (Extracts/Summarizes from Found Pages)]`
 
 These patterns are starting points. Feel free to combine and adapt them to create sophisticated workflows tailored to your unique automation challenges!

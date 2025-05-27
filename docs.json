@@ -31,12 +31,12 @@
             ]
           },
           {
-        "dropdown": "Tutorials",
-        "icon": "code",
-        "pages": [
-          "guides/Extracting-Online-Reviews"
-        ]
-      }
+            "dropdown": "Tutorials",
+            "icon": "code",
+            "pages": [
+              "guides/Extracting-Online-Reviews"
+            ]
+          }
         ]
       },
       

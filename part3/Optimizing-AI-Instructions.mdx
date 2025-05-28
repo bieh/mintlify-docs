@@ -62,7 +62,7 @@ This is often the most instruction-heavy block.
     * Clearly identify the element: `click on the button with text 'Next Page'`, `type `{{user_query}}` into the search bar with placeholder 'Search articles...'`
     * Be explicit about the action: `click`, `type`, `select 'Option A' from dropdown 'Category'`
 * **Goal-Oriented Tasks (if using increased steps):**
-    * Clearly state the desired outcome on the page: `Complete the login form with username `{{username}}` and password `{{password}}` and submit it.`
+    * Clearly state the desired outcome on the page: `Complete the login form with username {{username}} and password {{password}} and submit it.`
 
 ## Iterative Refinement: The Key to Success
 
@@ -81,8 +81,8 @@ It's rare to get AI instructions perfect on the first try.
 ## Using Variables in Instructions
 
 Remember you can use `{{variable_name}}` (from an `Apply Variables` block or previous `Extract Data` outputs) within your instructions to make them dynamic and reusable across different inputs.
-* Example for `Extract Data`: `Extract the shipping cost for the product named `{{product_name}}`.`
-* Example for `Interact with Page`: `type `{{city_name}}` into the 'City' input field.`
+* Example for `Extract Data`: `Extract the shipping cost for the product named {{product_name}}.`
+* Example for `Interact with Page`: `type {{city_name}} into the 'City' input field.`
 
 ## Conclusion
 

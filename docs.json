@@ -41,6 +41,12 @@
               "guides/Turning-Website-Content-into-an-FAQ",
               "guides/Finding-Speaker-LinkedIn-Profiles"
             ]
+          },
+          {
+            "group": "Leveling Up - Advanced Techniques & Best Practices",
+            "pages": [
+              "part3Optimizing-AI-Instructions"
+            ]
           }
         ]
       },

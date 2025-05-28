@@ -37,7 +37,8 @@
             "group": "Tutorials",
             "pages": [
               "guides/Extracting-Online-Reviews",
-              "guides/Scraping-Movie-Data"
+              "guides/Scraping-Movie-Data",
+              "guides/Turning-Website-Content-into-an-FAQ"
             ]
           }
         ]

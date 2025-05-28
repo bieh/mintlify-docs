@@ -33,7 +33,8 @@
           {
             "group": "Tutorials",
             "pages": [
-              "guides/Extracting-Online-Reviews"
+              "guides/Extracting-Online-Reviews",
+              "guides/Scraping-Movie-Data"
             ]
           }
         ]

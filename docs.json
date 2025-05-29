@@ -18,28 +18,25 @@
         "groups": [
           {
             "group": "Get Started with Jsonify",
-            "pages": [              
+            "pages": [
               "part1/welcome",
               "part1/basics",
               "part1/first-workflow"
-              
             ]
           },
           {
-            "group": "Building Effectively - Strategies & Examples ",
+            "group": "Building Effectively - Strategies & Examples",
             "pages": [
               "part2/Workflow-Design-Principles",
               "part2/Common-Workflow-Patterns",
-              "part2/Practical-Tutorials"
-            ]
-          },
-          {
-            "group": "Tutorials",
-            "pages": [
-              "guides/Extracting-Online-Reviews",
-              "guides/Scraping-Movie-Data",
-              "guides/Turning-Website-Content-into-an-FAQ",
-              "guides/Finding-Speaker-LinkedIn-Profiles"
+              "part2/Practical-Tutorials",
+              {
+                "dropdown": "Tutorials",
+                "icon": "library",
+                "pages": [
+                  "guides/Extracting-Online-Reviews"
+                ]
+              }
             ]
           },
           {
@@ -50,10 +47,9 @@
           }
         ]
       },
-      
       {
         "tab": "Mastering Workflow Blocks",
-        "groups": [          
+        "groups": [
           {
             "group": "Blocks",
             "pages": [

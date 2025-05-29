@@ -29,9 +29,7 @@
             "pages": [
               "part2/Workflow-Design-Principles",
               "part2/Common-Workflow-Patterns",
-              "part2/Practical-Tutorials",
-              "part2/Tutorials/test",
-              "part2/Tutorials/test2"
+              "part2/Practical-Tutorials"
             ]
           },
           {
@@ -43,7 +41,7 @@
         ],
         "dropdowns": [
           {
-            "title": "Tutorials2",
+            "title": "Tutorials",
             "pages": [
               "guides/Extracting-Online-Reviews",
               "guides/Scraping-Movie-Data",

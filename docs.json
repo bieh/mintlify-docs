@@ -29,24 +29,23 @@
             "pages": [
               "part2/Workflow-Design-Principles",
               "part2/Common-Workflow-Patterns",
-              "part2/Practical-Tutorials"
+              "part2/Practical-Tutorials",
+              {
+                "dropdown": "Tutorials",
+                "icon": "library",
+                "pages": [
+                  "guides/Extracting-Online-Reviews",
+                  "guides/Scraping-Movie-Data",
+                  "guides/Turning-Website-Content-into-an-FAQ",
+                  "guides/Finding-Speaker-LinkedIn-Profiles"
+                ]
+              }
             ]
           },
           {
             "group": "Leveling Up - Advanced Techniques & Best Practices",
             "pages": [
               "part3/Optimizing-AI-Instructions"
-            ]
-          }
-        ],
-        "dropdowns": [
-          {
-            "title": "Tutorials",
-            "pages": [
-              "guides/Extracting-Online-Reviews",
-              "guides/Scraping-Movie-Data",
-              "guides/Turning-Website-Content-into-an-FAQ",
-              "guides/Finding-Speaker-LinkedIn-Profiles"
             ]
           }
         ]

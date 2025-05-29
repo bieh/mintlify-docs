@@ -45,7 +45,8 @@
           {
             "group": "Leveling Up - Advanced Techniques & Best Practices",
             "pages": [
-              "part3/Optimizing-AI-Instructions"
+              "part3/Optimizing-AI-Instructions",
+              "part3/Mastering-Variables"
             ]
           }
         ]

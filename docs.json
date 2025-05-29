@@ -32,7 +32,6 @@
               "part2/Practical-Tutorials",
               {
                 "dropdown": "Tutorials",
-                "icon": "library",
                 "pages": [
                   "guides/Extracting-Online-Reviews",
                   "guides/Scraping-Movie-Data",

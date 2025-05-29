@@ -47,7 +47,8 @@
             "pages": [
               "part3/Optimizing-AI-Instructions",
               "part3/Mastering-Variables",
-              "part3/Handling-Complexity"
+              "part3/Handling-Complexity",
+              "part3/Efficiency-and-Scale"
             ]
           }
         ]

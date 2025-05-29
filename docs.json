@@ -42,7 +42,7 @@
         ],
         "dropdowns": [
           {
-            "title": "Tutorials",
+            "title": "Tutorials2",
             "pages": [
               "guides/Extracting-Online-Reviews",
               "guides/Scraping-Movie-Data",

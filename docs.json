@@ -19,8 +19,8 @@
           {
             "group": "Get Started with Jsonify",
             "pages": [              
-              "Get-Starded/Welcome",
-              "part1/basics",
+              "part1/welcome",
+              "Get-Starded/Basics",
               "part1/first-workflow"
               
             ]

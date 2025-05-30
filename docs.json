@@ -21,6 +21,7 @@
             "pages": [              
               "part1/welcome",
               "part1/basics",
+              "get-started/test",            
               "part1/first-workflow"
               
             ]

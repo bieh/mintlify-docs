@@ -36,7 +36,7 @@
           {
             "group": "Tutorials",
             "pages": [
-              "guides/Extracting-Online-Reviews",
+              "Tutorials/Extracting-Online-Reviews",
               "guides/Scraping-Movie-Data",
               "guides/Turning-Website-Content-into-an-FAQ",
               "guides/Finding-Speaker-LinkedIn-Profiles"

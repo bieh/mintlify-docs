@@ -1,0 +1,113 @@
+---
+title: 'Tutorial 2: Scraping Movie Data (e.g., Rotten Tomatoes)'
+description: 'Learn to navigate from a listing page to detail pages and extract structured movie information.'
+icon: 'film' # Lucide icon
+---
+
+This tutorial demonstrates how to build a workflow that starts on a movie listing page (like Rotten Tomatoes), navigates to individual movie detail pages, and then extracts specific information such as titles, ratings, and synopses for each movie.
+
+## Goal
+
+To collect detailed information for multiple movies listed on a website. This involves:
+1. Opening an initial movie listing page.
+2. Finding links to individual movie detail pages.
+3. Navigating to each movie detail page.
+4. Extracting structured data (e.g., title, rating, synopsis, director, cast) from each detail page.
+
+## Key Blocks Used
+
+* `Open Websites`
+* `Find Links`
+* `Follow Links`
+* `Extract Data`
+
+## What You'll Learn
+
+* How to navigate from a general listing/category page to multiple individual detail pages.
+* How to use `Find Links` to identify specific URLs and `Follow Links` to visit them.
+* How to set up an `Extract Data` schema for information found on detail pages.
+* A common pattern for "deep dive" data collection.
+
+## Steps
+
+### 1. Create a New Workflow
+
+* Navigate to your Jsonify **Dashboard**.
+* Click the button sequence to create a new workflow: **Create an empty workflow ➙ Extract**.
+  * This template will already include `Open Websites` and `Extract Data`. We will add `Find Links` and `Follow Links` manually.
+
+### 2. Configure `Open Websites` Block
+
+* Select the `Open Websites` block.
+* For this tutorial, we'll use a Rotten Tomatoes page listing movies in theaters as an example. In the URL input field, add:
+  * `https://www.rottentomatoes.com/browse/movies_in_theaters`
+* Ensure the toggle switch next to the URL is **ON**.
+
+[Screenshot: Open Websites block configured with Rotten Tomatoes URL]
+
+### 3. Add and Configure `Find Links` Block
+
+* After opening the listing page, we need to find the links to individual movie pages.
+* To add a new block:
+    1. Look at the **block categories at the top of the editor** (e.g., Trigger, Input, Transform, Filter, Output).
+    2. Select the **Transform** category.
+    3. From the dropdown list of blocks that appears, select **`Find Links`**.
+    4. Now, click the **`+`** icon on the canvas at the point where you want to add the block (i.e., after the `Open Websites` block). The `Find Links` block will be added and connected.
+* Select the `Find Links` block to configure it.
+  * **What kind of links?:** Enter a description like `Find links to individual movie pages in the main list`. You might add constraints like `Links must contain '/m/'` if you observe a pattern in Rotten Tomatoes movie URLs.
+
+[Screenshot: Find Links block configured to find movie page links]
+
+### 4. Add and Configure `Follow Links` Block
+
+* Once the links are found, the agent needs to visit each one.
+* To add a new block:
+    1. Look at the **block categories at the top of the editor**.
+    2. Select the **Input** category.
+    3. From the dropdown list, select **`Follow Links`**.
+    4. Click the **+** icon on the canvas after the `Find Links` block. The `Follow Links` block will be added and connected.
+* Select the `Follow Links` block to configure it.
+  * **Which links to follow?:** Choose **`Follow each link`**. This will make the subsequent `Extract Data` block run for every movie page found.
+
+[Screenshot: Follow Links block configured to "Follow each link"]
+
+### 5. Configure `Extract Data` Block
+
+* This block will now execute on each individual movie page that the `Follow Links` block navigates to.
+* Select the `Extract Data` block (it should be after `Follow Links`).
+* **What information should we scrape from each URL?:** Select **`A single item`**, as each movie page contains details for one movie.
+* Define the attributes (fields) for each movie:
+
+  | NAME             | EXAMPLE VALUE OR A LONGER DESCRIPTION                                                                 |
+  | ---------------- | ----------------------------------------------------------------------------------------------------- |
+  | `movie_title`    | `The main title of the movie.`                                                                        |
+  | `tomatometer`    | `The Tomatometer score (percentage), e.g., 95%. Extract as text or just the number.`                  |
+  | `audience_score` | `The Audience Score (percentage), e.g., 88%. Extract as text or just the number.`                     |
+  | `synopsis`       | `A brief summary or plot description of the movie.`                                                   |
+  | `rating`         | `The MPAA rating (e.g., PG-13, R).`                                                                   |
+  | `genre`          | `Primary genre(s) of the movie, e.g., Action, Comedy.`                                                |
+  | `director`       | `Name(s) of the director(s).`                                                                         |
+  | `release_date_theaters` | `The theatrical release date, e.g., Oct 20, 2023.`                                             |
+
+* **Add additional instructions and guidance...:**
+  * `You are on a movie detail page. Extract the specified information. If a field is not present, leave it empty.`
+
+[Screenshot: Extract Data block configured for extracting movie details]
+
+### 6. Run Your Workflow
+
+* Click the **Run manually** button.
+* The agent will:
+  1. Open the Rotten Tomatoes movie listing page.
+  2. Find all links to individual movie pages.
+  3. For each movie link found:
+     a. Navigate to the movie's detail page.
+     b. Extract the defined information (title, scores, synopsis, etc.).
+
+### 7. Check the Results
+
+* You will be redirected to the current run's page where results will populate.
+* Once completed, click on **"View as sheet"**.
+* You should see a table where each row represents a movie, and the columns contain the details you specified for extraction.
+
+**Congratulations!** You've created a workflow that navigates from a list to detail pages and extracts structured data. This "deep dive" pattern is very common for many data collection tasks.

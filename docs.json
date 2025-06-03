@@ -30,18 +30,20 @@
             "pages": [
               "Building-Effectively/Workflow-Design-Principles",
               "Building-Effectively/Common-Workflow-Patterns",
-              "Building-Effectively/Practical-Tutorials"
+              "Building-Effectively/Practical-Tutorials",
+              {
+                "group": "Tutorials",
+                "icon": "folder",
+                "pages": [
+                  "Tutorials/Extracting-Online-Reviews",
+                  "Tutorials/Scraping-Movie-Data",
+                  "Tutorials/Turning-Website-Content-into-an-FAQ",
+                  "Tutorials/Finding-Speaker-LinkedIn-Profiles"
+                ]
+              }
             ]
           },
-          {
-            "group": "Tutorials",
-            "pages": [
-              "Tutorials/Extracting-Online-Reviews",
-              "Tutorials/Scraping-Movie-Data",
-              "Tutorials/Turning-Website-Content-into-an-FAQ",
-              "Tutorials/Finding-Speaker-LinkedIn-Profiles"
-            ]
-          },
+          
           {
             "group": "Leveling Up - Advanced Techniques & Best Practices",
             "pages": [

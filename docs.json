@@ -68,7 +68,8 @@
               "blocks/explore-content",
               "blocks/interact-with-page",
               "blocks/find-links",
-              "blocks/extract-data"
+              "blocks/extract-data",
+              "blocks/LLM-Completion"
             ]
           }
         ]

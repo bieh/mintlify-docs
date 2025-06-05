@@ -1,0 +1,76 @@
+---
+title: 'Block: LLM Completion'
+description: 'Directly query a Large Language Model (LLM) without a browser session to generate text or variables for your workflow.'
+icon: 'brain-circuit' # Lucide icon
+---
+
+The `LLM Completion` block allows you to leverage the power of a Large Language Model (LLM) directly within your workflow, without needing an active browser session or webpage content. You can send a prompt to the LLM and receive a response that can be used as plain text or captured as a variable for use in subsequent blocks.
+
+This is useful for tasks like generating dynamic content from scratch, formatting data based on abstract rules, answering general knowledge questions (based on the LLM's training), translating text, or creating dynamic values for other workflow steps based on non-web data.
+
+## Purpose
+
+Use the `LLM Completion` block to:
+
+* Generate creative text based on a prompt (e.g., write marketing copy, a product idea, a short story).
+* Transform or reformat data that isn't tied to a specific webpage's content (e.g., formatting a list of keywords from a variable).
+* Answer general questions or perform simple reasoning tasks based on the LLM's knowledge.
+* Create dynamic variables based on complex instructions or calculations that don't require web context (e.g., generate today's date in a specific format).
+* Translate text snippets.
+
+## Configuration
+
+1.  **Enter your prompt:**
+    * This is the main text area where you write your instructions for the LLM.
+    * Be as clear, specific, and detailed as possible in your prompt to get the desired output.
+    * You can include context, examples, and specify the desired output format directly in the prompt.
+    * Variables (e.g., `{{some_previous_data}}` not necessarily from a webpage) can be used within the prompt to make it dynamic.
+
+2.  **Output format as:**
+    * This dropdown determines how the LLM's response will be handled and made available to the rest of the workflow.
+    * **Text:** The LLM's response will be treated as plain text. This text might be implicitly passed to the next block or could be used in contexts where a direct text output is needed.
+    * **Variable:** The LLM's response will be captured and stored in a new variable. You then define the name for this variable.
+
+3.  **Variable name (if "Output format as" is "Variable"):**
+    * If you choose to output the LLM's response as a variable, you must provide a name for this variable here (e.g., `generated_slogan`, `current_date`, `translated_text`).
+    * This variable name (e.g., `{{current_date}}`) can then be used in subsequent blocks.
+
+[Screenshot: LLM Completion block showing a prompt to get today's date and outputting it as a variable named 'current_date']
+
+## Examples
+
+**Example 1: Generating Today's Date as a Variable**
+
+* **Enter your prompt:**
+    ```
+    Write the todays date strictly in the specified format: 'YYYYMMDD'
+    (YYYY → current year → MM → current month → DD → current day). Write only the
+    date without additional characters and spaces. Use US eastern time as
+    primary timezone
+    ```
+* **Output format as:** `Variable`
+* **Variable name:** `current_date`
+* **Result:** The LLM will generate the current date (e.g., `20250605`). This value is now available as `{{current_date}}`.
+* **Usage in a subsequent `Open Websites` block:**
+    * URL: `https://example.com/archive/{{current_date}}/news`
+
+**Example 2: Generating Marketing Slogans (Output as Text)**
+
+* * **Enter your prompt:**
+    ```
+    Write a random city. Write only the city name.
+    ```
+* **Output format as:** `Variable`
+* **Variable name:** `city`
+* **Result:** The variable `{{city}}` will contain the random name of city.
+* **Usage in a subsequent `Open Websites` block:**
+    * URL: `https://en.wikipedia.org/wiki/{{city}}`
+
+## Key Considerations
+
+* **Prompt Engineering is Key:** The quality and usefulness of the LLM's output depend heavily on how well you craft your prompt. Experiment with different phrasings, levels of detail, and examples.
+* **LLM Capabilities and Limitations:** Be aware of what the underlying LLM is good at and where it might struggle (e.g., highly complex or very niche calculations, real-time factual accuracy for rapidly changing events).
+* **Conciseness for Variables:** If outputting as a variable, ensure your prompt encourages the LLM to provide a concise response suitable for a variable's value. Explicitly ask for a specific format if needed (as in the date or translation example).
+* **No Browser Context:** This block operates independently of any browser session. It cannot see or interact with webpages directly; it only processes the text you provide in the prompt (which can include variables from previous steps).
+
+The `LLM Completion` block offers a flexible way to integrate generative AI capabilities directly into the logic of your Jsonify workflows, especially for tasks that don't require direct webpage interaction.

@@ -1,0 +1,79 @@
+---
+title: 'Mastering Variables'
+description: 'Unlock dynamic and reusable workflows by effectively using variables in Jsonify.'
+icon: 'variable' # Lucide icon
+---
+
+Variables are a cornerstone of creating dynamic, reusable, and scalable automations in Jsonify. They allow you to run the same workflow logic with different inputs, personalize actions, and manage data flow effectively.
+
+## What are Variables in Jsonify?
+
+In Jsonify, a variable is essentially a named placeholder for a piece of data that can change. When the workflow runs, the placeholder is replaced with its actual value for that specific run or iteration. Variable names are **case-sensitive**.
+
+## Why Use Variables?
+
+* **Reusability:** Build a generic workflow and use variables to adapt it to different specific inputs without duplicating the entire workflow.
+* **Dynamic Operations:**
+    * Open different URLs based on a list.
+    * Perform searches with varying keywords.
+    * Instruct data extraction based on changing criteria.
+    * Personalize interactions (e.g., typing a specific username).
+* **Data Input:** Easily feed lists of data (e.g., from a CSV, or typed in) into your workflow using the `Apply Variables` block.
+* **Data Chaining:** Use data extracted by one `Extract Data` block as a variable input for subsequent blocks within the same processing loop (e.g., for each item in a list).
+
+## Defining Variables: The `Apply Variables` Block
+
+The primary way to introduce a list of varying inputs into your workflow is through the **`Apply Variables`** block.
+
+* **Columns as Variable Names:** Each column header you define in the `Apply Variables` table becomes a variable name (e.g., `company_name`, `product_url`, `search_keyword`). Remember, these names are **case-sensitive**.
+* **Rows as Value Sets:** Each row in the table represents a distinct set of values for these variables. The workflow (or the part of it following `Apply Variables`) will run once for each row.
+* **Special Column Name `URL`:** If you name a column exactly `URL` (case-sensitive) in the `Apply Variables` block and provide valid, complete URLs (starting with `http://` or `https://`) in its rows, the AI Agent will automatically open each of these URLs. In this specific case, a subsequent `Open Websites` block is not required to open these particular URLs. For any other column name intended to hold URLs that you want to open via the `Open Websites` block, ensure the values are complete URLs.
+
+Refer to the detailed guide on the [`Apply Variables` block](#) for configuration specifics. *(We'll replace `#` with the actual link later)*
+
+## Using Variables in Other Blocks
+
+Once defined (e.g., in `Apply Variables`), you can use these variables in most other blocks that accept text input for their configuration.
+
+* **Syntax:** Variables are referenced using double curly braces: `{{variable_name}}`.
+  * Make sure the `variable_name` inside the braces **exactly matches** the column header from `Apply Variables` (including case).
+* **Common Use Cases:**
+    * **`Open Websites`:**
+        * URL: `https://{{website_domain}}/products` (assuming `website_domain` provides just the domain like `example.com`)       
+    * **`Search on Google`:**
+        * Query: `reviews for {{product_name}}`
+    * **`Interact with Page`:**
+        * Action: `type {{user_comment}} into 'comment_field'`
+        * Action: `click button 'Download {{report_filename}}'`
+    * **`Extract Data` (in Descriptions or Additional Instructions):**
+        * Description for a field: `Extract the price for the item named {{item_name}}.`
+        * Additional Instruction: `Only extract reviews that mention the brand {{brand_to_filter_by}}.`
+    * **`Find Links`:**
+        * Description: `Find the link to the contact page for {{company_name}}`
+
+## Variables from `Extract Data` Output
+
+When you use an `Extract Data` block, the **NAME** you give to each attribute (e.g., `product_title`, `reviewer_name`) can act as a variable for subsequent blocks *within that same iteration or loop*. These are also **case-sensitive**.
+
+* **Example:**
+  1. `Open Websites` (opens a category page)
+  2. `Find Links` (finds links to all product pages, e.g., outputs `product_page_url`)
+  3. `Follow Links` (configured to "Follow each link" `product_page_url`)
+     * *Now, for each product page visited:*
+  4. `Extract Data` (extracts `product_name` and `price` from the current product page)
+  5. `Search on Google` (can use `{{product_name}}` from the previous step: `Search for 'competitors of {{product_name}}'`)
+
+This allows you to chain operations based on data extracted in real-time.
+
+## Tips for Naming Variables
+
+* **Descriptive:** Choose names that clearly indicate what the variable represents (e.g., `customer_email` instead of `eml`).
+* **Consistent:** Use a consistent naming convention (e.g., `snake_case` like `product_id`, or `camelCase` like `productId`). Remember case sensitivity.
+* **Avoid Spaces and Special Characters (other than underscore):** Stick to letters, numbers, and underscores for maximum compatibility and clarity.
+
+## Scope of Variables
+
+* **`Apply Variables` Scope:** Variables defined in `Apply Variables` are available to all subsequent blocks for each iteration (row) defined in the `Apply Variables` block.
+* **`Extract Data` Scope:** Variables created from `Extract Data` field names are scoped to the current item being processed in a list or the current page for that specific iteration.
+
+Understanding and effectively utilizing variables will dramatically increase the flexibility and power of your Jsonify workflows, allowing you to automate more complex and varied tasks with less effort.

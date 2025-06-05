@@ -40,33 +40,30 @@ This workflow will be scheduled to run periodically (e.g., weekly or monthly).
 
 * Navigate to your Jsonify **Dashboard**.
 * Click: **Create an empty workflow ➙ Extract**.
-  * The default `Open Websites` block and initial trigger will be modified or removed.
 
 ### 2. Add and Configure `Timer` Block (Trigger)
 
-* We want this workflow to run periodically. The initial template starts with a manual trigger ("The workflow starts when 'Run workflow' is clicked...").
-* First, select this initial trigger block. In the bottom right corner of the block's configuration panel, click **Delete** to remove it.
-* Now, to add the `Timer` trigger:
+* We want this workflow to run periodically. To add the `Timer` trigger:
     1. Look at the **block categories at the top of the editor** (Trigger, Input, Transform, Filter, Output).
     2. Select the **Trigger** category.
     3. From the dropdown list of blocks that appears, select **`Timer`**.
-    4. Click the **+** icon on the canvas in the starting ("placeholder") position. The `Timer` block will be added.
+    4. Click the **+** icon on the canvas in the first position. The `Timer` block will be added.
 * Select the `Timer` block to configure it:
   * **Choose a time interval for this task to start at:** Select your desired frequency, e.g., `Every 7d` (for weekly).
   * **Start at a specific time of day in GMT (optional):** Set a time, e.g., `09:00`.
 
 [Screenshot: Timer block configured for periodic runs]
 
-### 3. Remove Default `Open Websites` and Add `Search on Google` Block
+### 3. Remove Default `Open Websites` and Add `Google Search` Block
 
 * The "Extract" template includes an `Open Websites` block, which we don't need for this workflow as our input will come from a Google search.
 * Select the `Open Websites` block. In the bottom right corner of its configuration panel, click **Delete**.
 * Now, add the search functionality:
     1. Look at the **block categories at the top of the editor**.
     2. Select the **Input** category.
-    3. From the dropdown list, select **`Search on Google`**.
+    3. From the dropdown list, select **`Google Search`**.
     4. Click the **+** icon on the canvas after the `Timer` block.
-* Select the `Search on Google` block to configure it:
+* Select the `Google Search` block to configure it:
   * **What should the AI search for?:** Enter your target query, e.g., `Photo studio in London -top-brand`.
     * **Search Query Explanation:**
         * `Photo studio in London`: This is the main search phrase.

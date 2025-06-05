@@ -1,0 +1,141 @@
+---
+title: 'Tutorial 5: Landing Page SEO Analyzer'
+description: 'Automate basic SEO and content analysis for a list of landing pages obtained from Google search results.'
+icon: 'scan-search'
+---
+
+This tutorial demonstrates how to build a workflow that performs a Google search for a specific query, then visits the top search results (landing pages) and analyzes them for basic SEO and content characteristics. You'll also learn how to schedule this workflow to run periodically.
+
+## Goal
+
+To analyze the top landing pages from Google search results for a given query, extracting elements like:
+1. Company name.
+2. Count of H1, H2, H3 tags.
+3. Key phrases or keywords found on the page.
+4. Presence of trust signals or specific UX elements.
+5. Word count.
+6. A general SEO-focused analysis or summary based on the content.
+
+This workflow will be scheduled to run periodically (e.g., weekly or monthly).
+
+## Key Blocks Used
+
+* `Timer` (Trigger)
+* `Search on Google` (Input)
+* `Find Links` (Transform)
+* `Follow Links` (Input)
+* `Extract Data` (Transform - for analysis)
+
+## What You'll Learn
+
+* How to set up a scheduled workflow using the `Timer` block.
+* How to process Google search results to identify and visit target landing pages.
+* How to instruct the `Extract Data` block to perform analytical tasks and generate insights.
+* Combining search, navigation, and AI-driven analysis.
+* Understanding basic Google search query refinement.
+
+## Steps
+
+### 1. Create a New Workflow
+
+* Navigate to your Jsonify **Dashboard**.
+* Click: **Create an empty workflow ➙ Extract**.
+  * The default `Open Websites` block and initial trigger will be modified or removed.
+
+### 2. Add and Configure `Timer` Block (Trigger)
+
+* We want this workflow to run periodically. The initial template starts with a manual trigger ("The workflow starts when 'Run workflow' is clicked...").
+* First, select this initial trigger block. In the bottom right corner of the block's configuration panel, click **Delete** to remove it.
+* Now, to add the `Timer` trigger:
+    1. Look at the **block categories at the top of the editor** (Trigger, Input, Transform, Filter, Output).
+    2. Select the **Trigger** category.
+    3. From the dropdown list of blocks that appears, select **`Timer`**.
+    4. Click the **+** icon on the canvas in the starting ("placeholder") position. The `Timer` block will be added.
+* Select the `Timer` block to configure it:
+  * **Choose a time interval for this task to start at:** Select your desired frequency, e.g., `Every 7d` (for weekly).
+  * **Start at a specific time of day in GMT (optional):** Set a time, e.g., `09:00`.
+
+[Screenshot: Timer block configured for periodic runs]
+
+### 3. Remove Default `Open Websites` and Add `Search on Google` Block
+
+* The "Extract" template includes an `Open Websites` block, which we don't need for this workflow as our input will come from a Google search.
+* Select the `Open Websites` block. In the bottom right corner of its configuration panel, click **Delete**.
+* Now, add the search functionality:
+    1. Look at the **block categories at the top of the editor**.
+    2. Select the **Input** category.
+    3. From the dropdown list, select **`Search on Google`**.
+    4. Click the **+** icon on the canvas after the `Timer` block.
+* Select the `Search on Google` block to configure it:
+  * **What should the AI search for?:** Enter your target query, e.g., `Photo studio in London -top-brand`.
+    * **Search Query Explanation:**
+        * `Photo studio in London`: This is the main search phrase.
+        * `-top-brand`: The minus sign (`-`) before a word or phrase tells Google to **exclude** results containing that specific word/phrase. In this example, it tries to filter out results that might be heavily focused on "top brand" lists or discussions, aiming for actual photo studio websites. You can use such operators to refine your search results.
+
+[Screenshot: Search on Google block configured with an example query and explanation of flags]
+
+### 4. Add and Configure `Find Links` Block
+
+* From the Google search results page, we need to identify links to the actual landing pages.
+* To add a new block:
+    1. Look at the **block categories at the top of the editor**.
+    2. Select the **Transform** category.
+    3. From the dropdown list, select **`Find Links`**.
+    4. Click the **+** icon on the canvas after `Search on Google`.
+* Select the `Find Links` block.
+  * **What kind of links?:** `Find links to the first 5 different offers on Google search`.
+
+[Screenshot: Find Links block configured to find top 5 offer links]
+
+### 5. Add and Configure `Follow Links` Block
+
+* The agent now needs to visit each of these 5 landing pages.
+* To add a new block:
+    1. Look at the **block categories at the top of the editor**.
+    2. Select the **Input** category.
+    3. From the dropdown list, select **`Follow Links`**.
+    4. Click the **+** icon on the canvas after `Find Links`.
+* Select the `Follow Links` block.
+  * **Which links to follow?:** Choose **`Follow each link`**.
+
+[Screenshot: Follow Links block configured to "Follow each link"]
+
+### 6. Configure `Extract Data` Block (The Analysis Step)
+
+* This block will execute on each of the 5 landing pages visited.
+* Select the `Extract Data` block (it should be the last block, originally from the template, now connected after `Follow Links`).
+* **What information...?:** Select **`A single item`**.
+* **Enter Advanced Mode (Edit data shape - JSON):** Click **Advanced** to switch to JSON mode.
+* Enter the following JSON schema. The values `<...>` are prompts for the AI:
+  ```json
+  {
+    "company": "<name of the company from the landing page content>",
+    "count_of_h1/h2/h3": "<Count of H1, H2, and H3 tags. Example: H1:1, H2:3, H3:5>",
+    "key_words": "<Which expressions occur how often on the page (keyword analysis; note: word combinations must also be taken into account), list them separated by commas. Max 10-15 phrases.>",
+    "title": "<The HTML title of the current page>",
+    "ux_standpoint": "<Trust signals or tools provided on the page (e.g., testimonials, live chat, security badges)>",
+    "word_count": "<The total approximate number of words on the current page's main content>"
+  }
+  ```
+* **Add additional instructions and guidance...:**
+  * `Analyze the company's landing page in terms of SEO and key content elements. Populate the fields based on the page content. For key_words, identify recurring and prominent phrases.`
+
+[Screenshot: Extract Data block in JSON mode with SEO analysis schema]
+
+### 7. Run Your Workflow (Manually for Testing)
+
+* Although scheduled, you can test it immediately. Click the **Run manually** button.
+* The agent will:
+  1. Perform the Google search.
+  2. Identify the top 5 landing page links.
+  3. For each of these 5 pages:
+     a. Navigate to the page.
+     b. Perform the analysis and extract the data according to your JSON schema and instructions.
+
+### 8. Check the Results
+
+* You will be redirected to the current run's page where results will populate.
+* Once completed, click on **"View as sheet"**.
+* You should see a table with 5 rows (one for each analyzed landing page), and columns corresponding to your JSON schema.
+
+**Congratulations!** You've built a workflow that periodically analyzes top landing pages from search results.

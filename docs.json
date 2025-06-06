@@ -79,25 +79,25 @@
       "anchors": [
         {
           "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
+          "href": "https://docs.jsonify.com",
           "icon": "file-text"
         },
         {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
+          "anchor": "Home",
+          "href": "https://jsonify.com",
+          "icon": "home"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Log in",
+          "href": "https://app.jsonify.com",
+          "icon": "user"
         }
       ]
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/light.svg?v=2",
+    "dark": "/logo/dark.svg?v=2"
   },
   "navbar": {
     "links": [
@@ -114,9 +114,9 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/jsonifyco",
+      "github": "https://github.com/jsonify",
+      "linkedin": "https://www.linkedin.com/company/jsonify"
     }
   }
 }

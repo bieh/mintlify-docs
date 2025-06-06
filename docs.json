@@ -96,8 +96,8 @@
     }
   },
   "logo": {
-    "light": "https://framerusercontent.com/images/FiOaqPrrYkkHytckSZspP0slm4.png?scale-down-to=512",
-    "dark": "https://framerusercontent.com/images/UnmD8Nd4GOoX4GX9w55qlsIffjU.png?scale-down-to=512"
+    "light": "https://app.jsonify.com/static/logo/jsonify-logo-d-black-bg.png",
+    "dark": "https://app.jsonify.com/static/logo/jsonify-logo-d-black-bg.png"
   },
   "navbar": {
     "links": [

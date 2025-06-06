@@ -85,7 +85,7 @@
         {
           "anchor": "Home",
           "href": "https://jsonify.com",
-          "icon": "home"
+          "icon": "house"
         },
         {
           "anchor": "Log in",
@@ -96,8 +96,8 @@
     }
   },
   "logo": {
-    "light": "/logo/light.svg?v=2",
-    "dark": "/logo/dark.svg?v=2"
+    "light": "https://framerusercontent.com/images/FiOaqPrrYkkHytckSZspP0slm4.png?scale-down-to=512",
+    "dark": "https://framerusercontent.com/images/UnmD8Nd4GOoX4GX9w55qlsIffjU.png?scale-down-to=512"
   },
   "navbar": {
     "links": [

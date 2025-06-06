@@ -1,0 +1,83 @@
+---
+title: 'Trigger Block: Start on Incoming Webhook'
+description: 'Initiate your Jsonify workflows via an HTTP POST request, allowing integration with any external system capable of sending webhooks.'
+icon: 'webhook' # Lucide icon
+---
+
+The `Start on incoming webhook` block acts as a **trigger**, enabling your Jsonify workflow to be started programmatically by an external system via an HTTP POST request. This provides immense flexibility for integrating Jsonify into larger automation pipelines or custom applications.
+
+When this trigger is configured, Jsonify provides a unique URL. Sending a POST request to this URL will initiate the workflow. You can also pass parameters in the body of the POST request, which can then be used as variables within your Jsonify workflow.
+
+## Purpose
+
+Use the `Start on incoming webhook` trigger block to:
+
+* Start a Jsonify workflow from your own custom scripts or applications.
+* Integrate Jsonify with services that can send webhooks.
+* Trigger workflows based on events from IoT devices, internal monitoring systems, or any system capable of making an HTTP POST request.
+* Pass dynamic data (e.g., a URL to process, a search query, user details) directly into the workflow at runtime.
+
+This block replaces manual execution or other triggers like `Timer`.
+
+## Configuration
+
+1.  **POST to start the workflow:**
+    * This section displays the **unique Webhook URL** for this specific workflow trigger (e.g., `https://app.jsonify.com/api/v2/workflow/YOUR_WORKFLOW_ID/node/YOUR_NODE_ID/start`).
+    * **You must send an HTTP POST request to this URL** from your external system to trigger the workflow.
+
+2.  **Authorization Header:**
+    * The example `curl` command provided in the UI shows an important header: `-H "Authorization: Bearer YOUR_API_KEY"`.
+    * **You must include this `Authorization` header** with a valid Jsonify API key in your POST request.
+    * The UI notes: "We have pre-filled a key from the developer settings. Any API key from your organisation can be used." You can generate and manage API keys in your Jsonify account's developer settings.
+
+3.  **Passing Parameters (via POST Body):**
+    * To pass data into your workflow, include a JSON payload in the body of your POST request.
+    * The keys in your JSON payload will become available as variables within the Jsonify workflow, accessible using the `{{variable_name}}` syntax.
+    * **Example `curl` with a JSON body to pass parameters:**
+      ```bash
+      curl -X POST \
+        [https://app.jsonify.com/api/v2/workflow/YOUR_WORKFLOW_ID/node/YOUR_NODE_ID/start](https://app.jsonify.com/api/v2/workflow/YOUR_WORKFLOW_ID/node/YOUR_NODE_ID/start) \
+        -H "Authorization: Bearer YOUR_API_KEY" \
+        -H "Content-Type: application/json" \
+        -d '{
+              "input_url": "[https://example.com/specific-page](https://example.com/specific-page)",
+              "search_query": "jsonify automation",
+              "user_id": "12345"
+            }'
+      ```
+    * In your Jsonify workflow, you could then use `{{input_url}}`, `{{search_query}}`, and `{{user_id}}`.
+
+4.  **Enabling the Block:**
+    * Ensure the toggle switch for this block is **ON** for it to be active and listen for incoming webhook requests.
+
+[Screenshot: Start on incoming webhook block configuration panel showing the Webhook URL and example curl command]
+
+## How It Works
+
+1.  You configure the `Start on incoming webhook` trigger in your Jsonify workflow. This generates a unique URL and requires an API key for authorization.
+2.  An external application, script, or service is set up to send an HTTP POST request to this unique URL when a specific event occurs or when you want to initiate the workflow.
+3.  The POST request must include the `Authorization: Bearer YOUR_API_KEY` header.
+4.  Optionally, the POST request can include a JSON body with key-value pairs. These pairs are passed as parameters/variables to the Jsonify workflow.
+5.  When Jsonify receives a valid POST request at the webhook URL, it triggers the corresponding workflow.
+6.  The workflow executes, using any parameters passed in the webhook's body as variables.
+
+## Example Scenario: Processing a URL submitted via a Custom Web Form
+
+1.  **Your Custom Web Form:** A user submits a URL through a form on your website.
+2.  **Your Backend Application:** When your backend receives the form submission:
+    * It constructs a JSON payload: `{"url_to_process": "USER_SUBMITTED_URL"}`.
+    * It sends an HTTP POST request to your Jsonify webhook URL, including the Authorization header and the JSON payload.
+3.  **Jsonify Workflow:**
+    * Starts with `Start on incoming webhook`.
+    * The first active block could be `Open Websites`, configured with its URL field set to `{{url_to_process}}`.
+    * Subsequent blocks in Jsonify would then scrape, analyze, or process the webpage from the submitted URL.
+
+## Key Considerations
+
+* **Security (API Key):** Keep your API keys secure. Anyone with a valid API key and the webhook URL can trigger your workflow.
+* **POST Requests Only:** This trigger only responds to HTTP POST requests.
+* **JSON Payload for Parameters:** If passing data, ensure it's a well-formed JSON object in the request body and that the `Content-Type` header is set to `application/json`.
+* **Error Handling (External System):** Your external system should ideally have logic to handle potential errors when calling the webhook (e.g., network issues, incorrect API key, Jsonify server errors). Jsonify itself won't report back synchronous success/failure to the webhook call in a way that typical APIs do for immediate request-response cycles; it queues the workflow for execution.
+* **One Trigger Per Workflow:** A workflow can only have one starting trigger.
+
+The `Start on incoming webhook` block provides a powerful and flexible method for integrating Jsonify into a wide array of custom systems and external event sources.

@@ -69,7 +69,8 @@
               "blocks/interact-with-page",
               "blocks/find-links",
               "blocks/extract-data",
-              "blocks/LLM-Completion"
+              "blocks/LLM-Completion",
+              "blocks/Start-on-Incoming-Webhook"
             ]
           }
         ]

@@ -10,7 +10,7 @@
   "icons": {
     "library": "lucide"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "https://app.jsonify.com/static/favicon3/favicon.svg",
   "navigation": {
     "tabs": [
       {

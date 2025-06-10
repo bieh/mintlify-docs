@@ -1,0 +1,83 @@
+---
+title: 'Block: Open sub-pages'
+description: 'Instructs the AI agent to navigate to similar types of sub-pages, especially when direct links are not available (e.g., in a product catalog).'
+icon: 'layout-list'
+---
+
+The `Open sub-pages` block is a specialized tool designed for navigating to a list of similar items (like products in a catalog or articles in a list) when these items **do not have direct, standard `<a>` tag links**. This block is used when clicks are handled by JavaScript, and the agent needs to understand the *goal* of opening each item to proceed.
+
+Instead of finding and following direct URLs, you provide a goal, and the AI agent intelligently interacts with the page elements to open each item and save its content as a separate result.
+
+## Purpose
+
+Use the `Open sub-pages` block in specific scenarios where standard link-finding is not applicable:
+
+* **JavaScript-Driven Navigation:** The primary use case. For example, clicking on product cards in a catalog that trigger a page change via JavaScript, rather than having a direct `<a href="...">` link.
+* **Opening a List of Similar Items:** When you need to process a list of visually similar items like products, search results, or profiles, and the action to open each is a click on the element itself.
+
+<Note>
+For most navigation tasks where elements are standard links (`<a>` tags with `href` attributes), the combination of **`Find Links` + `Follow Links`** is faster and more precise. Use `Open sub-pages` for more complex, JavaScript-based list navigation.
+</Note>
+
+## Configuration
+
+### 1. What pages do you want to open?
+
+This is the primary text field where you describe the criteria for the items the agent should open. This is a goal-oriented prompt.
+
+Be clear and specific. For example: `open each product from the list`, `navigate to each job posting shown on the page`.
+
+### 2. How many pages to extract?
+
+This field sets a limit on the maximum number of matching items the agent will open.
+
+If you set this to `10`, the agent will open a maximum of the first 10 items that match your criteria. The default is typically `5`.
+
+### 3. How should pages be saved?
+
+This dropdown determines the structure of your output results.
+
+* **Multiple rows, one per page:** This is the standard option. For each sub-page the agent opens, it will create a new row in your results, making it easy to process them individually.
+* **One combined result**  The agent will use AI to combine the data from each page. 
+
+[Screenshot: Open sub-pages block configuration panel]
+
+## How It Works
+
+1.  The workflow navigates to a starting page (e.g., a product category page via `Open Websites`).
+2.  The `Open sub-pages` block is executed. The AI agent identifies clickable elements that match your description (e.g., "each product in the catalog").
+3.  The agent interacts with each of these elements sequentially to navigate to the corresponding sub-page, up to the specified limit.
+4.  For each new page visited, the agent captures its content.
+5.  The block outputs a series of results, with each result corresponding to one of the opened sub-pages.
+
+## Output Data Structure
+
+The primary output of this block is a list of results. When set to **"Multiple rows, one per page"**, each result item will contain the content of an opened page. This data is then available as variables for subsequent blocks. The structure for each item will include:
+
+* `url`: The URL of the sub-page that was opened.
+* `content`: The full text content of that sub-page.
+
+You can then use `{{url}}` and `{{content}}` in a subsequent `Extract Data` block to pull specific details from each item's page.
+
+## Example: Opening Products from a JavaScript Catalog
+
+Imagine an e-commerce category page where clicking a product image (which is not a standard link) navigates to the product page.
+
+1.  **`Open Websites` Block:**
+    * URL: `https://example-shop.com/catalog/shoes`
+2.  **`Open sub-pages` Block (added next):**
+    * **What pages do you want to open?:** `open each product from the catalog`
+    * **How many pages to extract?:** `12`
+    * **How should pages be saved?:** `Multiple rows, one per page`
+3.  **(Optional) `Extract Data` Block (added next):**
+    * You could add this block to process the `{{content}}` of each product page.
+
+**Result:** The workflow will open up to 12 product pages by simulating clicks on the catalog items and will create a separate result row for each page's content and URL.
+
+## Key Considerations
+
+* **Use Case Specificity:** This block is a specialized tool. **Prefer the `Find Links` + `Follow Links` pattern** for all standard navigation tasks involving `<a>` tags.
+* **Goal-Oriented Interaction:** The success of this block relies on the AI's ability to understand your goal ("open each product") and identify the correct interactive elements on the page.
+* **Simplified Workflow:** For its specific use case, this block simplifies a potentially complex `Interact with Page` -> `Extract Data` loop into a single, easy-to-configure step.
+
+The `Open sub-pages` block is an advanced tool for handling modern, JavaScript-heavy websites where traditional link-finding methods may not apply.

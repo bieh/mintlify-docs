@@ -68,6 +68,7 @@
               "blocks/Read-RSS-feeds",
               "blocks/explore-content",
               "blocks/interact-with-page",
+              "blocks/Open-sub-pages",
               "blocks/find-links",
               "blocks/extract-data",
               "blocks/LLM-Completion",

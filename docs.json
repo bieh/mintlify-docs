@@ -63,6 +63,7 @@
           {
             "group": "Blocks",
             "pages": [
+              "blocks/Start-on-Incoming-Webhook",
               "blocks/with-variables",
               "blocks/open-websites",
               "blocks/Read-RSS-feeds",
@@ -71,8 +72,7 @@
               "blocks/find-links",
               "blocks/Open-sub-pages",
               "blocks/extract-data",
-              "blocks/LLM-Completion",
-              "blocks/Start-on-Incoming-Webhook"
+              "blocks/LLM-Completion"              
             ]
           }
         ]

@@ -1,7 +1,7 @@
 ---
-title: 'Block: Read RSS feeds'
-description: 'Fetch the latest posts from one or more RSS feeds to use as data inputs for your workflow.'
-icon: 'rss' # Lucide icon
+title: "Block: Read RSS feeds"
+description: "Fetch the latest posts from one or more RSS feeds to use as data inputs for your workflow."
+icon: "rss"
 ---
 
 The `Read RSS feeds` block allows you to connect to one or more RSS feeds and retrieve the latest posts or articles. This block acts as a powerful data input, enabling workflows based on new content from blogs, news sites, and other sources.
@@ -12,28 +12,28 @@ Technically, the block uses a browser to open the feed link, but it directly fet
 
 Use the `Read RSS feeds` block to:
 
-* Monitor news sites or blogs for new articles on specific topics.
-* Aggregate content from multiple sources into a single data stream.
-* Trigger workflows based on new content publications.
-* Feed article links and summaries into other blocks for further analysis or processing.
+- Monitor news sites or blogs for new articles on specific topics.
+- Aggregate content from multiple sources into a single data stream.
+- Trigger workflows based on new content publications.
+- Feed article links and summaries into other blocks for further analysis or processing.
 
 ## Configuration
 
-1.  **Add a URL:**
-    * This is the input field where you add the URL of the RSS feed (e.g., `https://example.com/feed.xml`).
-    * You can add multiple RSS feed URLs to the list. The block will process each one.
-    * Use the **+ Add** button for single entries. To add multiple URLs at once, use the "Add a list of pages" option from the dropdown menu next to the **+ Add** button.
-    * You can also use variables from a preceding `Apply Variables` block to dynamically provide RSS feed URLs.
+1. **Add a URL:**
+   - This is the input field where you add the URL of the RSS feed (e.g., `https://example.com/feed.xml`).
+   - You can add multiple RSS feed URLs to the list. The block will process each one.
+   - Use the **\+ Add** button for single entries. To add multiple URLs at once, use the "Add a list of pages" option from the dropdown menu next to the **\+ Add** button.
+   - You can also use variables from a preceding `Apply Variables` block to dynamically provide RSS feed URLs.
+2. **Managing URLs:**
+   - **Toggle ON/OFF:** Each RSS feed URL has a toggle switch to enable or disable it for a given run without deleting it.
+   - **Edit/Delete:** You can edit or delete individual URLs from the list.
+3. **Advanced Options:**
+   - Click the **Advanced** link (typically in the bottom right) to access more settings.
+   - **Maximum number of posts to fetch from each RSS feed:** This crucial parameter lets you control how many of the latest items are retrieved from each feed. If you set it to `10`, the block will only fetch the 10 most recent posts, even if the feed contains more. This is useful for managing the amount of data processed in each workflow run.
 
-2.  **Managing URLs:**
-    * **Toggle ON/OFF:** Each RSS feed URL has a toggle switch to enable or disable it for a given run without deleting it.
-    * **Edit/Delete:** You can edit or delete individual URLs from the list.
-
-3.  **Advanced Options:**
-    * Click the **Advanced** link (typically in the bottom right) to access more settings.
-    * **Maximum number of posts to fetch from each RSS feed:** This crucial parameter lets you control how many of the latest items are retrieved from each feed. If you set it to `10`, the block will only fetch the 10 most recent posts, even if the feed contains more. This is useful for managing the amount of data processed in each workflow run.
-
-[Screenshot: Read RSS feeds block configuration panel]
+<Frame caption="Screenshot: Read RSS feeds block configuration panel">
+  ![Screenshot: Apply Variables block configuration table with example columns/rows](/blocks/imgs/block-Reed-RSS-feeds.png)
+</Frame>
 
 ## Output Data Structure
 
@@ -41,36 +41,37 @@ When this block runs, it fetches the posts from the specified RSS feeds. The out
 
 Each post item typically has the following fields (variable names):
 
-* `title`: The title of the article or post.
-* `link`: The direct URL to the full article.
-* `description` or `summary`: A short summary or the full content of the post.
-* `pubDate`: The publication date of the post.
-* `author`: The author of the post (if available).
-* `category`: The category or tags associated with the post (if available).
+- `title`: The title of the article or post.
+- `link`: The direct URL to the full article.
+- `description` or `summary`: A short summary or the full content of the post.
+- `pubDate`: The publication date of the post.
+- `author`: The author of the post (if available).
+- `category`: The category or tags associated with the post (if available).
 
 You can use these as variables in subsequent blocks, like `{{title}}`, `{{link}}`, etc.
 
 ## Example: Summarize New Blog Posts
 
-1.  **`Read RSS feeds` Block:**
-    * **URL:** Add the URL of a blog's RSS feed, e.g., `https://my-favorite-blog.com/rss`.
-    * **Advanced ➙ Maximum number of posts...:** Set to `5` to only get the latest 5 posts.
-2.  **`LLM Completion` Block (added next):**
-    * **Enter your prompt:**
-      ```
-      Summarize the following blog post in one tweet (under 280 characters).
-      Title: {{title}}
-      Description: {{description}}
-      ```
-    * **Output format as:** `Variable`
-    * **Variable name:** `tweet_summary`
+1. **`Read RSS feeds Block:`**
+   - **URL:** Add the URL of a blog's RSS feed, e.g., `https://my-favorite-blog.com/rss`.
+   - **Advanced ➙ Maximum number of posts...:** Set to `5` to only get the latest 5 posts.
+2. **`LLM Completion Block (added next):`**
+   - **Enter your prompt:**
 
-* **Result:** The workflow fetches the 5 latest posts, and for each one, it generates a tweet-sized summary. The `tweet_summary` variable (along with `title`, `link`, etc.) is now available for each post and can be used in subsequent steps, such as passing it to an `Extract Data` block to structure a final report.
+     ```
+     Summarize the following blog post in one tweet (under 280 characters).
+     Title: {{title}}
+     Description: {{description}}
+     ```
+   - **Output format as:** `Variable`
+   - **Variable name:** `tweet_summary`
+
+- **Result:** The workflow fetches the 5 latest posts, and for each one, it generates a tweet-sized summary. The `tweet_summary` variable (along with `title`, `link`, etc.) is now available for each post and can be used in subsequent steps, such as passing it to an `Extract Data` block to structure a final report.
 
 ## Key Considerations
 
-* **Valid RSS URL:** Ensure the URL you provide is a direct link to a valid RSS or Atom feed (usually ending in `.xml` or `/feed`). It is not a link to a regular webpage.
-* **Direct Parsing:** While a browser is used technically, this block does not interact with visual webpage elements. It directly parses the structured data from the feed file.
-* **Data Source:** This block acts as a data source, similar to `Apply Variables`. The blocks that follow it will execute for each post fetched from the feed(s).
+- **Valid RSS URL:** Ensure the URL you provide is a direct link to a valid RSS or Atom feed (usually ending in `.xml` or `/feed`). It is not a link to a regular webpage.
+- **Direct Parsing:** While a browser is used technically, this block does not interact with visual webpage elements. It directly parses the structured data from the feed file.
+- **Data Source:** This block acts as a data source, similar to `Apply Variables`. The blocks that follow it will execute for each post fetched from the feed(s).
 
 The `Read RSS feeds` block is a highly efficient way to bring structured content from across the web into your Jsonify automations.

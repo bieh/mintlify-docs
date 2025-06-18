@@ -1,7 +1,7 @@
 ---
-title: "Block: Explore Content"
-description: "Empower your AI Agent to intelligently search for and navigate to target pages within a site through iterative attempts."
-icon: "compass"
+title: 'Block: Explore Content'
+description: 'Empower your AI Agent to intelligently search for and navigate to target pages within a site through iterative attempts.'
+icon: 'compass'
 ---
 
 The `Explore Content` block gives your AI Agent an intelligent search capability. Instead of providing exact links, you give the agent a **goal**, and it will perform a series of **attempts** to navigate the current website and find pages relevant to that goal.
@@ -12,9 +12,9 @@ This block is exceptionally useful when you don't know the exact URLs where info
 
 Use the `Explore Content` block when you want your AI Agent to:
 
-- Iteratively find specific types of pages within a website (e.g., "Find the contact page," "Locate pages about pricing").
-- Discover information that might be spread across several internal pages by learning from each navigation step.
-- Intelligently explore a section of a website to find the most relevant content before extracting data.
+* Iteratively find specific types of pages within a website (e.g., "Find the contact page," "Locate pages about pricing").
+* Discover information that might be spread across several internal pages by learning from each navigation step.
+* Intelligently explore a section of a website to find the most relevant content before extracting data.
 
 This block is followed by an `Extract Data` block, which is used to both analyze the content of each attempt and to extract the final data once the goal is reached.
 
@@ -23,22 +23,23 @@ This block is followed by an `Extract Data` block, which is used to both analyze
 ### 1. Describe an action or set of actions below...
 
 This is the primary input field where you define the **ultimate goal** for the AI Agent. The agent will use this goal to evaluate its success after each attempt. Be clear and specific.
+* **Example:** `"Find the page that contains the company's contact information, including a physical address."`
 
-- **Example:** `"Find the page that contains the company's contact information, including a physical address."`
+### 2. Maximum number of steps
 
-### 2. How many pages to open?
+This defines the "budget" of interactions available to the agent for **each single attempt**. For example, a value of `2` allows the agent to perform up to two interactions to find the page within one attempt.
 
-This defines the "budget" of clicks available to the agent for **each single attempt**. For example, a value of `2` allows the agent to make up to two clicks to find the page within one attempt.
+An **interaction** is a single action the agent takes to navigate or change the state of the page. This can be a click on a traditional link, or a click on an interactive element like a button, a product card, or a menu item that is powered by JavaScript.
 
 <Warning>
-  The agent may use its entire click budget to go "deep" down a single path (e.g., click link A, then from page A click link B). It does not necessarily mean it will explore two separate links from the starting page. Plan your click budget accordingly. For exploring multiple distinct items from a list, other blocks might be more suitable.
+The agent may use its entire interaction budget to go "deep" down a single path (e.g., perform action A, then from the new state, perform action B). It does not necessarily mean it will explore two separate elements from the starting page. Plan your interaction budget accordingly.
 </Warning>
 
-### 3. Maximum number of steps
+
+### 3. How many pages to open?
 
 This parameter sets how many times the agent will try to find the target page. For each new attempt, the agent receives the context of the data that was extracted in the previous attempt and whether that attempt was successful in reaching the goal.
-
-- **Example:** Setting this to `3` means the agent will make up to three attempts. If it finds a page and extracts data that matches the goal on the first attempt, it will stop. If not, it will use what it learned to make a second, more informed attempt.
+* **Example:** Setting this to `3` means the agent will make up to three attempts. If it finds a page and extracts data that matches the goal on the first attempt, it will stop. If not, it will use what it learned to make a second, more informed attempt.
 
 <Frame caption="Screenshot: Explore Content block configuration panel showing the parameters">
   ![Screenshot: Explore Content block configuration panel showing the parameters](/blocks/imgs/block-explore-content.png)
@@ -48,39 +49,38 @@ This parameter sets how many times the agent will try to find the target page. F
 
 The `Explore Content` block operates in a loop for the specified number of attempts:
 
-1. **Attempt Start:** The agent starts on the current page.
-2. **Navigation:** It uses its goal description to decide which links to click. It will perform up to the number of clicks specified in its "click budget" for the current attempt.
-3. **Content Analysis:** After each attempt's navigation path is complete, the subsequent `Extract Data` block is executed on the final page reached.
-4. **Goal Evaluation:** The agent analyzes the extracted data to determine if the goal has been met.
-5. **Iteration:**
-   - If the goal is met, the process stops, and the successful data is passed on.
-   - If the goal is not met and there are attempts remaining, the agent starts a new attempt. It uses the information and extracted data from the failed attempt as **context** to make a smarter choice for its next navigation path.
+1.  **Attempt Start:** The agent starts on the current page.
+2.  **Navigation:** It uses its goal description to decide which interactions to perform. It will perform up to the number of interactions specified in its "interaction budget" for the current attempt.
+3.  **Content Analysis:** After each attempt's navigation path is complete, the subsequent `Extract Data` block is executed on the final page reached.
+4.  **Goal Evaluation:** The agent analyzes the extracted data to determine if the goal has been met.
+5.  **Iteration:**
+    * If the goal is met, the process stops, and the successful data is passed on.
+    * If the goal is not met and there are attempts remaining, the agent starts a new attempt. It uses the information and extracted data from the failed attempt as **context** to make a smarter choice for its next navigation path.
 
 ## Example: Finding a Specific "Enterprise Pricing" Page
 
 Imagine you're on a company's homepage.
 
-1. **`Open Websites Block:`**
-   - URL: `https://some-saas-company.com`
-2. **`Explore Content Block (added next):`**
-   - **Describe an action...:** `Find the Enterprise pricing plan page.`
-   - **Number of attempts...:** `3`
-   - **How many pages (clicks)...:** `2`
-3. **`Extract Data Block (added next):`**
-   - **What information...?:** `A single item`
-   - **Attributes:**
+1.  **`Open Websites` Block:**
+    * URL: `https://some-saas-company.com`
+2.  **`Explore Content` Block (added next):**
+    * **Describe an action...:** `Find the Enterprise pricing plan page.`
+    * **Number of attempts...:** `3`
+    * **How many interactions...:** `2`
+3.  **`Extract Data` Block (added next):**
+    * **What information...?:** `A single item`
+    * **Attributes:**
+        | NAME          | EXAMPLE VALUE OR A LONGER DESCRIPTION       |
+        | ------------- | ------------------------------------------- |
+        | `plan_name`   | `The name of the pricing plan, e.g., Enterprise` |
+        | `has_address` | `Does the page mention a physical address? Yes or No` |
 
-     | NAME          | EXAMPLE VALUE OR A LONGER DESCRIPTION                 |
-     | ------------- | ----------------------------------------------------- |
-     | `plan_name`   | `The name of the pricing plan, e.g., Enterprise`      |
-     | `has_address` | `Does the page mention a physical address? Yes or No` |
-
-- **Result:**
-  - **Attempt 1:** The agent might click "Pricing" (1st click), see "Pro" and "Business" plans but not "Enterprise". It runs `Extract Data`, `plan_name` is "Business", `has_address` is "No". The goal is not met.
-  - **Attempt 2:** Using the context that "Pricing" was a good first step, it navigates back to the pricing page (1st click), and now looks for a "Compare Plans" or "Contact Sales for Enterprise" link (2nd click). It lands on the Enterprise page. `Extract Data` runs, `plan_name` is "Enterprise". The goal is met, and the process stops.
+* **Result:**
+    * **Attempt 1:** The agent might click "Pricing" (1st interaction), see "Pro" and "Business" plans but not "Enterprise". It runs `Extract Data`, `plan_name` is "Business", `has_address` is "No". The goal is not met.
+    * **Attempt 2:** Using the context that "Pricing" was a good first step, it navigates back to the pricing page (1st interaction), and now looks for a "Compare Plans" or "Contact Sales for Enterprise" link (2nd interaction). It lands on the Enterprise page. `Extract Data` runs, `plan_name` is "Enterprise". The goal is met, and the process stops.
 
 ## Key Considerations
 
-- **`Paired with Extract Data:`** This block is intrinsically linked to a subsequent `Extract Data` block, which is used for the critical step of evaluating whether the goal has been achieved on each attempt.
-- **Clear Goal:** The success of this block is highly dependent on a clear and verifiable goal. The agent needs to be able to determine success based on the data extracted.
-- **Click Budget:** Use the click budget wisely. For finding a link that is likely two clicks away (e.g., in a dropdown menu), a budget of 2 is appropriate. For broader exploration, more attempts might be better than a large click budget.
+* **Paired with `Extract Data`:** This block is intrinsically linked to a subsequent `Extract Data` block, which is used for the critical step of evaluating whether the goal has been achieved on each attempt.
+* **Clear Goal:** The success of this block is highly dependent on a clear and verifiable goal. The agent needs to be able to determine success based on the data extracted.
+* **Interaction Budget:** Use the interaction budget wisely. For finding something that is likely two interactions away (e.g., in a dropdown menu), a budget of 2 is appropriate. For broader exploration, more attempts might be better than a large interaction budget.

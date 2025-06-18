@@ -25,21 +25,21 @@ This block is followed by an `Extract Data` block, which is used to both analyze
 This is the primary input field where you define the **ultimate goal** for the AI Agent. The agent will use this goal to evaluate its success after each attempt. Be clear and specific.
 * **Example:** `"Find the page that contains the company's contact information, including a physical address."`
 
-### 2. Maximum number of steps
+### 2. How many pages to open?
+
+This parameter sets how many times the agent will try to find the target page. For each new attempt, the agent receives the context of the data that was extracted in the previous attempt and whether that attempt was successful in reaching the goal.
+* **Example:** Setting this to `3` means the agent will make up to three attempts. If it finds a page and extracts data that matches the goal on the first attempt, it will stop. If not, it will use what it learned to make a second, more informed attempt.
+
+### 3. Maximum number of steps
 
 This defines the "budget" of interactions available to the agent for **each single attempt**. For example, a value of `2` allows the agent to perform up to two interactions to find the page within one attempt.
 
-An **interaction** is a single action the agent takes to navigate or change the state of the page. This can be a click on a traditional link, or a click on an interactive element like a button, a product card, or a menu item that is powered by JavaScript.
+An **interaction** is a single action the agent takes to navigate or change the state of the page. This can be a click on a traditional link, or a click on an interactive element like a button, a product card, or a menu item.
 
 <Warning>
 The agent may use its entire interaction budget to go "deep" down a single path (e.g., perform action A, then from the new state, perform action B). It does not necessarily mean it will explore two separate elements from the starting page. Plan your interaction budget accordingly.
 </Warning>
 
-
-### 3. How many pages to open?
-
-This parameter sets how many times the agent will try to find the target page. For each new attempt, the agent receives the context of the data that was extracted in the previous attempt and whether that attempt was successful in reaching the goal.
-* **Example:** Setting this to `3` means the agent will make up to three attempts. If it finds a page and extracts data that matches the goal on the first attempt, it will stop. If not, it will use what it learned to make a second, more informed attempt.
 
 <Frame caption="Screenshot: Explore Content block configuration panel showing the parameters">
   ![Screenshot: Explore Content block configuration panel showing the parameters](/blocks/imgs/block-explore-content.png)
@@ -59,25 +59,26 @@ The `Explore Content` block operates in a loop for the specified number of attem
 
 ## Example: Finding a Specific "Enterprise Pricing" Page
 
-Imagine you're on a company's homepage.
+Imagine you're on a B2B software company's homepage, and you want to find a case study about a client in the "financial services" industry. This information might be under "Solutions", "Customers", or "Resources".
 
 1.  **`Open Websites` Block:**
-    * URL: `https://some-saas-company.com`
+    * URL: `https://some-b2b-software.com`
 2.  **`Explore Content` Block (added next):**
-    * **Describe an action...:** `Find the Enterprise pricing plan page.`
+    * **Describe an action...:** `Find a case study page for a client in the financial services industry.`
     * **Number of attempts...:** `3`
     * **How many interactions...:** `2`
 3.  **`Extract Data` Block (added next):**
     * **What information...?:** `A single item`
     * **Attributes:**
-        | NAME          | EXAMPLE VALUE OR A LONGER DESCRIPTION       |
-        | ------------- | ------------------------------------------- |
-        | `plan_name`   | `The name of the pricing plan, e.g., Enterprise` |
-        | `has_address` | `Does the page mention a physical address? Yes or No` |
+        | NAME                | EXAMPLE VALUE OR A LONGER DESCRIPTION                                       |
+        | ------------------- | --------------------------------------------------------------------------- |
+        | `page_title`        | `The main title of the current page.`                                       |
+        | `mentions_finance`  | `Does the text on this page mention 'finance', 'bank', or 'investment'? Yes or No.` |
 
 * **Result:**
-    * **Attempt 1:** The agent might click "Pricing" (1st interaction), see "Pro" and "Business" plans but not "Enterprise". It runs `Extract Data`, `plan_name` is "Business", `has_address` is "No". The goal is not met.
-    * **Attempt 2:** Using the context that "Pricing" was a good first step, it navigates back to the pricing page (1st interaction), and now looks for a "Compare Plans" or "Contact Sales for Enterprise" link (2nd interaction). It lands on the Enterprise page. `Extract Data` runs, `plan_name` is "Enterprise". The goal is met, and the process stops.
+    * **Attempt 1:** The agent might click "Resources" (1st interaction), then "Blog" (2nd interaction). It lands on a blog page. `Extract Data` runs, and `mentions_finance` might be "No". The goal is not met.
+    * **Attempt 2:** Using the context from the failed attempt, the agent knows the blog was a dead end. It starts again from the homepage. This time it might click "Customers" (1st interaction) and see a link for "Case Studies", clicking it (2nd interaction). It now sees a list of case studies. It might click the first one. `Extract Data` runs. The result might not mention finance. Goal not met.
+    * **Attempt 3:** The agent now knows it is on the correct "Case Studies" list page. It goes back and intelligently selects a case study with a title like "How Global Bank Optimized Their Workflow". It navigates to this page. `Extract Data` runs, and `mentions_finance` is "Yes". The goal is met, and the process stops, having successfully found the target page.
 
 ## Key Considerations
 

@@ -1,75 +1,87 @@
 ---
 title: "Block: Interact with Page"
-description: "Instruct your AI Agent to perform specific actions, sequences, or even goal-oriented tasks on a webpage."
+description: "Instruct your AI Agent to perform a precise sequence of actions or to achieve a high-level goal on a webpage."
 icon: "pointer"
 ---
 
-While `Explore Content` allows the agent to navigate based on a broad goal, the `Interact with Page` block lets you define **precise, sequential actions** or even **more complex, goal-oriented tasks** for the agent to perform on the current webpage. This is essential for scenarios like logging in, submitting forms, revealing hidden content, initiating file "downloads" for in-browser processing, or attempting a registration process.
+The `Interact with Page` block is a highly versatile tool for controlling the AI agent's actions on a webpage. You can use it in two ways: by providing **a precise, sequential list of commands**, or by defining **a single, high-level goal** that the agent will attempt to achieve by performing multiple sub-steps automatically.
+
+This makes it essential for everything from simple button clicks to complex tasks like filling out forms or performing a search.
 
 ## Purpose
 
 Use the `Interact with Page` block when you need your AI Agent to:
 
-- Click specific buttons, links, or other elements.
-- Type text into input fields, search bars, or forms.
-- Press keys like 'Enter' or key combinations.
-- Interact with elements to reveal more content (e.g., clicking 'Show all', 'Read more', spoilers).
-- Attempt more complex, multi-step goals on a single page, such as "initiate download of the file named `{{filename}}`" or "register on the website using `{{email}}` and `{{password}}`."
-- **File Handling Note:** When you instruct the agent to "download" a file (e.g., a PDF), it doesn't mean the file is downloaded directly to your computer. Instead, the agent will open the file content within its browser environment. This allows subsequent workflow steps to process this content, such as extracting data from the opened PDF.
-
-This block can function as a direct, step-by-step instruction manual or a higher-level task definition for interacting with a single page.
+- **Perform Step-by-Step Actions:** Click buttons, type text, select from dropdowns, navigate, etc.
+- **Achieve a Goal:** Execute a multi-step task from a single instruction, like searching for an item or completing a login process, letting the AI handle the intermediate steps.
+- **Handle Dynamic Elements:** Close pop-ups, interact with menus, or trigger JavaScript events.
+- **Control Workflow Execution:** Conditionally pause or stop the workflow.
 
 ## Configuration
 
-1. **Describe the action to take below:**
-   - This is the core text area where you list actions or define a goal.
-   - **Optimal Use (Step-by-step):** For maximum reliability, list precise actions, with **each new action on a new line.** The agent will execute these in the order you list them.
-     - Example:
-       - `click on 'Submit'`
-       - `type 'Green Flag' into 'Search bar'`
-       - `click 'Show all reviews'`
-   - **Goal-Oriented Tasks:** You can also state a more global task like `initiate download of 'report.pdf'` or `register on site`.
-     - By default, the agent attempts this within a limited number of internal steps (often one, corresponding to one line).
-     - If the task is more complex (e.g., registration involves multiple fields and clicks), you can increase the "Maximum number of steps" in Advanced Options. However, this increases the chance of the agent making an error or failing to achieve the goal. A step-by-step algorithm is generally more robust. Experiments are encouraged\!
-2. **Using Variables:**
-   - You can use variables (from an `Apply Variables` block) in **any part of an action description**, not just for typing text.
-   - Examples:
-     - `type {{search_query}} into 'Search input'`
-     - `click on button 'Download {{filename}}'`
-     - `initiate download of file {{file_url}}`
-     - `select {{option_value}} from 'Dropdown menu'`
-3. **No Scrolling Needed:**
-   - You don't need to add instructions like "scroll down to the button." The AI Agent perceives the **entire page** at once.
-4. **Advanced Options:**
-   - **Maximum number of steps:** Default is 1 (meaning one line in the description field is one primary action). You can increase this if you've described a more global, multi-step task on a single line and want the agent to attempt more internal actions to achieve it. Be mindful that increasing this can reduce reliability for complex tasks. (The agent uses visual understanding to identify elements).
+### 1. Describing the Task
 
-<Frame caption="Screenshot: Interact with Page block configuration showing a sequence of actions">
-  ![Screenshot: Interact with Page block configuration showing a sequence of actions](/blocks/imgs/block-interact-with-page.png)
+This is the core text area where you define what the agent should do. You can choose one of two approaches:
+
+#### Approach A: Step-by-Step Commands (High Reliability)
+
+For maximum control and reliability, list precise commands, with **each new command on a new line.** The agent will execute these in the exact order you provide.
+
+- **Example:**
+  1. `type '{{username}}' into 'Username or Email field'`
+  2. `type '{{password}}' into 'Password input'`
+  3. `click on button 'Sign In'`
+
+#### Approach B: Goal-Oriented Task (High Flexibility)
+
+You can provide a single, high-level instruction. The agent will then attempt to break this down into the necessary sub-steps. This requires setting a sufficient "Maximum number of steps" in the Advanced Options.
+
+- **Example:**
+  - `Find car part by part number in the search bar. Part number is {{part_number}}.`
+  - In this case, the agent will attempt to perform a sequence of actions like: closing pop-ups, clicking the search bar, typing the part number, and clicking the search button, all from one instruction.
+
+### 2. Available Commands & Syntax (for Step-by-Step Mode)
+
+- **`click`**: Clicks on a target element (`click on button 'Log In'`).
+- **`type`**: Types text into a field (`type '{{text}}' into 'Search bar'`).
+- **`goto`**: Opens a specific URL (`goto 'https://example.com/contact'`).
+- **`press`**: Presses a keyboard key (`press 'Enter'`).
+- **`back`**: Goes to the previous page.
+- **`idle`**: Waits for 30 seconds.
+- **`stop`**: Immediately stops the workflow run (`stop 'Item not found'`).
+
+### 3. Using Variables
+
+Variables (e.g., `{{part_number}}`) are crucial for both modes, allowing you to make your interactions dynamic.
+
+### 4. Advanced Options
+
+- **Maximum number of steps:** This is critical for goal-oriented tasks. The default is `1`. For a goal like finding a car part, you must increase this value (e.g., to `5` or higher) to give the agent enough "action credits" to perform all the necessary sub-steps (close pop-ups, click, type, click again).
+
+<Frame captin="Screenshot: Interact with Page block configuration showing a step-by-step task">
+  ![creenshot: Interact with Page block configuration showing a step-by-step task](/blocks/imgs/block-interact-with-page.png)
 </Frame>
 
 ## Examples
 
-**Example 1: Performing a Search (Step-by-step)**
+**Example 1: Goal-Oriented Search (Recommended for flexibility)**
 
-1. `type 'AI automation' into 'Search input'`
-2. `click on 'Search button'`
+- **Instruction:** `Find car part by part number in the search bar. Part number is {{part_number}}.`
+- **Advanced \> Maximum number of steps:** `5`
+- **Result:** The agent autonomously handles pop-ups, clicks, typing, and submitting the search.
 
-**Example 2: Goal-Oriented File Processing (Potentially using increased steps)**
+**Example 2: Logging into an Account (Step-by-Step for reliability)**
 
-- `initiate download of 'Annual Report 2024.pdf'` (Agent will open this PDF in its browser)
-
-**Example 3: Submitting a Form with Variables (Step-by-step)**
-
-1. `type {{user_email}} into 'Email field'`
-2. `type {{user_password}} into 'Password field'`
-3. `click on 'Login button'`
+1. `type '{{username}}' into 'Username or Email field'`
+2. `type '{{password}}' into 'Password input'`
+3. `press 'Enter'`
+4. `idle`
+5. `goto 'https://app.example.com/settings/profile'`
 
 ## Key Considerations
 
-- **Sequential Order (for step-by-step):** Actions are performed exactly in the order listed. Ensure your sequence makes logical sense.
-- **Clarity:** Describe the target element or goal clearly.
-- **One Action Per Line (for step-by-step):** This is the most reliable way to use the block.
-- **Global Tasks & Step Limit:** For broader tasks on a single line, adjust "Maximum number of steps" cautiously.
-- **File "Downloads":** Remember that file downloads open the content in the agent's browser for further processing, not to your local machine directly through this block.
+- **Choose the Right Approach:** Use step-by-step commands for precise, linear processes. Use a goal-oriented task for more complex interactions where the exact sequence of clicks might vary or involve handling unexpected elements like pop-ups.
+- **Set Step Budget for Goals:** When using a goal-oriented instruction, always set an adequate "Maximum number of steps".
+- **Clarity is Key:** Whether writing steps or a goal, be as clear and specific as possible.
 
-The `Interact with Page` block gives you fine-grained control or allows for broader task definitions for how the AI Agent engages with web pages, enabling complex automation scenarios.
+The `Interact with Page` block gives you a flexible spectrum of control, from micromanaging every action to defining a high-level goal and letting the AI handle the details.

@@ -1,14 +1,14 @@
 ---
-title: "Apply Variables"
+title: "Open a dataset"
 description: "Run your workflow with different inputs using variables."
 icon: "variable"
 ---
 
-The `Apply Variables` block is a powerful tool for running the same workflow logic across different sets of input data. Instead of creating separate workflows for each input, you define variables once, and the workflow runs automatically for each set.
+The `Open a dataset` block is a powerful tool for running the same workflow logic across different sets of input data. Instead of creating separate workflows for each input, you define variables once, and the workflow runs automatically for each set.
 
 ## Purpose
 
-Use the `Apply Variables` block when you want to:
+Use the `Open a dataset` block when you want to:
 
 - Process a list of items (e.g., search for multiple companies, open several user profiles).
 - Parameterize your workflow (e.g., use different search keywords, test various URLs).
@@ -25,36 +25,36 @@ Configuring this block involves setting up a table where columns represent varia
 3. **Variable Syntax:** In subsequent blocks (like `Open Websites`, `Extract Data` instructions, `Search on Google`, etc.), you refer to these variables using double curly braces: `{{variable_name}}`. For example, if you have a column named `company_name`, you would use `{{company_name}}` in another block to insert the value from the current row.
 4. **Import (Optional):** You can import data directly into this table from a CSV file, which is useful for large datasets. Look for an "Import" button.
 
-<Frame caption="Screenshot: Apply Variables block configuration table with example columns/rows">
-  ![Screenshot: Apply Variables block configuration table with example columns/rows](/blocks/imgs/block-with-varaibles.png)
+<Frame caption="Screenshot: Open a dataset block configuration table with example columns/rows">
+  ![Screenshot: Open a dataset block configuration table with example columns/rows](/blocks/imgs/block-with-varaibles.png)
 </Frame>
 
 ## Examples
 
 **Example 1: Searching for Multiple Companies**
 
-- **`Apply Variables Block:`**
+- **`Open a dataset Block:`**
   - Column: `company_name`
   - Row 1: `Jsonify`
   - Row 2: `Google`
   - Row 3: `Microsoft`
-- **`Google Search Block (following Apply Variables):`**
+- **`Google Search Block (following Open a dataset):`**
   - Query: `{{company_name}} headquarters address`
   - _Result:_ The workflow will run three times, searching for the headquarters of Jsonify, Google, and Microsoft respectively.
 
 **Example 2: Opening Different Product Pages**
 
-- **`Apply Variables Block:`**
+- **`Open a dataset Block:`**
   - Column: `product_id`
   - Row 1: `12345`
   - Row 2: `67890`
-- **`Open Websites Block (following Apply Variables):`**
+- **`Open Websites Block (following Open a dataset):`**
   - URL: `https://yourstore.com/products/{{product_id}}`
   - _Result:_ The workflow runs twice, opening the pages for product ID 12345 and 67890.
 
 ## Key Considerations
 
-- The workflow steps _after_ the `Apply Variables` block will execute once for **each row** defined in the table.
+- The workflow steps _after_ the `Open a dataset` block will execute once for **each row** defined in the table.
 - Ensure your variable names in the table match exactly how you reference them (including case sensitivity) in other blocks using the `{{variable_name}}` syntax.
 
 This block is fundamental for scaling your automations and making them reusable across different data inputs.

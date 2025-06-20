@@ -54,7 +54,7 @@ This pattern addresses extracting data that spans multiple "pages." This can inc
 This pattern is used when your starting point is a set of search terms or other variables, and you need to find and extract information related to each.
 
 * **Blocks:**
-    1.  `Apply Variables` (provides a list of search terms, company names, etc.)
+    1.  `Open a dataset` (provides a list of search terms, company names, etc.)
     2.  `Search on Google` (or other search block, using the variable in the query, e.g., `Search for "{{company_name}} official website"`)
     3.  `Find Links` (identifies the most relevant link from the search results, e.g., `Find the official website link`)
     4.  `Follow Links` (navigates to the found relevant link, typically "Follow the first link")
@@ -62,7 +62,7 @@ This pattern is used when your starting point is a set of search terms or other 
 * **Use Case:** Finding official websites and contact emails for a list of companies; looking up product specifications for a list of product names.
 * **How it Works:** For each variable set, the agent performs a search, identifies the best link, navigates to it, and then extracts data.
 * **Diagram:**
-    `[Apply Variables] ➙ [Search on Google] ➙ [Find Links] ➙ [Follow Links] ➙ [Extract Data]`
+    `[Open a dataset] ➙ [Search on Google] ➙ [Find Links] ➙ [Follow Links] ➙ [Extract Data]`
 
 ## 5. Site Exploration for Targeted Data Extraction or Summarization
 

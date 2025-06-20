@@ -10,15 +10,15 @@ As your automation needs grow, you'll want to build workflows that are not only 
 
 When dealing with hundreds or thousands of starting points (e.g., URLs, search terms):
 
-* **`Apply Variables` with CSV Import:**
+* **`Open a dataset` with CSV Import:**
     * This is the most robust way to handle large lists of inputs. Prepare your data (e.g., list of company names, product IDs, URLs) in a CSV file.
-    * When using the **Import** feature in the `Apply Variables` block to load a CSV, the **first row of your CSV file will be imported as the column headers (variable names)** in the block. Subsequent rows will be treated as data.
+    * When using the **Import** feature in the `Open a dataset` block to load a CSV, the **first row of your CSV file will be imported as the column headers (variable names)** in the block. Subsequent rows will be treated as data.
     * The workflow will then iterate through each data row.
 * **`Open Websites` with "Add a numbered range of URLs":**
     * Ideal for paginated content where the URL structure is predictable (e.g., `example.com/products?page={{page}}`).
     * You can generate thousands of page URLs this way for the agent to process.
 * **Parallel Processing (Jsonify's Architecture):**
-    * Jsonify is designed to handle tasks in parallel. When you provide a large list of items (e.g., via `Apply Variables` or multiple URLs in `Open Websites`), Jsonify automatically assigns the **maximum number of AI Agents available based on your subscription plan** to work on different items concurrently. There is no manual setting for the number of agents; the platform always utilizes the maximum available to you to significantly speed up the overall process.
+    * Jsonify is designed to handle tasks in parallel. When you provide a large list of items (e.g., via `Open a dataset` or multiple URLs in `Open Websites`), Jsonify automatically assigns the **maximum number of AI Agents available based on your subscription plan** to work on different items concurrently. There is no manual setting for the number of agents; the platform always utilizes the maximum available to you to significantly speed up the overall process.
 
 ## 2. Optimizing Data Quality and Interaction Path
 
@@ -40,24 +40,24 @@ For extremely large datasets or very long-running processes:
 
 * **Break Down into Smaller, Chained Workflows (Manual Data Transfer):**
     * If a single workflow would process tens of thousands of items and take many hours, consider if the task can be logically divided.
-    * For example, one workflow could gather a list of URLs or initial data. You can then **manually save these results** (e.g., export to CSV from the results view). A second, separate workflow can then take this manually saved file as input (e.g., imported into `Apply Variables`) to process those items.
+    * For example, one workflow could gather a list of URLs or initial data. You can then **manually save these results** (e.g., export to CSV from the results view). A second, separate workflow can then take this manually saved file as input (e.g., imported into `Open a dataset`) to process those items.
     * *Currently, automatic saving of results to a file for direct input into another workflow is not available, but this feature is planned for future development.*
 * **Use Limits in Exploration/Pagination Blocks:**
     * Be mindful of the "Maximum number of pages" in `Explore Content` and "How many pages to navigate through?" in `Paginate a list`. Set reasonable limits to prevent workflows from running indefinitely or processing excessive data if not needed.
 * **Incremental Processing:**
-    * If processing a massive list, consider running it in batches. You can do this by using `Apply Variables` with partial CSVs, or by adjusting the range in the "Add a numbered range of URLs" feature in `Open Websites`.
+    * If processing a massive list, consider running it in batches. You can do this by using `Open a dataset` with partial CSVs, or by adjusting the range in the "Add a numbered range of URLs" feature in `Open Websites`.
 
 ## 4. Handling Potential Website Limitations
 
 * **Rate Limiting:**
     * Some websites monitor for rapid, automated requests from a single IP address and may temporarily block access (rate limiting).
-    * Jsonify's architecture, by using different AI agent sessions (which may originate from different IP addresses, especially when processing items from `Apply Variables` or distinct URLs in `Open Websites`), can help mitigate this. Providing direct URLs for paginated content (Pattern 3 in "Common Workflow Patterns") is generally better than rapidly clicking "Next" buttons from a single session.
+    * Jsonify's architecture, by using different AI agent sessions (which may originate from different IP addresses, especially when processing items from `Open a dataset` or distinct URLs in `Open Websites`), can help mitigate this. Providing direct URLs for paginated content (Pattern 3 in "Common Workflow Patterns") is generally better than rapidly clicking "Next" buttons from a single session.
 * **Anti-Bot Measures:**
     * Complex anti-bot measures can be challenging. Jsonify's AI is designed to behave like a human user, which helps. However, extremely aggressive sites might still pose difficulties. Adhering to best practices like providing direct URLs where possible can reduce the chances of being flagged.
 
 ## 5. Designing for Reusability
 
-* **Heavy Use of Variables:** Design your core logic to be driven by variables from an `Apply Variables` block. This makes the workflow instantly reusable for different datasets.
+* **Heavy Use of Variables:** Design your core logic to be driven by variables from an `Open a dataset` block. This makes the workflow instantly reusable for different datasets.
     * Instead of hardcoding a search term, use `{{search_keyword}}`.
     * Instead of a fixed URL, use `https://{{domain_name}}`.
 * **Modular Thinking:** Think about creating "template" workflows for common tasks (e.g., a generic "Google Search & Extract Top Result" workflow) that you can clone and adapt.

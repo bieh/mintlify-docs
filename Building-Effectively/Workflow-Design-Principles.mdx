@@ -31,7 +31,7 @@ Jsonify provides a variety of blocks, each designed for specific tasks. Understa
 * Need to click a button or type text? Use `Interact with Page`.
 * Need to find links based on a description? Use `Find Links` (followed by `Follow Links`).
 * Need to get specific data from a page? Use `Extract Data`.
-* Need to run the same logic for multiple inputs? Start with `Apply Variables`.
+* Need to run the same logic for multiple inputs? Start with `Open a dataset`.
 
 Refer to the "Mastering Workflow Blocks" section for details on each block.
 
@@ -42,7 +42,7 @@ Don't try to build a massive, complex workflow all at once.
 * **Start Simple:** Begin with the first few core steps (e.g., opening a site, extracting one piece of data).
 * **Test Often:** Run your workflow frequently as you build it. This helps you catch errors early and verify that each part is working as expected.
 * **Add Complexity Gradually:** Once a section is working, add the next logical set of blocks.
-* **Use Small Data Sets for Testing:** When using `Apply Variables` or processing lists, test with a small number of items first to speed up debugging.
+* **Use Small Data Sets for Testing:** When using `Open a dataset` or processing lists, test with a small number of items first to speed up debugging.
 * **Handling Paginated Data:** To extract similar data from multiple pages (e.g., paginated search results or product listings), it's often more reliable and less likely to trigger anti-bot measures to provide direct links to each page as input (e.g., using the "Add a numbered range of URLs" feature in `Open Websites`) rather than using a dedicated pagination block that simulates clicks on "Next" buttons. Processing each page URL as a new starting point can be beneficial because each new browser session initiated by the agent might use a unique IP address, making the activity appear less like a single bot rapidly clicking through pages from one IP.
 
 ## 5. Write Clear Instructions for the AI
@@ -58,9 +58,9 @@ Many blocks (like `Extract Data`, `Explore Content`, `Find Links`, `Interact wit
 
 Be mindful of how data flows through your workflow:
 
-* **Variables:** Data from `Apply Variables` is injected into subsequent blocks.
+* **Variables:** Data from `Open a dataset` is injected into subsequent blocks.
 * **Block Outputs:** Some blocks (like `Find Links` or `Extract Data`) produce output that is implicitly used by the next block (like `Follow Links`) or can be explicitly captured and used later.
-* **Iteration:** When using `Apply Variables` or "Follow each link" in `Follow Links`, the subsequent blocks will run for each item/page, processing data in that specific context.
+* **Iteration:** When using `Open a dataset` or "Follow each link" in `Follow Links`, the subsequent blocks will run for each item/page, processing data in that specific context.
 
 ## 7. Keep It Readable
 

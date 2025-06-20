@@ -61,14 +61,24 @@
         "tab": "Mastering Workflow Blocks",
         "groups": [          
           {
-            "group": "Blocks",
+            "group": "Trigger Blocks",
             "pages": [
               "blocks/Start-on-Incoming-Webhook",
-              "blocks/timer",
+              "blocks/timer"             
+            ]
+          },
+          {
+            "group": "Input Blocks",
+            "pages": [
               "blocks/with-variables",
               "blocks/open-websites",
               "blocks/Read-RSS-feeds",
-              "blocks/open-files",
+              "blocks/open-files"
+            ]
+          },
+          {
+            "group": "Transform Blocks",
+            "pages": [
               "blocks/find-links",
               "blocks/interact-with-page",
               "blocks/explore-content",

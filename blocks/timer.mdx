@@ -1,0 +1,66 @@
+---
+title: "Trigger Block: Start on a timer"
+description: "Schedule your Jsonify workflow to run automatically at specific time intervals."
+icon: "timer"
+---
+
+The `Start on a timer` block functions as a **trigger** for your Jsonify workflow, allowing it to be initiated automatically on a recurring schedule. This is essential for monitoring tasks, periodic data collection, and any automation that needs to run regularly without manual intervention.
+
+This block replaces the manual "Run" button or other triggers like a webhook as the starting point for your workflow.
+
+## Purpose
+
+Use the `Start on a timer` trigger block to:
+
+- Periodically check a website for updates.
+- Run a report or analysis on a weekly or monthly basis.
+- Monitor product prices or stock levels daily.
+- Automatically gather new articles from news sites or blogs every hour.
+
+## Configuration
+
+1. **Choose a time interval for this task to start at:**
+   - This is a dropdown menu where you select the frequency for the workflow to run.
+   - The available preset options are:
+     - `Every hour`
+     - `Every 24 hours`
+     - `Every 7 days`
+     - `Every 30 days`
+2. **Start at a specific time of day in GMT (optional):**
+   - For intervals of 24 hours or more, you can specify an exact time of day for the workflow to start.
+   - The time is in **GMT (Greenwich Mean Time)**, so be sure to calculate the correct time based on your local timezone. For example, if you want it to run at 9 AM in Central European Summer Time (CEST, GMT\+2), you would set the time to `07:00`.
+3. **Enabling the Trigger:**
+   - For the schedule to be active, the main toggle switch for the block (usually in the bottom left) must be set to **ON**.
+   - The UI also displays a notification message like "This workflow will automatically start on a timer if the task is enabled with the 'on' switch in the editor."
+
+<Frame caption="Screenshot: Start on a timer block configuration panel showing the selected interval">
+  ![Screenshot: Start on a timer block configuration panel showing the selected interval](/blocks/imgs/block-timer.png)
+</Frame>
+
+## How It Works
+
+1. You configure the `Start on a timer` block and set it as the first block in your workflow.
+2. You enable the block using its toggle switch.
+3. Jsonify's scheduling system then automatically queues your workflow to run at the next scheduled interval.
+4. For example, if you select `Every 7 days` and set the time to `09:00` GMT, the workflow will run once a week at that specific time.
+
+## Example Scenario: Weekly Competitor Monitoring
+
+1. **`Start on a timer Block:`**
+   - **Choose a time interval...:** `Every 7 days`
+   - **Start at a specific time...:** `08:00`
+2. **`Search on Google Block (added next):`**
+   - **What should the AI search for?:** `new features from {{competitor_name}}`
+   - _`(This assumes a Apply Variables block or that the variable is set elsewhere).`_
+3. **Subsequent Blocks:**
+   - Blocks to find links, follow them, and extract information about new features.
+
+- **Result:** Every week at 8:00 AM GMT, this workflow will automatically run to search for and analyze the latest news about a competitor's features.
+
+## Key Considerations
+
+- **One Trigger Per Workflow:** A workflow can only have one starting trigger. If you add a `Timer` block, it will replace the default manual trigger. You cannot have both a `Timer` and a `Webhook` trigger in the same workflow.
+- **GMT Timezone:** Always remember that the scheduled time is in GMT. Double-check your calculations for your local timezone to ensure the workflow runs when you expect it to.
+- **Activation Toggle:** The workflow will **not** run on a schedule unless the block's main toggle switch is **ON**.
+
+The `Start on a timer` block is a simple and powerful way to put your routine data collection and monitoring tasks on autopilot.

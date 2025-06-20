@@ -64,6 +64,7 @@
             "group": "Blocks",
             "pages": [
               "blocks/Start-on-Incoming-Webhook",
+              "blocks/timer",
               "blocks/with-variables",
               "blocks/open-websites",
               "blocks/Read-RSS-feeds",

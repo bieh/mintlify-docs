@@ -1,0 +1,78 @@
+---
+title: "Search on Google"
+description: "Perform a Google search as a step in your workflow to find information or as a starting point for navigation."
+icon: "search"
+---
+
+The `Search on Google` block allows you to initiate a Google search with one or more queries directly within your workflow. This block is a powerful starting point for many automations, enabling the AI agent to find relevant webpages based on your search terms.
+
+The agent will perform the search, and the resulting Google search page becomes the active page for subsequent blocks like `Find Links` or `Explore Content` to operate on.
+
+## Purpose
+
+Use the `Search on Google` block to:
+
+- Find official websites for a list of companies.
+- Discover articles, news, or blog posts related to specific keywords.
+- Find product pages when you don't have direct URLs.
+- Initiate research on any topic as a starting point for data collection.
+
+## Configuration
+
+1. **What should the AI search for?:**
+   - This is the input field where you enter your search query.
+   - You can add multiple queries to the list. The workflow will iterate, running the subsequent blocks for each search query provided.
+   - Use the **\+ Add** button for single entries. To add multiple queries at once, use the "Add multiple queries" option from the dropdown menu next to the **\+ Add** button.
+   - You can also import queries from a CSV file using the "Import from CSV" option in the same dropdown.
+2. **Using Variables:**
+   - You can use variables (e.g., from a preceding `Apply Variables` block) to make your searches dynamic.
+   - **Example:** If you have a variable `{{company_name}}`, you can set the query to `{{company_name}} official website`.
+3. **Managing Queries:**
+   - **Toggle ON/OFF:** Each query in the list has a toggle switch to enable or disable it for a given run.
+   - **Edit/Delete:** You can edit or delete individual queries from the list.
+
+<Frame caption="Sreenshot: Search on Google block configuration panel">
+  ![Sreenshot: Search on Google block configuration panel](/blocks/imgs/block-Search-on-Google.png)
+</Frame>
+
+4. **Advanced Options:**
+   - The **Advanced** link opens a panel with powerful tools to refine all your queries at once.
+   - **Use a search template?:** You can format every query using a template. Use `{{query}}` as a placeholder for the original query from your list. For example, if your template is `Who is {{query}}?` and your query is `Elon Musk`, the actual search performed will be `Who is Elon Musk?`.
+   - **Limit to only a certain set of websites:** Enter a list of domains here (one per line, e.g., `linkedin.com`, `github.com`) to restrict the search to only these sites. This is equivalent to adding `(site:linkedin.com OR site:github.com)` to your query.
+   - **Exclude a certain set of websites:** Enter a list of domains here (one per line, e.g., `pinterest.com`, `facebook.com`) to exclude them from the search results. This adds `-site:pinterest.com -site:facebook.com` to your query.
+
+<Frame caption="Screenshot: Advanced options panel for the Search on Google block">
+  ![Screenshot: Advanced options panel for the Search on Google block](/blocks/imgs/block-Search-on-Google-2.png)
+</Frame>
+
+## How It Works
+
+1. The `Search on Google` block is executed with one of your specified queries.
+2. The AI Agent performs the Google search, applying any advanced options (template, site limits) to the query.
+3. The Google Search Engine Results Page (SERP) becomes the active page.
+4. The blocks placed after `Search on Google` (like `Find Links` or `Explore Content`) will then operate on this results page.
+5. If you provided multiple queries, the workflow will loop, running the entire sequence of subsequent blocks for each query.
+
+## Example: Finding Company Websites
+
+1. **`Apply Variables Block:`**
+   - Create a column named `company_name` and list several companies (e.g., "Jsonify", "Mintlify").
+2. **`Search on Google Block (added next):`**
+   - **What should the AI search for?:** `{{company_name}}`
+   - **Advanced Options:**
+     - **Use a search template?:** `{{query}} official website`
+     - **Exclude a certain set of websites:** `youtube.com`
+3. **`Find Links Block (added next):`**
+   - **What kind of links?:** `Find the first organic search result link`
+4. **`Follow Links Block (added next):`**
+   - **Which links to follow?:** `Follow the first link`
+
+- **Result:** For each company name provided, the workflow will search Google for `[Company Name] official website`, excluding results from youtube.com, then find the first result and navigate to that page.
+
+## Key Considerations
+
+- **Combining Operators and Advanced Options:** The advanced options effectively build search operators for you. You can still use operators in your base query for even more fine-grained control.
+- **Output:** This block's primary "output" is the Google search results page itself, which serves as the context for the next block. It does not directly output structured data.
+- **Data Source:** This block can act as a data source when multiple queries are provided, initiating an iteration for each query.
+
+The `Search on Google` block is a fundamental tool for any workflow that needs to discover information on the web before navigating to it or extracting data.

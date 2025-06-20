@@ -73,6 +73,7 @@
               "blocks/with-variables",
               "blocks/open-websites",
               "blocks/Read-RSS-feeds",
+              "blocks/Search-on-Google",
               "blocks/open-files"
             ]
           },

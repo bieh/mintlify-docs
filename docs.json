@@ -67,6 +67,7 @@
               "blocks/with-variables",
               "blocks/open-websites",
               "blocks/Read-RSS-feeds",
+              "blocks/open-files",
               "blocks/find-links",
               "blocks/interact-with-page",
               "blocks/explore-content",

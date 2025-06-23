@@ -84,8 +84,9 @@
               "blocks/interact-with-page",
               "blocks/explore-content",
               "blocks/Open-sub-pages",
+              "blocks/LLM-Completion",              
               "blocks/extract-data",
-              "blocks/LLM-Completion"              
+              "blocks/Merge-data"
             ]
           }
         ]

@@ -70,7 +70,7 @@
           {
             "group": "Input Blocks",
             "pages": [
-              "blocks/with-variables",
+              "blocks/open-datasets",
               "blocks/open-websites",
               "blocks/Read-RSS-feeds",
               "blocks/Search-on-Google",

@@ -88,6 +88,12 @@
               "blocks/extract-data",
               "blocks/Merge-data"
             ]
+          },
+          {
+            "group": "Output Blocks",
+            "pages": [
+              "blocks/webhook-out"
+            ]
           }
         ]
       }

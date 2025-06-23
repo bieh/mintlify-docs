@@ -31,10 +31,10 @@ This block allows you to manage a list of URLs that the AI Agent will visit.
 2.  **Managing URLs:**
     * **Toggle ON/OFF:** Each URL in the list has a toggle switch. Only URLs that are **ON** will be visited by the agent. This allows you to temporarily disable certain URLs without deleting them.
     * **Edit/Delete/open:** To the right of each URL in the list, you will find separate **Open** and **Delete** buttons to open or remove that specific entry. To edit the URL, click on it.
-3.  **Using Variables (from `Open a dataset` block):**
-    * If you have an `Open a dataset` block earlier in your workflow, you can use those variables to construct dynamic URLs.
+3.  **Using Variables (from `Open datasets` block):**
+    * If you have an `Open datasets` block earlier in your workflow, you can use those variables to construct dynamic URLs.
     * **Full URL Replacement:** If a variable `{{website_url}}` contains just the domain (e.g., `jsonify.com` or `jsonify.com/news`), you should structure the input in the URL field like this: `https://{{website_url}}`.
-    * **Partial URL Replacement:** You can use variables to substitute parts of a URL. For example, if you have variables `{{ticker}}` and `{{slug}}`, your URL might look like: `https://financialsite.com/stocks/{{ticker}}/{{slug}}/details`. The workflow will generate a URL for each row in your `Open a dataset` table.
+    * **Partial URL Replacement:** You can use variables to substitute parts of a URL. For example, if you have variables `{{ticker}}` and `{{slug}}`, your URL might look like: `https://financialsite.com/stocks/{{ticker}}/{{slug}}/details`. The workflow will generate a URL for each row in your `Open datasets` table.
 
 <Frame caption="Screenshot: Open Websites block configuration showing a list of URLs">
   ![Screenshot: Open Websites block configuration showing a list of URLs](/Tutorials/imgs/Tutorial-4-Open-Websites.png)
@@ -64,9 +64,9 @@ This block allows you to manage a list of URLs that the AI Agent will visit.
 
 **Example 4: Opening Company Pages Using Variables**
 
-* Assumes an `Open a dataset` block with a column `company_domain` containing values like `jsonify.com` or `google.com`.
+* Assumes an `Open datasets` block with a column `company_domain` containing values like `jsonify.com` or `google.com`.
 * `Open Websites` block URL: `https://{{company_domain}}`
-* *Result:* If `Open a dataset` has rows for `jsonify.com` and `google.com`, the agent will open `https://jsonify.com` and `https://google.com`.
+* *Result:* If `Open datasets` has rows for `jsonify.com` and `google.com`, the agent will open `https://jsonify.com` and `https://google.com`.
 
 ## Key Considerations
 

@@ -10,15 +10,15 @@ As your automation needs grow, you'll want to build workflows that are not only 
 
 When dealing with hundreds or thousands of starting points (e.g., URLs, search terms):
 
-* **`Open a dataset` with CSV Import:**
+* **`Open datasets` with CSV Import:**
     * This is the most robust way to handle large lists of inputs. Prepare your data (e.g., list of company names, product IDs, URLs) in a CSV file.
-    * When using the **Import** feature in the `Open a dataset` block to load a CSV, the **first row of your CSV file will be imported as the column headers (variable names)** in the block. Subsequent rows will be treated as data.
+    * When using the **Import** feature in the `Open datasets` block to load a CSV, the **first row of your CSV file will be imported as the column headers (variable names)** in the block. Subsequent rows will be treated as data.
     * The workflow will then iterate through each data row.
 * **`Open Websites` with "Add a numbered range of URLs":**
     * Ideal for paginated content where the URL structure is predictable (e.g., `example.com/products?page={{page}}`).
     * You can generate thousands of page URLs this way for the agent to process.
 * **Parallel Processing (Jsonify's Architecture):**
-    * Jsonify is designed to handle tasks in parallel. When you provide a large list of items (e.g., via `Open a dataset` or multiple URLs in `Open Websites`), Jsonify automatically assigns the **maximum number of AI Agents available based on your subscription plan** to work on different items concurrently. There is no manual setting for the number of agents; the platform always utilizes the maximum available to you to significantly speed up the overall process.
+    * Jsonify is designed to handle tasks in parallel. When you provide a large list of items (e.g., via `Open datasets` or multiple URLs in `Open Websites`), Jsonify automatically assigns the **maximum number of AI Agents available based on your subscription plan** to work on different items concurrently. There is no manual setting for the number of agents; the platform always utilizes the maximum available to you to significantly speed up the overall process.
 
 ## 2. Optimizing Data Quality and Interaction Path
 
@@ -40,12 +40,12 @@ For extremely large datasets or very long-running processes:
 
 * **Break Down into Smaller, Chained Workflows (Manual Data Transfer):**
     * If a single workflow would process tens of thousands of items and take many hours, consider if the task can be logically divided.
-    * For example, one workflow could gather a list of URLs or initial data. You can then **manually save these results** (e.g., export to CSV from the results view). A second, separate workflow can then take this manually saved file as input (e.g., imported into `Open a dataset`) to process those items.
+    * For example, one workflow could gather a list of URLs or initial data. You can then **manually save these results** (e.g., export to CSV from the results view). A second, separate workflow can then take this manually saved file as input (e.g., imported into `Open datasets`) to process those items.
     * *Currently, automatic saving of results to a file for direct input into another workflow is not available, but this feature is planned for future development.*
 * **Use Limits in Exploration/Pagination Blocks:**
     * Be mindful of the "Maximum number of pages" in `Explore Content` and "How many pages to navigate through?" in `Paginate a list`. Set reasonable limits to prevent workflows from running indefinitely or processing excessive data if not needed.
 * **Incremental Processing:**
-    * If processing a massive list, consider running it in batches. You can do this by using `Open a dataset` with partial CSVs, or by adjusting the range in the "Add a numbered range of URLs" feature in `Open Websites`.
+    * If processing a massive list, consider running it in batches. You can do this by using `Open datasets` with partial CSVs, or by adjusting the range in the "Add a numbered range of URLs" feature in `Open Websites`.
 
 ## 4. Handling Potential Website Limitations
 

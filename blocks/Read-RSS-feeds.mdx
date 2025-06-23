@@ -23,7 +23,7 @@ Use the `Read RSS feeds` block to:
    - This is the input field where you add the URL of the RSS feed (e.g., `https://example.com/feed.xml`).
    - You can add multiple RSS feed URLs to the list. The block will process each one.
    - Use the **\+ Add** button for single entries. To add multiple URLs at once, use the "Add a list of pages" option from the dropdown menu next to the **\+ Add** button.
-   - You can also use variables from a preceding `Open a dataset` block to dynamically provide RSS feed URLs.
+   - You can also use variables from a preceding `Open datasets` block to dynamically provide RSS feed URLs.
 2. **Managing URLs:**
    - **Toggle ON/OFF:** Each RSS feed URL has a toggle switch to enable or disable it for a given run without deleting it.
    - **Edit/Delete:** You can edit or delete individual URLs from the list.
@@ -72,6 +72,6 @@ You can use these as variables in subsequent blocks, like `{{title}}`, `{{link}}
 
 - **Valid RSS URL:** Ensure the URL you provide is a direct link to a valid RSS or Atom feed (usually ending in `.xml` or `/feed`). It is not a link to a regular webpage.
 - **Direct Parsing:** While a browser is used technically, this block does not interact with visual webpage elements. It directly parses the structured data from the feed file.
-- **Data Source:** This block acts as a data source, similar to `Open a dataset`. The blocks that follow it will execute for each post fetched from the feed(s).
+- **Data Source:** This block acts as a data source, similar to `Open datasets`. The blocks that follow it will execute for each post fetched from the feed(s).
 
 The `Read RSS feeds` block is a highly efficient way to bring structured content from across the web into your Jsonify automations.

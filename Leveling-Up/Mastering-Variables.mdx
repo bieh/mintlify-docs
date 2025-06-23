@@ -18,25 +18,25 @@ In Jsonify, a variable is essentially a named placeholder for a piece of data th
     * Perform searches with varying keywords.
     * Instruct data extraction based on changing criteria.
     * Personalize interactions (e.g., typing a specific username).
-* **Data Input:** Easily feed lists of data (e.g., from a CSV, or typed in) into your workflow using the `Open a dataset` block.
+* **Data Input:** Easily feed lists of data (e.g., from a CSV, or typed in) into your workflow using the `Open datasets` block.
 * **Data Chaining:** Use data extracted by one `Extract Data` block as a variable input for subsequent blocks within the same processing loop (e.g., for each item in a list).
 
-## Defining Variables: The `Open a dataset` Block
+## Defining Variables: The `Open datasets` Block
 
-The primary way to introduce a list of varying inputs into your workflow is through the **`Open a dataset`** block.
+The primary way to introduce a list of varying inputs into your workflow is through the **`Open datasets`** block.
 
-* **Columns as Variable Names:** Each column header you define in the `AOpen a dataset` table becomes a variable name (e.g., `company_name`, `product_url`, `search_keyword`). Remember, these names are **case-sensitive**.
-* **Rows as Value Sets:** Each row in the table represents a distinct set of values for these variables. The workflow (or the part of it following `Open a dataset`) will run once for each row.
-* **Special Column Name `URL`:** If you name a column exactly `URL` (case-sensitive) in the `Open a dataset` block and provide valid, complete URLs (starting with `http://` or `https://`) in its rows, the AI Agent will automatically open each of these URLs. In this specific case, a subsequent `Open Websites` block is not required to open these particular URLs. For any other column name intended to hold URLs that you want to open via the `Open Websites` block, ensure the values are complete URLs.
+* **Columns as Variable Names:** Each column header you define in the `Open datasets` table becomes a variable name (e.g., `company_name`, `product_url`, `search_keyword`). Remember, these names are **case-sensitive**.
+* **Rows as Value Sets:** Each row in the table represents a distinct set of values for these variables. The workflow (or the part of it following `Open datasets`) will run once for each row.
+* **Special Column Name `URL`:** If you name a column exactly `URL` (case-sensitive) in the `Open datasets` block and provide valid, complete URLs (starting with `http://` or `https://`) in its rows, the AI Agent will automatically open each of these URLs. In this specific case, a subsequent `Open Websites` block is not required to open these particular URLs. For any other column name intended to hold URLs that you want to open via the `Open Websites` block, ensure the values are complete URLs.
 
-Refer to the detailed guide on the [`AOpen a dataset` block](https://docs.jsonify.com/blocks/with-variables) for configuration specifics.
+Refer to the detailed guide on the [`Open datasets` block](https://docs.jsonify.com/blocks/with-variables) for configuration specifics.
 
 ## Using Variables in Other Blocks
 
-Once defined (e.g., in `Open a dataset`), you can use these variables in most other blocks that accept text input for their configuration.
+Once defined (e.g., in `Open datasets`), you can use these variables in most other blocks that accept text input for their configuration.
 
 * **Syntax:** Variables are referenced using double curly braces: `{{variable_name}}`.
-  * Make sure the `variable_name` inside the braces **exactly matches** the column header from `Open a dataset` (including case).
+  * Make sure the `variable_name` inside the braces **exactly matches** the column header from `Open datasets` (including case).
 * **Common Use Cases:**
     * **`Open Websites`:**
         * URL: `https://{{website_domain}}/products` (assuming `website_domain` provides just the domain like `example.com`)       
@@ -73,7 +73,7 @@ This allows you to chain operations based on data extracted in real-time.
 
 ## Scope of Variables
 
-* **`Open a dataset` Scope:** Variables defined in `Open a dataset` are available to all subsequent blocks for each iteration (row) defined in the `Open a dataset` block.
+* **`Open datasets` Scope:** Variables defined in `Open datasets` are available to all subsequent blocks for each iteration (row) defined in the `Open datasets` block.
 * **`Extract Data` Scope:** Variables created from `Extract Data` field names are scoped to the current item being processed in a list or the current page for that specific iteration.
 
 Understanding and effectively utilizing variables will dramatically increase the flexibility and power of your Jsonify workflows, allowing you to automate more complex and varied tasks with less effort.

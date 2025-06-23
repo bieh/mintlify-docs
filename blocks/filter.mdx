@@ -1,0 +1,65 @@
+---
+title: 'Block: Filter results'
+description: 'Filter the output of previous steps so that the workflow only continues for relevant items or changes.'
+icon: 'filter'
+---
+
+The `Filter results` block acts as an intelligent gatekeeper in your workflow. It allows you to inspect the data coming from a preceding block (like `Open datasets`, `Read RSS feeds`, or `Extract Data`) and decide whether the workflow should continue for a specific item based on a set of rules you define.
+
+This is essential for creating efficient and focused automations, ensuring that you only process and get alerted on the most relevant changes or data points.
+
+## Purpose
+
+Use the `Filter results` block to:
+
+* Process only the items from a data source that contain specific keywords.
+* Filter content based on a date (e.g., only process articles published after a certain date).
+* Use AI to apply a complex, descriptive filter to text (e.g., only pass through items with a "positive sentiment").
+* Prevent the workflow from running on irrelevant or unimportant data, saving time and resources.
+
+## Configuration
+
+The block's configuration is centered around a dropdown menu that lets you choose the filtering method. After you select an option that requires input, a text field will appear to specify the condition.
+
+1.  **Dropdown Menu Options:**
+    * **No filter, pass through all changes:** This is the default state. The block will not perform any filtering, and all items from the previous step will be passed through to the next.
+    * **Look for specific keywords (one per line):** After selecting this, a text field appears. Provide a list of keywords, one per line. The workflow will only continue for an item if its content contains **at least one** of the specified keywords.
+    * **Describe the filter in English, and filter with AI:** After selecting this, a text field appears. Provide a natural language instruction describing your filtering criteria. The AI will analyze the content of each item and determine if it matches your description.
+        * **Example condition:** `The text should be a positive customer review` or `The article must be about financial technology (fintech)`.
+    * **The content must mention a specific date or time which must be after...:** After selecting this, a date/time picker appears. The workflow will only continue for items whose content contains a date that is more recent than the one you specified.
+
+[Screenshot: Filter results block configuration panel showing the dropdown options and the conditional text field]
+
+## How It Works
+
+1.  The `Filter results` block is placed after a block that produces a list of items (e.g., `Read RSS feeds` outputs a list of posts, `Open datasets` outputs a list of rows).
+2.  The workflow iterates through each item from the preceding block.
+3.  For each item, the `Filter results` block applies your chosen filter rule.
+4.  If the item **passes** the filter, the workflow continues to the subsequent blocks for that item.
+5.  If the item **does not pass** the filter, the workflow stops for that specific item and moves on to the next one in the list.
+
+## Example: Processing Only Relevant News Articles
+
+Imagine a workflow that monitors a news RSS feed but should only analyze articles about a specific company.
+
+1.  **`Read RSS feeds` Block:**
+    * Configured to fetch the latest 10 articles from a news source.
+2.  **`Filter results` Block (added next):**
+    * **Filter method chosen:** `Look for specific keywords (one per line)`
+    * **Add the filter condition here:**
+        ```
+        Jsonify
+        OpenAI
+        ```
+3.  **`Extract Data` Block (added next):**
+    * Configured to summarize the article content.
+
+* **Result:** The workflow will check all 10 articles fetched from the RSS feed. If an article's title or description contains either "Jsonify" or "OpenAI", it will pass the filter, and the `Extract Data` block will run on it to create a summary. Articles that do not contain these keywords will be ignored.
+
+## Key Considerations
+
+* **Placement is Crucial:** This block must be placed after a block that provides iterable data (a list of items).
+* **AI vs. Keywords:** For simple text matching, the keyword filter is fast and precise. For more nuanced filtering based on meaning, context, or sentiment, the descriptive AI filter is much more powerful.
+* **Efficiency:** Using a filter early in your workflow is a key strategy for efficiency, as it prevents resource-intensive blocks (like complex `Extract Data` or `LLM Completion` steps) from running on irrelevant data.
+
+The `Filter results` block allows you to add powerful conditional logic to your automations, making them smarter and more efficient.

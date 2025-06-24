@@ -90,6 +90,12 @@
             ]
           },
           {
+            "group": "Filter block",
+            "pages": [
+              "blocks/filter"
+            ]
+          },
+          {
             "group": "Output Blocks",
             "pages": [
               "blocks/webhook-out"

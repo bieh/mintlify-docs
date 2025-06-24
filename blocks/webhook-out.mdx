@@ -70,7 +70,7 @@ When the workflow completes, Jsonify will send an **HTTP POST** request to the s
    - Paste the Make webhook URL into the input field.
 3. **Back in Make:**
    - After running your Jsonify workflow once to send test data, Make will detect the incoming data structure.
-   - Add a new module to your Scenario (e.g., "HubSpot" -\> "Create/Update a Contact").
+   - Add a new module to your Scenario (e.g., "HubSpot" ➙ "Create/Update a Contact").
    - Map the `results` data from the Jsonify webhook payload to the appropriate fields in your CRM module.
 
 - **Result:** Every time your Jsonify workflow runs and finds a new lead, the data will be automatically sent to Make, which will then create a new contact in your CRM.

@@ -98,7 +98,8 @@
           {
             "group": "Output Blocks",
             "pages": [
-              "blocks/webhook-out"
+              "blocks/webhook-out",
+              "blocks/email"
             ]
           }
         ]

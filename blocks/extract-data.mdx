@@ -1,90 +1,97 @@
 ---
-title: "Extract Data"
-description: "Define the specific information your AI Agent should retrieve from webpages and the structure for this data."
-icon: "file-spreadsheet"
+title: 'Extract Data'
+description: 'Define a schema to extract new information from a webpage and, in advanced mode, merge it with data from previous steps.'
+icon: 'braces' # Lucide icon
 ---
 
-The `Extract Data` block is where you tell the AI Agent precisely what information to pull from the current webpage and how to structure it. This is the core of most data collection workflows.
+The `Extract Data` block is the core of most data collection workflows. It's where you tell the AI Agent precisely what new information to pull from the current webpage and how to structure it.
+
+In its advanced JSON mode, this block has the powerful ability to **merge** data. It can take existing variables from a *previous* `Extract Data` step and combine them with newly extracted information into a single, structured output.
 
 ## Purpose
 
 Use the `Extract Data` block to:
 
-- Define a schema (a set of fields) for the data you want to collect.
-- Instruct the agent to find and extract specific pieces of text, numbers, or other details from a page.
-- Scrape data from a single item (e.g., product details on a product page).
-- Extract a list of multiple items from a single page (e.g., all reviews, all products in a list).
-- Transform or format data as it's being extracted (e.g., translate text, format dates - by providing clear instructions).
+* Define a schema to extract new data like text, numbers, or other details from a page.
+* Scrape data from a single item or a list of items on a page.
+* **(Advanced) Merge** data from a previous `Extract Data` step with new data extracted from the current page into a unified result.
 
-This block follows after navigation blocks like `Open Websites`, `Follow Links`, or `Explore Content`.
+This block typically follows navigation blocks like `Open Websites`, `Follow Links`, or `Explore Content`.
 
 ## Configuration
 
-1. **What information should we scrape from each URL?**
-   - This is the first crucial choice that determines how the agent approaches data extraction on the page.
-   - **A list of items:** Choose this if the page contains multiple similar objects you want to extract (e.g., a list of user reviews, search results, products on a category page). The agent will try to identify each item and extract the defined attributes for all of them.
-   - **A single item:** Choose this if the page is focused on one primary object and you want to extract various attributes of that single object (e.g., details of one specific product on its dedicated page, contact information from a contact page).
-2. **Defining Attributes (The Data Table):**
-   - Once you've selected "A list of items" or "A single item," you'll define the structure of your data in a table-like interface.
-   - **NAME (Column 1):** This is the internal name or key for each piece of data you want to extract. It can be anything descriptive (e.g., `product_name`, `review_text`, `price`). This name will be used as the column header or JSON key in your results.
-   - **EXAMPLE VALUE OR A LONGER DESCRIPTION (Column 2):** This is a critical field. Here, you provide a clear description or an example of the data you want the AI to find for the corresponding NAME. The more detailed and unambiguous your description and examples are, the more accurate the extraction will be.
-     - Good example: For `NAME: author_name`, Description: `The full name of the person who wrote the review, e.g., John Doe.`
-     - Good example: For `NAME: rating`, Description: `The star rating the user gave, as a number (e.g., 4 or 5).`
-3. **Add additional instructions and guidance to the AI when extracting data:**
-   - This is a text field below the attribute table where you can provide general instructions that apply to the entire extraction process on the page.
-   - Use this to:
-     - Give context (e.g., "You are on a product page. Extract the following details.").
-     - Specify how to handle missing data (e.g., "If you can't find the target data, leave the corresponding field empty.").
-     - Request data transformation (e.g., "Translate all extracted text into English.").
-     - Provide negative constraints (e.g., "Do not extract prices from the 'related items' section.").
-4. **Using Variables:**
-   - You can use variables (from an `Apply Variables` block) within the "EXAMPLE VALUE OR A LONGER DESCRIPTION" column or in the "Additional instructions" field to make your extraction prompts dynamic.
-   - Example: If you have a variable `{{brand_name}}`, you could have a description: `Find the price for the {{brand_name}} product.`
-5. **Advanced Options (Edit data shape):**
-   - This mode allows technically proficient users to define the extraction schema directly in **JSON format**.
-   - This is powerful for:
-     - Creating nested data structures (e.g., an "author" object with "name" and "location" sub-fields).
-     - Fine-tuning the exact output format.
-   - If you use this, the visual editor is reflects the JSON structure.
+### Simple Mode
 
+1.  **Defining Attributes to Extract:**
+    * In the default Simple mode, you define the **new** information you want the AI to find on the current page using a table.
+    * **NAME (Column 1):** The name for the new piece of data (e.g., `price`, `stock_status`). This becomes a new variable.
+    * **DESCRIPTION (Column 2):** A clear instruction or example for the AI on what to find (e.g., `<the current product price>`).
+
+2.  **Other Options:**
+    * **A list of items / A single item:** Choose whether you're extracting multiple items from the current page or just one.
+    * **Add additional instructions:** Provide global context or rules for the extraction process.
 
 <Frame caption="Screenshot: Extract Data block configuration showing item type selection and attribute table">
   ![Screenshot: Extract Data block configuration showing item type selection and attribute table](/blocks/imgs/block-Extract-data-simple.png)
 </Frame>
 
+### Advanced (JSON) Mode
+
+Clicking **Advanced** switches to a JSON editor for full control over the output schema. This mode unlocks the merging capability.
+
+1. **Defining Extraction and Merging in JSON:**
+    * You define a JSON object where keys represent the final output fields.
+    * For **new data**, the value for a key is a descriptive prompt in angle brackets `<...>` instructing the AI what to find on the page.
+    * For **old data** from a previous steps, the value for a key is the corresponding `{{variable_name}}`. The agent will not search for this on the page, but will pull the existing value from its memory.
+
+2.  **Merging Previous Columns:**
+    * Click the **`+ Merge previous columns`** link to reveal the merge section.
+    * A new field appears: **"And merge these columns from previous results"**.
+    * Here, you specify the names of **existing variables from a preceding `Extract Data` block** that you want to carry over and include in the final output for this item.
+    * The agent does not search for this data on the current page; it simply pulls the existing value from its memory for the current item's loop.
+
 <Frame caption="Screenshot: Extract Data block configuration showing JSON Editor">
   ![Screenshot: Extract Data block configuration showing JSON Editor](/blocks/imgs/block-Extract-data.png)
 </Frame>
 
-## Examples
+## How It Works
 
-**Example 1: Extracting Product Details (Single Item)**
+1.  A workflow processes a series of items. In an early `Extract Data` step, initial data is collected (e.g., `product_name`).
+2.  After more steps (like `Follow Links`), the workflow arrives at a new page.
+3.  A second `Extract Data` block (in JSON mode) executes.
+4.  The agent looks at the JSON schema. For keys with descriptive prompts (e.g., `"price": "<the price of the product>"`), it scrapes the page for that new information.
+5.  For keys with variable placeholders (e.g., `"product": "<put {{product_name}} as value of this field>"`), it retrieves the existing value from the previous extraction step.
+6.  Finally, it combines the newly extracted data and the merged data into a single output row matching the JSON structure.
 
-- Agent is on `https://example.com/product/123`
-- **Extraction Type:** `A single item`
-- **Attributes:**
-  - `NAME: product_title`, `DESCRIPTION: The main name of the product.`
-  - `NAME: price`, `DESCRIPTION: The current selling price, e.g., $19.99.`
-  - `NAME: stock_status`, `DESCRIPTION: Availability status, e.g., 'In Stock' or 'Out of Stock'.`
-- **Additional Instructions:** `If a discount price is shown, extract that as the price.`
+## Example: Merging List Data with Detail Page Data
 
-**Example 2: Extracting a List of Reviews**
+Imagine a workflow that scrapes product names from a category page and then gets the price for each from their individual detail pages.
 
-- Agent is on a product page with multiple reviews.
-- **Extraction Type:** `A list of items`
-- **Attributes:**
-  - `NAME: reviewer_name`, `DESCRIPTION: Name of the person who wrote the review.`
-  - `NAME: review_date`, `DESCRIPTION: Date the review was published, in YYYY-MM-DD format.`
-  - `NAME: review_text`, `DESCRIPTION: The full body text of the user's review.`
-  - `NAME: star_rating`, `DESCRIPTION: The number of stars given, e.g., 4 or 5.`
-- **Additional Instructions:** `Translate all reviews into English. If star rating is not found, leave empty.`
+1.  **`Open Websites` Block:**
+    * Opens a product category page.
+2.  **First `Extract Data` Block:**
+    * **Mode:** Simple
+    * **What information...?:** `A list of items`.
+    * **Attributes:** Extracts `product_name` and `url` for each product in the list.
+3.  **`Follow Links` Block:**
+    * Configured to "Follow each link".
+4.  **Second `Extract Data` Block (on the detail page):**
+    * **Mode:** Advanced (JSON)
+    * **JSON Schema:**
+      ```json
+      {
+        "price": "<the price of the {{product_name}} on the current page>"
+      }
+      ```
+    * **Additional instructions:** `You are on a product detail page. Extract the price and merge it with the existing product name.`
+    * **Merge previous columns** `product_name`
+
+* **Result:** The final output will be a table with two columns: `product_name` and `price`. For each product, the `product_name` is carried over from the first extraction step via the merge, and the `price` is newly extracted from the detail page.
 
 ## Key Considerations
 
-- **Clarity is King:** The accuracy of the AI's extraction heavily depends on how clearly and unambiguously you define your fields and instructions. Provide examples whenever possible.
-- **One Page, One Schema:** The schema defined in one `Extract Data` block applies to the single page the agent is currently on. If you navigate to a different page with a different structure, you'll need another `Extract Data` block.
-- **Iterative Refinement:** You might need to run your workflow, check the results, and then refine your descriptions or instructions in the `Extract Data` block to improve accuracy.
-- **JSON for Complexity:** Don't hesitate to use the Advanced (JSON) mode if you need nested data or very specific output structures that are hard to define in the table.
-- **Chaining Extractions:** Field names defined in an `Extract Data` block can be used as variables in subsequent blocks within the same iteration (e.g., if processing a list of items).
+* **Merge is an Advanced Feature:** The ability to merge data from previous extraction steps is only available in the **Advanced (JSON) Mode**. The Simple mode only defines new data to be extracted.
+* **Variable Name Matching:** When merging in JSON mode, the `variable_name` must exactly match the name of a variable from a previous extraction (case-sensitive).
+* **No Redundant Extraction:** Use the merge feature to avoid asking the AI to re-extract information you already have, which makes your workflow more efficient and reliable.
 
-The `Extract Data` block is where the magic of data collection happens in Jsonify\!
+The `Extract Data` block, with its combined extraction and merging capabilities, is a powerful tool for creating comprehensive and well-structured datasets.

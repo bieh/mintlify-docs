@@ -78,7 +78,7 @@
             ]
           },
           {
-            "group": "Transform Blocks",
+            "group": "Extract Blocks",
             "pages": [
               "blocks/find-links",
               "blocks/interact-with-page",

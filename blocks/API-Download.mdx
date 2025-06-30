@@ -1,0 +1,63 @@
+---
+title: "API Download"
+description: "Generate a permanent, public URL to access your workflow results in JSON, CSV, or JSONL format."
+icon: "download-cloud"
+---
+
+The `API Download` block is a powerful output method that creates a stable API endpoint (a URL) for your workflow's results. This allows you or other applications to programmatically access the latest data without needing to log into the platform.
+
+The generated link always provides the data from the **last successful run** of the workflow.
+
+## Purpose
+
+Use the `API Download` block when you need to:
+
+- Integrate your workflow results with other applications, scripts, or services.
+- Feed data into various external tools using a direct link.
+- Create a stable, shareable link for colleagues to access the latest results.
+- Automate data pipelines by fetching results programmatically.
+
+## Configuration
+
+<Frame caption="Screenshot: API Download block configuration showing the generated URL.">
+  ![API Download block UI](/blocks/imgs/block-API-Download.png)
+</Frame>
+
+1. **Data Format:**
+   - A dropdown menu to select the format of the output data available at the endpoint.
+   - **`Return JSON data:`** Standard JSON format. Ideal for web applications and structured, potentially nested data.
+   - **`Return CSV data:`** Comma-separated values. Best for importing into spreadsheets.
+   - **`Return JSONL data:`** JSON Lines format, where each line is a valid JSON object. Useful for streaming or processing large datasets efficiently.
+2. **API Endpoint URL:**
+   - A read-only field displaying the unique, permanent URL for your workflow's data.
+   - You can copy this URL to use in other applications.
+3. **On/Off Toggle:**
+   - A simple switch to activate or deactivate the API endpoint. If turned off, the URL will not be updated with new results, and accessing it may result in an error.
+
+## How It Works
+
+1. When you add and activate the `API Download` block, a unique URL is generated.
+2. After your workflow completes a **successful run**, the system takes the final data and publishes it to this specific URL in the format you selected.
+3. Any application can then make a standard HTTP GET request to this URL to retrieve the data.
+4. This data is overwritten with the results of each new successful run, ensuring the endpoint always serves the freshest data.
+
+## Example: Powering a Google Sheet
+
+You can use the `API Download` link to quickly import data into a Google Sheet.
+
+1. Configure the `API Download` block to **`Return CSV data`**.
+2. Copy the generated URL.
+3. In a Google Sheets cell, use the `IMPORTDATA` function with the copied URL:
+   `=IMPORTDATA("https://api.jsonify.com/api/v2/workflow/...")`
+
+**Result:** Your Google Sheet will automatically update with the latest data every time it refreshes, pulling from the last successful workflow run.
+
+<Info>
+  **Advanced Google Sheets Integration:** For more control over how your data is published to Google Sheets (e.g., sending it to a specific sheet or cell range), use the dedicated **`Google Sheets`** output block.
+</Info>
+
+## Key Considerations
+
+- **Data Freshness:** The link always points to the data from the **last successful run**. Data from failed or currently running workflows will not be available at the endpoint.
+- **Public Accessibility:** The generated URL is public but contains a long, unique, and unguessable ID. Be aware that anyone who has the link can access the data, so avoid using this method for highly sensitive information.
+- **Static Endpoint:** The URL for a given block is permanent. It will not change unless you delete and re-create the block.

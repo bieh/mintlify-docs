@@ -99,7 +99,8 @@
             "group": "Output Blocks",
             "pages": [
               "blocks/webhook-out",
-              "blocks/email"
+              "blocks/email",
+              "blocks/API-Download"
             ]
           }
         ]

@@ -1,7 +1,7 @@
 ---
-title: 'Send email'
-description: 'Automatically send the results of your workflow to one or more email addresses as an XLSX attachment.'
-icon: 'mail' # Lucide icon
+title: "Send email"
+description: "Automatically send the results of your workflow to one or more email addresses as an XLSX attachment."
+icon: "mail"
 ---
 
 The `Send email` block is an output block that finalizes your workflow by delivering the collected data directly to your inbox. It's the simplest way to get notified and receive your results without having to manually check the application.
@@ -10,51 +10,47 @@ The `Send email` block is an output block that finalizes your workflow by delive
 
 Use the `Send email` block to:
 
-* Send an email notification when a workflow run is complete.
-* Deliver the final, structured data as an XLSX file attachment to specified recipients.
-* Distribute results to multiple team members or stakeholders automatically.
+- Send an email notification when a workflow run is complete.
+- Deliver the final, structured data as an XLSX file attachment to specified recipients.
+- Distribute results to multiple team members or stakeholders automatically.
 
 This block should be placed at the end of your workflow, as it acts on the data collected in the preceding steps.
 
 ## Configuration
 
 <Frame caption="Screenshot: Send email block configuration showing recipient and sending options">
-  ![Send email block UI](https://storage.googleapis.com/gemini-prod/images/2024/6/26/image_7d55df.png_ec1aaa65_a641_4563_8133_bb020c13a7cd_g2t3d5402.png)
+  ![Send email block UI](/blocks/imgs/block-send-email.png))
 </Frame>
 
-1.  **Email Recipients:**
-    * A text area where you define who should receive the results.
-    * You can add multiple email addresses. Each address must be on a new line.
-
-2.  **Sending Mode:**
-    * This setting controls how the emails are sent in relation to your workflow's data processing.
-    * **`Send an email for every read of a page`:** Sends a separate email for each individual item processed by your workflow. For example, if your workflow scrapes 10 products, it will send 10 distinct emails. This is useful for real-time, individual alerts.
-    * **`Send one combined email at the end`:** (Default) This option gathers all the data from the entire workflow run and sends a single, consolidated email after the workflow finishes. The collected data is conveniently attached as a single XLSX file.
-
-3.  **On/Off Toggle:**
-    * A simple switch to activate or deactivate the email notification. This allows you to temporarily disable the output without removing the block from your workflow, which is useful for testing and debugging.
+1. **Email Recipients:**
+   - A text area where you define who should receive the results.
+   - You can add multiple email addresses. Each address must be on a new line.
+2. **Sending Mode:**
+   - This setting controls how the emails are sent in relation to your workflow's data processing.
+   - **`Send an email for every read of a page:`** Sends a separate email for each individual item processed by your workflow. For example, if your workflow scrapes 10 products, it will send 10 distinct emails. This is useful for real-time, individual alerts.
+   - **`Send one combined email at the end:`** (Default) This option gathers all the data from the entire workflow run and sends a single, consolidated email after the workflow finishes. The collected data is conveniently attached as a single XLSX file.
+3. **On/Off Toggle:**
+   - A simple switch to activate or deactivate the email notification. This allows you to temporarily disable the output without removing the block from your workflow, which is useful for testing and debugging.
 
 ## How It Works
 
 When the workflow execution reaches the `Send email` block, it checks the configured sending mode.
 
-* If set to **`Send one combined email`**, the agent waits for all preceding steps to complete. It then aggregates all the generated data rows, compiles them into a single XLSX file, and emails it to the specified recipients.
-
-* If set to **`Send an email for every read of a page`**, the agent will send an email immediately after each item (or row of data) is fully processed within a loop.
+- If set to **`Send one combined email`**, the agent waits for all preceding steps to complete. It then aggregates all the generated data rows, compiles them into a single XLSX file, and emails it to the specified recipients.
+- If set to **`Send an email for every read of a page`**, the agent will send an email immediately after each item (or row of data) is fully processed within a loop.
 
 ## Example: Scraping Product Reviews
 
 Imagine a workflow that extracts `author`, `rating`, and `comment` for 5 reviews on a product page.
 
-1.  **First `Extract Data` Block:** Extracts the 5 reviews into a list.
-2.  **`Send email` Block:** Is configured to send the results to `reports@example.com`.
+1. **`First Extract Data Block:`** Extracts the 5 reviews into a list.
+2. **`Send email Block:`** Is configured to send the results to `reports@example.com`.
 
-* **Scenario A (Combined Email):** After all 5 reviews are extracted, one email is sent to `reports@example.com`. Attached to this email is a `results.xlsx` file with 5 rows, containing the author, rating, and comment for each review.
-
-* **Scenario B (Individual Emails):** As soon as the first review is scraped, an email is sent. When the second is scraped, another email is sent, and so on. In total, 5 separate emails will be sent, each containing the data for one review.
+- **Scenario A (Combined Email):** After all 5 reviews are extracted, one email is sent to `reports@example.com`. Attached to this email is a `results.xlsx` file with 5 rows, containing the author, rating, and comment for each review.
+- **Scenario B (Individual Emails):** As soon as the first review is scraped, an email is sent. When the second is scraped, another email is sent, and so on. In total, 5 separate emails will be sent, each containing the data for one review.
 
 ## Key Considerations
 
-* **Attachment Format:** The data is always delivered in an XLSX file. This is the standard format for Microsoft Excel spreadsheets and is compatible with other software like Google Sheets or Apple Numbers, preserving formatting and data types.
-* **Block Placement:** As an output block, `Send email` should be one of the last blocks in your workflow chain to ensure it sends the complete data.
-* **Recipient Management:** Double-check that all email addresses are spelled correctly and are on separate lines to ensure proper delivery.
+- **Attachment Format:** The data is always delivered in an XLSX file. This is the standard format for Microsoft Excel spreadsheets and is compatible with other software like Google Sheets or Apple Numbers, preserving formatting and data types.
+- **Block Placement:** As an output block, `Send email` should be one of the last blocks in your workflow chain to ensure it sends the complete data.
+- **Recipient Management:** Double-check that all email addresses are spelled correctly and are on separate lines to ensure proper delivery.

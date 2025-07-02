@@ -111,7 +111,7 @@
             {
               "group": "Endpoints",
               "openapi": {
-                "source": "openapi.yaml",
+                "source": "/api/openapi.yaml",
                 "directory": "api"
               }
             }

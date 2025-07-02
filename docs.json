@@ -107,8 +107,11 @@
       },
       {
         "tab": "API",
-        "openapi": "openapi.yaml"
-    }
+        "openapi": {
+            "source": "openapi.yaml", 
+            "directory": ""
+        }
+      }
     ],
     "global": {
       "anchors": [

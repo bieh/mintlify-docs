@@ -107,10 +107,15 @@
       },
       {
         "tab": "API",
-        "openapi": {
-            "source": "openapi.yaml", 
-            "directory": "api"
-        }
+        "groups": [
+            {
+              "group": "Endpoints",
+              "openapi": {
+                "source": "/api/openapi.yaml",
+                "directory": "api"
+              }
+            }
+          ]
       }
     ],
     "global": {

@@ -14,7 +14,7 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Tutorials",
         "groups": [
           {
             "group": "Get Started with Jsonify",
@@ -58,7 +58,7 @@
       },
       
       {
-        "tab": "Mastering Workflow Blocks",
+        "tab": "Workflow Block Reference",
         "groups": [          
           {
             "group": "Trigger Blocks",

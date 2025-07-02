@@ -106,13 +106,13 @@
         ]
       },
       {
-        "tab": "API",
+        "tab": "API Reference",
         "groups": [
             {
               "group": "Endpoints",
               "openapi": {
-                "source": "/api/openapi.yaml",
-                "directory": "api"
+                "source": "https://app.jsonify.com/static/openapi.yaml",
+                "directory": "api-reference"
               }
             }
           ]

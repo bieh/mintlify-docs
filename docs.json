@@ -109,7 +109,7 @@
         "tab": "API",
         "openapi": {
             "source": "openapi.yaml", 
-            "directory": ""
+            "directory": "api"
         }
       }
     ],

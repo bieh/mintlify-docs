@@ -1,7 +1,7 @@
 ---
-title: 'Handling Authentication with Cookies'
-description: 'A step-by-step guide on how to securely store your browser cookies and use them to automate websites that require a login.'
-icon: 'key-round'
+title: "Handling Authentication with Cookies"
+description: "A step-by-step guide on how to securely store your browser cookies and use them to automate websites that require a login."
+icon: "key-round"
 ---
 
 ## The Challenge: Login Walls
@@ -20,13 +20,9 @@ Jsonify allows you to securely store these cookies in a central **Credential Sto
 
 First, you need to export your active login session from your browser into a `cookies.txt` file. We recommend using a simple, open-source browser extension for this.
 
-1.  **Install the "Get cookies.txt LOCALLY" Extension.** Install this extension from the [Chrome Web Store](https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc?hl=en).
-2.  **Log into the Target Website.** In your Chrome browser, navigate to the website you want to automate (e.g., `pinterest.com`) and log in with your credentials.
-3.  **Export the Cookies File.** Once logged in, click the extension's icon in your toolbar and export `cookies.txt` file by clicking 'Export'.
-
-<Frame caption="Click the extension icon to download the cookies.txt file for the current website.">
-  ![Get cookies.txt LOCALLY extension icon](/guides/imgs/get-cookies-txt-extension.png)
-</Frame>
+1. **Install the "Get cookies.txt LOCALLY" Extension.** Install this extension from the [Chrome Web Store](https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc?hl=en).
+2. **Log into the Target Website.** In your Chrome browser, navigate to the website you want to automate (e.g., `pinterest.com`) and log in with your credentials.
+3. **Export the Cookies File.** Once logged in, click the extension's icon in your toolbar and export `cookies.txt` file by clicking 'Export'.
 
 ---
 
@@ -34,14 +30,14 @@ First, you need to export your active login session from your browser into a `co
 
 Next, you need to upload the exported `cookies.txt` file into Jsonify's secure credential manager.
 
-1.  **Navigate to Integrations.** From your main dashboard, in the menu on the left, go to the **`Integrations`** section.
-2.  **Select Website Credentials.** Open the **`Website Credentials`** tab.
-3.  **Create a New Store.** Click the **`+ Add credentials`** button. A new, untitled credential store will be created.
-4.  **Import the Cookies File.** Click the dropdown menu (`▼`) on the right side of 'add a cookie' button and select **`Import cookies.txt`**. Upload the file you downloaded in Step 1.
-5.  **Rename the Store.** Give your credential store a descriptive name, for example, "Pinterest".
+1. **Navigate to Integrations.** From your main dashboard, in the menu on the left, go to the **`Integrations`** section.
+2. **Select Website Credentials.** Open the **`Website Credentials`** tab.
+3. **Create a New Store.** Click the **`+ Add credentials`** button. A new, untitled credential store will be created.
+4. **Import the Cookies File.** Click the dropdown menu (`▼`) on the right side of 'add a cookie' button and select **`Import cookies.txt`**. Upload the file you downloaded in Step 1.
+5. **Rename the Store.** Give your credential store a descriptive name, for example, "Pinterest".
 
 <Frame caption="Importing the cookies.txt file into a newly created Website Credential store.">
-  ![Importing the cookies.txt file into the website's credential storage](https://storage.googleapis.com/gemini-prod/images/2024/7/3/image_1b26c0.png_bf187783_cacc_4bbd_9941_fe981bf4d4dd_g2t3d5402.png)
+  ![Importing the cookies.txt file into the website's credential storage](Leveling-Up/imgs/Leveling-Up-integrations.png)
 </Frame>
 
 ---
@@ -50,11 +46,11 @@ Next, you need to upload the exported `cookies.txt` file into Jsonify's secure c
 
 Now you can use your stored session in any workflow.
 
-1.  **Add the `Use Credentials` Block.** In your workflow editor, add the **`Input ➙ Advanced ➙ Use Credentials`** block. This block should be placed before navigating to the protected page.
-2.  **Select Your Credential Store.** In the block's settings, click the dropdown menu and select the credential store you created earlier (e.g., "Pinterest").
+1. **`Add the Use Credentials Block.`** In your workflow editor, add the **`Input ➙ Advanced ➙ Use Credentials`** block. This block should be placed before navigating to the protected page.
+2. **Select Your Credential Store.** In the block's settings, click the dropdown menu and select the credential store you created earlier (e.g., "Pinterest").
 
 <Frame caption="Selecting the named credential store from the dropdown in the 'Use Credentials' block.">
-  ![Selecting a named credential store from the drop-down list in the 'Use Credentials' block](https://storage.googleapis.com/gemini-prod/images/2024/7/3/image_1b171f.png_e3bb584b_e0f2_42eb_be72_5facb789e681_g2t3d5402.png)
+  ![Selecting a named credential store from the drop-down list in the 'Use Credentials' block](/Leveling-Up/imgs/Leveling-Up-Use-credentials.png)
 </Frame>
 
 ---
@@ -63,16 +59,14 @@ Now you can use your stored session in any workflow.
 
 Let's build a workflow that scrapes the names of your personal boards on Pinterest.
 
-1.  **`Use Credentials` Block:**
-    * Start your workflow with this block.
-    * Select "Pinterest" from the dropdown.
-
-2.  **`Open Websites` Block:**
-    * **URL:** Enter the direct URL to your Pinterest profile's "Saved" tab (e.g., `https://www.pinterest.com/YOUR_USERNAME_HERE/saved/`).
-    * The agent is now equipped with your login session and will be able to access this page.
-
-3.  **`Extract Data` Block:**
-    * Extract the `board_name` from the list of items on the page.
+1. **`Use Credentials Block:`**
+   - Start your workflow with this block.
+   - Select "Pinterest" from the dropdown.
+2. **`Open Websites Block:`**
+   - **URL:** Enter the direct URL to your Pinterest profile's "Saved" tab (e.g., `https://www.pinterest.com/YOUR_USERNAME_HERE/saved/`).
+   - The agent is now equipped with your login session and will be able to access this page.
+3. **`Extract Data Block:`**
+   - Extract the `board_name` from the list of items on the page.
 
 **Result:** The workflow will successfully run, using your stored credentials to authenticate and access the data behind the login wall.
 
@@ -80,6 +74,6 @@ Let's build a workflow that scrapes the names of your personal boards on Pintere
 
 ## Best Practices & Key Considerations
 
-* **Security:** Storing cookies as credentials is much more secure than pasting them directly into a workflow. The data is encrypted and managed centrally.
-* **Reusability:** You can use the same credential store across multiple workflows. If your cookies expire, you only need to update them in one place.
-* **Expiration:** Cookies have a limited lifespan. If your workflow suddenly fails, it likely means your session has expired. Simply re-export a new `cookies.txt` file and re-upload it to the same credential store to update it.
+- **Security:** Storing cookies as credentials is much more secure than pasting them directly into a workflow. The data is encrypted and managed centrally.
+- **Reusability:** You can use the same credential store across multiple workflows. If your cookies expire, you only need to update them in one place.
+- **Expiration:** Cookies have a limited lifespan. If your workflow suddenly fails, it likely means your session has expired. Simply re-export a new `cookies.txt` file and re-upload it to the same credential store to update it.

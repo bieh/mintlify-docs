@@ -26,6 +26,13 @@
             ]
           },
           {
+            "group": "Reference",
+            "pages": [              
+              "Building-Effectively/glossary",
+              "Building-Effectively/Block-Quick-Reference"
+            ]
+          },
+          {
             "group": "Building Effectively - Strategies & Examples ",
             "pages": [
               "Building-Effectively/Workflow-Design-Principles",
@@ -41,12 +48,9 @@
                   "Tutorials/Finding-Speaker-LinkedIn-Profiles",
                   "Tutorials/Landing-Page-SEO-Analyzer"
                 ]
-              },
-              "Building-Effectively/Block-Quick-Reference",
-              "Building-Effectively/glossary"
+              }
             ]
-          },
-          
+          },          
           {
             "group": "Leveling Up - Advanced Techniques & Best Practices",
             "pages": [

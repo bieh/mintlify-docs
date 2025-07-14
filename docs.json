@@ -128,11 +128,6 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://docs.jsonify.com",
-          "icon": "file-text"
-        },
-        {
           "anchor": "Home",
           "href": "https://jsonify.com",
           "icon": "house"

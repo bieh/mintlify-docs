@@ -1,0 +1,84 @@
+---
+title: 'Glossary'
+description: 'A comprehensive list of key terms and concepts used throughout the Jsonify platform and documentation.'
+icon: 'book-text'
+---
+
+This glossary defines common terms you will encounter while using Jsonify.
+
+### A
+
+**Agent (AI Agent)**
+The AI-powered entity that executes your workflow. It's the "robot" that navigates websites, interacts with pages, and extracts data based on your instructions.
+
+**Attribute**
+A single named field within a data extraction schema. For example, in a schema to extract user information, `user_name` and `email_address` would be attributes.
+
+### B
+
+**Block**
+The fundamental building block of a workflow. Each block represents a specific action or step, such as `Open Websites`, `Extract Data`, or `Filter results`. Blocks are connected sequentially to define the workflow's logic.
+
+### D
+
+**Dataset**
+A table of data within the `Open datasets` block. It contains rows and columns, where each column represents a variable and each row represents a set of values for an iteration.
+
+### E
+
+**Extraction**
+The process of pulling specific pieces of information from a source, such as a webpage or a document. This is primarily done using the `Extract Data` block.
+
+### F
+
+**Filter**
+A block (`Filter results`) that adds conditional logic to a workflow. It inspects data and allows the workflow to continue only for items that meet the specified criteria.
+
+### I
+
+**Input**
+A category of blocks that provide the initial data for a workflow. This can be a list of URLs (`Open Websites`), a set of variables (`Open datasets`), a search query (`Search on Google`), or uploaded files.
+
+**Interaction**
+A single action performed by the agent on a webpage, such as a `click`, `type`, or `press`. Blocks like `Interact with Page` and `Explore Content` use a budget of interactions.
+
+**Iteration**
+A single pass through a loop in a workflow. For example, if you provide 10 URLs in an `Open datasets` block, the workflow will perform 10 iterations, one for each URL.
+
+### M
+
+**Merge**
+A feature within the `Extract Data` block (in advanced mode) that allows you to combine existing variables from previous extraction steps with newly extracted data into a single, unified result.
+
+### O
+
+**Output**
+A category of blocks that send the final results of your workflow to an external system. For example, `Webhook out` sends data to a specified URL.
+
+### R
+
+**Run**
+A single, complete execution of a workflow from its trigger to its end. Each run has a unique ID and produces a set of results.
+
+### S
+
+**Schema**
+The structure you define for the data you want to extract, typically within an `Extract Data` block. It consists of a set of attributes (fields) that the agent will populate.
+
+### T
+
+**Transform**
+A category of blocks that perform an action to process, change, or navigate based on the current context. This is the largest category, including blocks like `Extract Data`, `Interact with Page`, and `Find Links`.
+
+**Trigger**
+A block that initiates a workflow run. A workflow can only have one trigger, such as `Start on a timer` or `Start on incoming webhook`.
+
+### V
+
+**Variable**
+A named placeholder for a piece of data (e.g., `{{company_name}}`). Variables allow you to make your workflows dynamic by using data from input blocks (like `Open datasets`) or previous extraction steps in subsequent blocks.
+
+### W
+
+**Workflow**
+A sequence of connected blocks that defines a complete automation task. It starts with a trigger, processes data through a series of actions, and (optionally) ends with an output.

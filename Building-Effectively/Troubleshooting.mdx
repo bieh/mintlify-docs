@@ -1,7 +1,7 @@
 ---
-title: 'Troubleshooting & Debugging'
-description: 'Learn how to diagnose and solve common issues in your workflows to ensure they run smoothly and accurately.'
-icon: 'wrench' # Lucide icon
+title: "Troubleshooting & Debugging"
+description: "Learn how to diagnose and solve common issues in your workflows to ensure they run smoothly and accurately."
+icon: "wrench"
 ---
 
 Even in well-designed workflows, you might encounter issues where data isn't extracted as expected or navigation doesn't work perfectly. This guide covers the most common problems and how to solve them.
@@ -13,21 +13,24 @@ This section addresses problems within the `Extract Data` block, where the outpu
 ### Problem: Extracted data is wrong or empty.
 
 #### Cause 1: Instructions are not specific enough.
+
 This is the most common reason for inaccurate data. The AI agent may be confused by multiple elements on the page that could match a vague description.
 
-* **Solution:** Make your instructions in the `DESCRIPTION` field as specific as possible.
-    * **Vague:** `<the price>`
-    * **Specific:** `<The final price in USD including tax, from the main product summary box. Ignore prices in the "You may also like" section. Example: $99.99>`
+- **Solution:** Make your instructions in the `DESCRIPTION` field as specific as possible.
+  - **Vague:** `<the price>`
+  - **Specific:** `<The final price in USD including tax, from the main product summary box. Ignore prices in the "You may also like" section. Example: $99.99>`
 
 #### Cause 2: The website's layout has changed.
+
 Websites frequently update their design. An instruction that worked yesterday might fail today if the target element (e.g., a button or a specific text area) has been moved, renamed, or removed.
 
-* **Solution:** Open the target webpage in your own browser and compare its current layout to your instructions in the `Extract Data` block. Update your descriptions to match the new structure of the page.
+- **Solution:** Open the target webpage in your own browser and compare its current layout to your instructions in the `Extract Data` block. Update your descriptions to match the new structure of the page.
 
 #### Cause 3: Pop-ups or Overlays are obscuring the content.
+
 Cookie consent banners, newsletter subscription pop-ups, or ad overlays can cover the content the agent needs to see.
 
-* **Solution:** Add an `Interact with Page` block right **before** your `Extract Data` block. Configure it with a command to close common pop-ups, for example: `If there is a cookie pop-up, click "Accept". If there is a newsletter pop-up, close it.`
+- **Solution:** Add an `Interact with Page` block right **before** your `Extract Data` block. Configure it with a command to close common pop-ups, for example: `If there is a cookie pop-up, click "Accept". If there is a newsletter pop-up, close it.`
 
 ## Navigation & Interaction Issues
 
@@ -36,19 +39,22 @@ This covers issues where blocks like `Find Links`, `Explore Content`, or `Intera
 ### Problem: The agent doesn't click the correct link or button.
 
 #### Cause 1: The description in `Find Links` is too broad.
+
 If multiple links match your description (e.g., "click the 'Read More' link"), the agent might choose the wrong one.
 
-* **Solution:** Add more context to your description. Instead of `"Find the 'details' link"`, try `"Find the 'details' link for the product named '{{product_name}}'"`.
+- **Solution:** Add more context to your description. Instead of `"Find the 'details' link"`, try `"Find the 'details' link for the product named '{{product_name}}'. Must contain '/product/'"`.
 
 #### Cause 2: The goal in `Explore Content` is unclear.
+
 The `Explore Content` block relies on a subsequent `Extract Data` step to verify if it has reached its goal. If the goal is ambiguous, the agent may not know when to stop exploring.
 
-* **Solution:** Ensure the goal description is clear and the `Extract Data` block is configured to find a unique piece of information that only exists on the target page (e.g., a specific heading like "Enterprise Pricing" or a unique text block). Also, ensure the "number of attempts" is sufficient.
+- **Solution:** Ensure the goal description is clear and the `Extract Data` block is configured to find a unique piece of information that only exists on the target page (e.g., a specific heading like "Enterprise Pricing" or a unique text block). Also, ensure the "number of attempts" is sufficient.
 
 #### Cause 3: Advanced Anti-Automation Measures
+
 While the Jsonify agent automatically handles most common anti-bot measures (like most captchas and using dynamic IP addresses), some websites employ highly customized or aggressive blocking systems.
 
-* **Solution:** In these rare cases, direct automation may be very difficult. Try to simplify the workflow as much as possible. If the problem persists, the site may not be suitable for this type of automation.
+- **Solution:** In these rare cases, direct automation may be very difficult. Try to simplify the workflow as much as possible. If the problem persists, the site may not be suitable for this type of automation.
 
 ## Variable Issues
 
@@ -57,11 +63,13 @@ This section covers problems related to using variables like `{{variable_name}}`
 ### Problem: A variable is not working or shows no value.
 
 #### Cause 1: Typo or Case Mismatch.
+
 Variable names are **case-sensitive**. `{{ProductName}}` is a different variable from `{{product_name}}`.
 
-* **Solution:** Double-check that the variable name in your block's instruction (e.g., `{{product_name}}`) exactly matches the column header in your `Open datasets` block or the `NAME` field from a previous `Extract Data` block.
+- **Solution:** Double-check that the variable name in your block's instruction (e.g., `{{product_name}}`) exactly matches the column header in your `Open datasets` block or the `NAME` field from a previous `Extract Data` block.
 
 #### Cause 2: Scope Issue.
+
 You are trying to use a variable before it has been defined. The workflow executes sequentially from top to bottom.
 
-* **Solution:** Ensure the block that defines the variable (e.g., `Open datasets` or an initial `Extract Data` step) comes **before** the block that uses it. Remember, the "Merge previous columns" feature in `Extract Data` can only access variables from a *previous* `Extract Data` step, not directly from `Open datasets`.
+- **Solution:** Ensure the block that defines the variable (e.g., `Open datasets` or an initial `Extract Data` step) comes **before** the block that uses it. Remember, the "Merge previous columns" feature in `Extract Data` can only access variables from a _previous_ `Extract Data` step, not directly from `Open datasets`.

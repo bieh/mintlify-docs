@@ -142,7 +142,7 @@
   },
   "logo": {
     "light": "https://app.jsonify.com/static/logo/jsonify-logo-d-black-bg.png",
-    "dark": "https://app.jsonify.com/static/logo/jsonify-logo-d-black-bg.png"
+    "dark": "logo/jsonify-logo-d-white-bg.png"
   },
   "navbar": {
     "links": [

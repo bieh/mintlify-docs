@@ -138,7 +138,7 @@
           "icon": "house"
         },
         {
-          "anchor": "Log in",
+          "anchor": "Log in Jsonify",
           "href": "https://app.jsonify.com",
           "icon": "user"
         }

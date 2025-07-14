@@ -18,29 +18,33 @@ Schedules your workflow to run automatically at specific, recurring intervals (e
 Triggers your workflow programmatically via an HTTP POST request from any external system or custom script.
 [Read more...](/blocks/Start-on-Incoming-Webhook)
 
+---
+
 ## Input Blocks
 
 Input blocks are used to provide the initial data or context for your workflow, such as URLs, files, or search queries.
 
 ### Open datasets
 Provides structured, tabular data as input by creating or importing one or more datasets with variables.
-[Read more...](/blocks/open-datasets)
+`[Read more...](./blocks/open-datasets)`
 
 ### Open Websites
 Opens one or more specified webpages in the AI agent's browser to begin a task.
-[Read more...](/blocks/open-websites)
+`[Read more...](./blocks/open-websites)`
 
 ### Read RSS feeds
 Fetches the latest posts from one or more RSS feeds to use as a data source.
-[Read more...](/blocks/Read-RSS-feeds)
+`[Read more...](./blocks/Read-RSS-feeds)`
 
 ### Upload documents
 Processes local files (like PDFs or text files) by uploading them directly into your workflow.
-[Read more...](/blocks/open-files)
+`[Read more...](./blocks/open-files)`
 
 ### Search on Google
 Performs a Google search with one or more queries to find relevant webpages.
-[Read more...](/blocks/Search-on-Google)
+`[Read more...](./blocks/Search-on-Google)`
+
+---
 
 ## Transform Blocks
 
@@ -48,31 +52,33 @@ Transform blocks perform actions to change the agent's state, navigate, or proce
 
 ### Extract Data
 Extracts new information from a webpage and can merge it with data from previous extraction steps. This is the primary data collection block.
-[Read more...](/blocks/extract-data)
+`[Read more...](./blocks/extract-data)`
 
 ### Explore Content
 Intelligently searches for and navigates to target pages within a site through iterative attempts based on a goal.
-[Read more...](/blocks/explore-content)
+`[Read more...](./blocks/explore-content)`
 
 ### Interact with Page
 Performs a precise sequence of actions (clicks, typing, etc.) or achieves a high-level goal on a webpage.
-[Read more...](/blocks/interact-with-page)
+`[Read more...](./blocks/interact-with-page)`
 
 ### Open sub-pages
 Navigates through a list of similar items (like products in a catalog) when direct links are not available, typically on JavaScript-heavy sites.
-[Read more...](/blocks/Open-sub-pages)
+`[Read more...](./blocks/Open-sub-pages)`
 
 ### Find Links
 Finds all standard `<a>` tag links on a page that match a descriptive goal.
-[Read more...](/blocks/find-links)
+`[Read more...](./blocks/find-links)`
 
 ### LLM Completion
 Directly queries a Large Language Model without a browser session to generate text or variables.
-[Read more...](/blocks/LLM-Completion)
+`[Read more...](./blocks/LLM-Completion)`
 
 ### Merge data
 Merges existing data from different steps of your workflow into a single, structured output format.
-[Read more...](/blocks/Merge-data)
+`[Read more...](./blocks/Merge-data)`
+
+---
 
 ## Filter Blocks
 
@@ -80,7 +86,9 @@ Filter blocks allow you to add conditional logic to your workflow.
 
 ### Filter results
 Filters a data source before extraction, ensuring that subsequent blocks only process relevant items.
-[Read more...](/blocks/filter)
+`[Read more...](./blocks/filter)`
+
+---
 
 ## Output Blocks
 
@@ -88,4 +96,4 @@ Output blocks send the final results of your workflow to external systems.
 
 ### Webhook out
 Sends the final results of your workflow to an external system or application via an HTTP POST request.
-[Read more...](/blocks/webhook-out)
+`[Read more...](./blocks/webhook-out)`

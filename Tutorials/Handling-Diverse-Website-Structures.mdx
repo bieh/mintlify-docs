@@ -47,15 +47,14 @@ The key is to prepare your data to guide each branch.
 This branch will handle the McDonald's links.
 
 1.  Start with an `Open datasets` block containing the data from the table after.
-2.  
 | URL                                                    | contain   |
 | ------------------------------------------------------ | --------- |
 | `https://www.mcdonalds.com/gb/en-gb/menu/whats-new.html` | /product/ |
 | `https://www.mcdonalds.com/gb/en-gb/menu/burgers.html`  | /product/ |
 
-4.  Add a **`Find Links`** block. Configure it with a dynamic goal: `Find all links that must contain '{{contain}}'`. This uses the variable from our dataset.
-5.  Add a **`Follow Links`** block next. Configure it to `Follow each link` found by the previous step.
-6.  Add an **`Interact with Page`** block to click the spoiler. Configure it with the action: `Click on "Nutritional Information"`.
+2.  Add a **`Find Links`** block. Configure it with a dynamic goal: `Find all links that must contain '{{contain}}'`. This uses the variable from our dataset.
+3.  Add a **`Follow Links`** block next. Configure it to `Follow each link` found by the previous step.
+4.  Add an **`Interact with Page`** block to click the spoiler. Configure it with the action: `Click on "Nutritional Information"`.
 
 ### 3. Add a Parallel Row
 

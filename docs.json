@@ -84,7 +84,8 @@
               "blocks/open-websites",
               "blocks/Read-RSS-feeds",
               "blocks/Search-on-Google",
-              "blocks/open-files"
+              "blocks/open-files",
+              "blocks/Use-credentials"
             ]
           },
           {

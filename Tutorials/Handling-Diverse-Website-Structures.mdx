@@ -53,7 +53,7 @@ This branch will handle the McDonald's links.
 | `https://www.mcdonalds.com/gb/en-gb/menu/whats-new.html` | /product/ |
 | `https://www.mcdonalds.com/gb/en-gb/menu/burgers.html`  | /product/ |
 
-2.  Add a **`Find Links`** block. Configure it with a dynamic goal: `Find all links that must contain '{{contain}}'`. This uses the variable from our dataset.
+2.  Add a **`Find Links`** block. Configure it with a dynamic goal: `Find all links to each product's page that must contain '{{contain}}'`. This uses the variable from our dataset.
 3.  Add a **`Follow Links`** block next. Configure it to `Follow each link` found by the previous step.
 4.  Add an **`Interact with Page`** block to click the spoiler. Configure it with the action: `Click on "Nutritional Information"`.
 

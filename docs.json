@@ -5,7 +5,7 @@
   "colors": {
     "primary": "#603eff",
     "light": "#07C983",
-    "dark": "#15803D"
+    "dark": "#603eff"
   },
   "icons": {
     "library": "lucide"

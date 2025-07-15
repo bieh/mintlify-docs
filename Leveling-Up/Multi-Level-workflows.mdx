@@ -1,0 +1,86 @@
+---
+title: "Building Multi-Level Workflows"
+description: "Learn how to create advanced workflows with parallel execution rows and merge data from multiple branches."
+icon: "git-fork"
+---
+
+Jsonify introduces a powerful feature for building advanced automations: **multi-level workflows**. This allows you to create multiple parallel "rows" or "branches" of actions that can execute independently and then be linked together to merge their results.
+
+This approach enables you to handle complex scenarios where different data sources or different navigation paths are required to achieve a single, unified output format.
+
+## The Core Concept: Parallel Rows
+
+Instead of a single, linear sequence of blocks, you can now have multiple starting points in your workflow. Each starting point initiates a new "row" of actions. These rows run in parallel, allowing you to define different strategies for different types of input data.
+
+For example, you can process a list of websites, but use one row for sites with standard navigation and a second row for sites that rely heavily on JavaScript, before merging the results.
+
+## The "Layout" Menu
+
+The ability to create and manage these parallel rows is handled through the **Layout** menu in the top action bar.
+
+- **Add new row:** Adds another set of actions that get executed in parallel. This creates a new starting point on your canvas.
+- **Link actions:** Connects two blocks to create a workflow sequence, even between different rows. This is the key to merging branches.
+- **Unlink action:** Removes a connection between two blocks.
+
+<Frame caption="Importing the cookies.txt file into a newly created Website Credential store.">
+  ![Screenshot: The Layout dropdown menu showing "Add new row" and "Link actions"](/Leveling-Up/imgs/Leveling-Up-Multi-level-workflow.png)
+</Frame>
+
+## How to Build a Multi-Level Workflow
+
+### Step 1: Build Your Primary Row First
+
+For clarity and easier debugging, it's best practice to completely build out your first, primary execution row before adding parallel ones. This ensures your core logic is working correctly.
+
+### Step 2: Add and Build Parallel Rows
+
+Once your first row is complete, go to **Layout ➙ Add new row**. This will create a second "start" block. Build out the logic for this parallel row. Each row can have its own data source (`Open datasets`, `Search on Google`, etc.) and its own set of transformation blocks.
+
+### Step 3: Link and Merge the Branches
+
+This is the most critical step. To combine the data from two different rows, you link a block from one row to a block in another.
+
+1. Click **Layout ➙ Link actions**.
+2. Click on the **source block** (the block you want to get data _from_).
+3. Click on the **destination block** (the block that will receive the data).
+
+The destination block is typically a final `Extract Data` block. When you link multiple branches into a single destination block, that block gains access to the context and variables from **all** incoming branches for the current item.
+
+### Step 4: Continue the Workflow (Optional)
+
+Nothing prevents you from continuing the workflow after the merge. You can add more blocks after the unifying `Extract Data` block to further process the combined data in a single, common branch.
+
+<Frame caption="Importing the cookies.txt file into a newly created Website Credential store.">
+  ![Screenshot: A multi-level workflow showing two parallel rows being linked into a single, final Extract Data block](/Leveling-Up/imgs/Leveling-Up-Multi-level-workflow-layout-menu.png)
+</Frame>
+
+## Example: Handling Different Website Structures
+
+Imagine you want to scrape product data from a list of category pages. Some of these sites use standard links for their products, while others use JavaScript. You can handle both scenarios in one workflow.
+
+Your both input `Open datasets` blocks would have one row for each category page, with  column: `URL`. Each block should have urls only for its own scenario.
+
+1. **Row 1 (Standard Navigation Branch):**
+   - `Open datasets`: Takes `URL` as first input.
+   - `Find Links`: Finds all product links on the page.
+   - `Follow Links`: Navigates to each product page.
+   - `Interact`: Clicks on "Show specifications" to reveal hidden data.
+2. **Row 2 (JavaScript Navigation Branch):**
+   - `Open datasets`: Takes `URL` as second input.
+   - `Open sub-pages`: This block is used to navigate the JavaScript-driven product list. It will open each product page. No further interaction is needed on this branch as the data is immediately visible.
+3. **Linking and Merging:**
+   - Click **Layout ➙ Link actions**.
+   - Link the `Open sub-pages` block from Row 2 to a final `Extract Data` block from Row 1.
+4. **`Final Extract Data Block:`**
+   - This block now receives the final product page from _either_ Row 1 or Row 2.
+   - You can configure it with a single schema to extract the `product_name` and `price`.
+
+- **Result:** A single, unified list of product names and prices, collected from websites with different navigation structures, all in one workflow run.
+
+## Key Considerations
+
+- **Parallel Execution, Sequential Merging:** While the rows can process data in parallel, the final merge happens when the branches are linked into a single block.
+- **Data Context:** The key to this feature is that a destination block inherits the context from all its linked source blocks.
+- **Modularity:** Use rows to break down extremely complex problems into smaller, more manageable logical sequences.
+
+Multi-level workflows are an advanced feature that unlocks a new level of power and flexibility, allowing you to solve complex data integration challenges directly within Jsonify.

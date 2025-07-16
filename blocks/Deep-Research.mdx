@@ -1,0 +1,81 @@
+---
+title: 'Deep Research'
+description: 'Perform an in-depth, multi-source research and synthesis task based on a detailed prompt, using a selected AI provider.'
+icon: 'binoculars' # Lucide icon
+---
+
+The `Deep Research` block empowers the AI agent to act as a research analyst. Instead of just finding links, this block performs a comprehensive investigation on a given topic, synthesizes information from various sources, and delivers the findings in a specified format.
+
+This is a powerful Input block for workflows that need to begin with rich, synthesized data rather than just a list of URLs.
+
+## Purpose
+
+Use the `Deep Research` block to:
+
+* Conduct market analysis, competitor research, or technology trend analysis.
+* Synthesize information from specified, credible sources (e.g., news sites, official reports).
+* Generate a structured report or a set of findings in a single text output.
+* Find the single best webpage or a list of relevant pages for a complex research query.
+
+## Configuration
+
+### 1. Research Subject
+
+This is the main text area where you provide a detailed, long-form prompt for the research task. A high-quality prompt is crucial for a high-quality result. Your prompt should ideally include:
+* **A Persona:** "Act as a senior strategic analyst..."
+* **The Goal:** "...conduct a comprehensive analysis of the European alcoholic beverage industry..."
+* **Sources:** "...based on credible, publicly available sources like INSR, Euromonitor, Bloomberg, Reuters..."
+* **Output Structure:** "...Synthesize all your findings into a single, structured JSON object. For each piece of information, you must provide the source URL..."
+
+<Frame caption="Screenshot: Deep Research block configuration showing the query.">
+  ![Deep Research block UI](/blocks/imgs/block-Deep-Research.png)
+</Frame>
+
+### 2. Advanced Options
+
+Clicking **Advanced** opens the Research Configuration panel, allowing you to customize how the AI conducts research and what it returns.
+
+* **Output Format:** This dropdown controls the final output of the block.
+    * **Return text:** The agent performs the research and returns its complete, synthesized findings as a single block of text. This is the most common option for detailed analysis.
+    * **Open all matching URLs:** The agent finds multiple relevant web pages based on your prompt and opens each one sequentially for subsequent blocks to process.
+    * **Open the best URL:** The agent analyzes the topic, finds what it determines to be the single most relevant webpage, and opens it.
+
+* **AI Provider:** Choose the AI service to use for the research.
+    * **Auto (Recommended):** Lets Jsonify choose the best model for the task.
+    * **Perplexity:** Utilizes Perplexity AI for the research.
+    * **OpenAI:** Utilizes OpenAI's models for the research.
+
+<Frame caption="Screenshot: Deep Research advanced options panel.">
+  ![Screenshot: Deep Research advanced options panel](/blocks/imgs/block-Deep-Research-adv.png)
+</Frame>
+
+## How It Works
+
+The workflow starts with the `Deep Research` block. The agent takes your prompt and, using the selected AI Provider, performs the research. Based on the "Output Format" you chose, one of two things happens:
+* If **Return text** is selected, the block's output is a single text variable containing the AI's synthesized answer.
+* If **Open...URLs** is selected, the block will find and open one or more webpages, and the workflow will then iterate through them, passing each page to the subsequent blocks.
+
+<Note>
+**Mandatory `Extract Data` Block:** If you choose the **`Return text`** output format, you **must** place an `Extract Data` block immediately after it to parse the synthesized text into the structured format (like JSON) that you requested in your prompt. The `Deep Research` block provides the text; the `Extract Data` block structures it.
+</Note>
+
+## Example Scenario: Market Analysis
+
+This example uses the prompt from the screenshot to perform a market analysis.
+
+1.  **`Deep Research` Block:**
+    * **Research Subject:** A detailed prompt asking for an analysis of the European spirits industry, specifying the required JSON output structure with keys like `keyDevelopments`, `competitiveLandscape`, etc.
+    * **Advanced > Output Format:** `Return text`
+    * **Advanced > AI Provider:** `Auto (Recommended)`
+
+2.  **`Extract Data` Block (added next - MANDATORY):**
+    * This block receives the single text output from the `Deep Research` block.
+    * You configure it with a schema that matches the JSON structure you requested in the prompt. For example, you would create attributes named `keyDevelopments`, `competitiveLandscape`, etc. Because you asked the AI to format the text as JSON, the `Extract Data` block's job is simply to parse this pre-formatted text.
+
+* **Result:** The `Deep Research` block generates a comprehensive analysis as a text block. The `Extract Data` block then parses this text into a clean, structured JSON output with all the requested fields, ready for use or to be sent to an output block like `Webhook out`.
+
+## Key Considerations
+
+* **Prompt Quality is Everything:** The success of this block is almost entirely dependent on the quality and detail of your research prompt. Be explicit about the required format, sources, and structure of the desired output.
+* **Deep Research vs. Search on Google:** Use `Search on Google` to simply find links based on keywords. Use `Deep Research` when you need the AI to read multiple sources, understand a topic, and synthesize a structured answer.
+* **Text Output Requires Extraction:** Remember the critical rule: if your output format is `Return text`, the next block must be `Extract Data` to make the result usable.

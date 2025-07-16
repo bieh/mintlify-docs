@@ -112,7 +112,8 @@
             "pages": [
               "blocks/webhook-out",
               "blocks/email",
-              "blocks/API-Download"
+              "blocks/API-Download",
+              "blocks/Google-sheet"
             ]
           }
         ]

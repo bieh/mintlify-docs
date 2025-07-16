@@ -86,7 +86,8 @@
               "blocks/Search-on-Google",
               "blocks/open-files",
               "blocks/Use-credentials",
-              "blocks/Deep-Research"
+              "blocks/Deep-Research",
+              "blocks/follow-links"
             ]
           },
           {

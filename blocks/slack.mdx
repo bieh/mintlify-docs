@@ -1,0 +1,53 @@
+---
+title: 'Slack Webhook'
+description: 'Send real-time notifications and workflow results directly to a specified Slack channel.'
+icon: 'slack' # Lucide icon
+---
+
+The `Slack` block is an **Output** block that allows you to send messages directly to a Slack workspace. This is perfect for real-time notifications, alerting your team to important findings, or sharing the results of a workflow run.
+
+This block works by sending your data to a specific **Slack Incoming Webhook URL**.
+
+## Prerequisites: Create a Slack Webhook URL
+
+Before you can use this block, you **must** create an "Incoming Webhook" in your Slack workspace.
+
+1.  Follow Slack's official guide to create a new Incoming Webhook: [Sending messages using Incoming Webhooks](https://api.slack.com/messaging/webhooks).
+2.  During the setup process, choose the specific channel you want the messages to be posted to.
+3.  Once created, Slack will provide you with a unique **Webhook URL** that starts with `https://hooks.slack.com/...`.
+4.  Copy this URL. You will need it to configure the block.
+
+## Configuration
+
+The block's configuration is straightforward.
+
+### 1. Paste a Slack webhook below
+
+This is the primary input field where you must paste the unique **Webhook URL** you generated from your Slack workspace settings.
+
+### 2. Message Frequency
+
+These radio buttons control *when* and *how* messages are sent.
+
+* **Send a message for every read of a page:** A separate Slack message will be sent for **each individual result row** your workflow produces. This is useful for getting immediate, item-by-item notifications.
+* **Send one combined message at the end:** The block will wait until the entire workflow is complete, then send **one single summary message** that contains all the results. This is ideal for reports or digests.
+
+<Frame caption="The Slack block configuration panel showing the Webhook URL input and frequency options.">
+  ![Slack Webhook block UI](/blocks/imgs/block-slack-webhook.png)
+</Frame>
+
+## How It Works
+
+1.  Your workflow runs and generates one or more rows of results.
+2.  The `Slack` block is executed as a final step.
+3.  It takes the data from your results and formats it into a message based on your template.
+4.  It then sends an HTTP POST request containing the message to the Slack Webhook URL you provided.
+5.  The message instantly appears in the designated Slack channel.
+
+## Key Considerations
+
+* **Placement:** This block should be placed at the end of a workflow or at the end of an iteration loop if you want per-item notifications.
+* **Security:** Treat your Webhook URL as a secret. Anyone with the URL can post messages to your channel.
+* **Rate Limits:** Be mindful of Slack's rate limits. Sending a very large number of individual messages in a short time (using the "for every read" option) could cause some messages to be delayed or dropped by Slack. For large result sets, the "one combined message" option is safer.
+* 
+The `Slack` block is a powerful way to integrate your automation results directly into your team's communication hub.

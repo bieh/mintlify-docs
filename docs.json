@@ -113,7 +113,8 @@
               "blocks/webhook-out",
               "blocks/email",
               "blocks/API-Download",
-              "blocks/Google-sheet"
+              "blocks/Google-sheet",
+              "blocks/slack"
             ]
           }
         ]
